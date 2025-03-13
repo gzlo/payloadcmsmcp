@@ -75,7 +75,7 @@ function sendEvent(res, event, data) {
  * @param {http.ServerResponse} res - The response object
  */
 function serveHomepage(res) {
-  // Simple HTML for the homepage
+  // Modern HTML for the homepage
   const html = `
 <!DOCTYPE html>
 <html lang="en">
@@ -84,261 +84,561 @@ function serveHomepage(res) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Payload CMS MCP Server - Server-Sent Events (SSE) and API endpoints for the Payload CMS Model Control Primitive (MCP)">
   <title>Payload CMS MCP Server</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #0070f3;
-      --secondary-color: #0051a8;
-      --accent-color: #00c6ff;
-      --text-color: #333;
-      --light-bg: #f5f5f5;
-      --dark-bg: #1a1a1a;
-      --success-color: #4caf50;
-      --warning-color: #ff9800;
-      --error-color: #f44336;
-      --border-radius: 8px;
-      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      /* Color Palette */
+      --primary: #3b82f6;
+      --primary-dark: #2563eb;
+      --primary-light: #60a5fa;
+      --secondary: #10b981;
+      --secondary-dark: #059669;
+      --accent: #8b5cf6;
+      --dark: #1e293b;
+      --dark-light: #334155;
+      --light: #f8fafc;
+      --light-dark: #e2e8f0;
+      --gray: #64748b;
+      --gray-light: #94a3b8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      
+      /* Typography */
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      
+      /* Spacing */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      
+      /* Borders */
+      --radius-sm: 0.25rem;
+      --radius: 0.5rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      
+      /* Transitions */
+      --transition: all 0.2s ease;
+      --transition-slow: all 0.3s ease;
     }
     
+    /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
     
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      line-height: 1.6;
-      color: var(--text-color);
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      min-height: 100vh;
-      padding: 2rem;
+    html {
+      scroll-behavior: smooth;
     }
     
+    body {
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      color: var(--dark);
+      background: linear-gradient(135deg, #f6f8fc 0%, #e2e8f0 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    a:hover {
+      color: var(--primary-dark);
+    }
+    
+    /* Layout */
     .container {
-      max-width: 1000px;
+      width: 100%;
+      max-width: 1200px;
       margin: 0 auto;
-      background-color: white;
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
+      padding: 0 var(--space-4);
+    }
+    
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    main {
+      flex: 1;
+      padding: var(--space-8) 0;
+    }
+    
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: var(--space-12) 0;
+      position: relative;
       overflow: hidden;
     }
     
-    header {
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-      color: white;
-      padding: 2rem;
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGRlZnM+CiAgPHBhdHRlcm4gaWQ9InBhdHRlcm4iIHg9IjAiIHk9IjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0icm90YXRlKDQ1KSI+CiAgICA8Y2lyY2xlIGN4PSIzIiBjeT0iMyIgcj0iMS41IiBmaWxsPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMSkiIC8+CiAgPC9wYXR0ZXJuPgo8L2RlZnM+CjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiIC8+Cjwvc3ZnPg==');
+      opacity: 0.3;
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 1;
       text-align: center;
     }
     
     .logo {
       font-size: 2.5rem;
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--space-4);
+      background: linear-gradient(90deg, #ffffff, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     
-    .tagline {
-      font-size: 1.2rem;
+    .subtitle {
+      font-size: 1.25rem;
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto var(--space-6);
       opacity: 0.9;
     }
     
-    main {
-      padding: 2rem;
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      padding: var(--space-2) var(--space-4);
+      font-size: 0.9rem;
+      margin-bottom: var(--space-4);
     }
     
-    h1, h2, h3 {
-      color: var(--primary-color);
-      margin-bottom: 1rem;
+    .status-badge::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--success);
+      margin-right: var(--space-2);
+      animation: pulse 2s infinite;
     }
     
-    p {
-      margin-bottom: 1.5rem;
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+      }
+    }
+    
+    /* Cards */
+    .card {
+      background-color: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+      transition: var(--transition-slow);
+      border: 1px solid var(--light-dark);
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .card-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--light-dark);
+    }
+    
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary-light);
+      color: white;
+      border-radius: var(--radius);
+      margin-right: var(--space-4);
+      font-size: 1.25rem;
     }
     
     .status-card {
-      background-color: var(--light-bg);
-      border-left: 4px solid var(--primary-color);
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      border-radius: var(--border-radius);
+      background: linear-gradient(135deg, var(--light) 0%, #f1f5f9 100%);
+      border-left: 4px solid var(--primary);
     }
     
     .status-item {
-      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--light-dark);
     }
     
-    .status-item h3 {
-      margin-bottom: 0.5rem;
-      color: var(--secondary-color);
+    .status-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .status-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--success);
+      color: white;
+      border-radius: 50%;
+      margin-right: var(--space-4);
+      font-size: 0.75rem;
+    }
+    
+    .status-content {
+      flex: 1;
+    }
+    
+    .status-content h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+      color: var(--dark);
+    }
+    
+    .status-content p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin: 0;
+    }
+    
+    /* Endpoint Cards */
+    .endpoints-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
     }
     
     .endpoint-card {
-      background-color: white;
-      border: 1px solid #e0e0e0;
-      border-radius: var(--border-radius);
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: var(--box-shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .endpoint-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      border-top: 4px solid var(--primary);
     }
     
     .endpoint-card h3 {
-      color: var(--secondary-color);
-      border-bottom: 1px solid #eaeaea;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
+      color: var(--primary-dark);
+      font-size: 1.25rem;
+      margin-bottom: var(--space-2);
+    }
+    
+    .endpoint-card p {
+      color: var(--gray);
+      margin-bottom: var(--space-4);
+      flex: 1;
+    }
+    
+    /* Code Blocks */
+    pre {
+      background-color: var(--dark);
+      color: white;
+      padding: var(--space-4);
+      border-radius: var(--radius);
+      overflow-x: auto;
+      margin: var(--space-4) 0;
+      position: relative;
+    }
+    
+    pre::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
     }
     
     code {
-      background-color: #f1f1f1;
-      padding: 0.2rem 0.4rem;
-      border-radius: 4px;
-      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-family: var(--font-mono);
       font-size: 0.9rem;
     }
     
-    pre {
-      background-color: var(--dark-bg);
-      color: white;
-      padding: 1rem;
-      border-radius: var(--border-radius);
-      overflow-x: auto;
-      margin: 1rem 0;
+    .inline-code {
+      background-color: var(--light-dark);
+      color: var(--primary-dark);
+      padding: 0.1em 0.4em;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.9em;
     }
     
-    pre code {
-      background-color: transparent;
-      color: white;
-      padding: 0;
+    /* Sections */
+    .section {
+      margin-bottom: var(--space-12);
     }
     
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: var(--space-6);
+      color: var(--dark);
+      position: relative;
+      padding-bottom: var(--space-2);
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: var(--radius);
+    }
+    
+    /* Integration Section */
     .integration-section {
-      background-color: #f0f9ff;
-      border-radius: var(--border-radius);
-      padding: 1.5rem;
-      margin-bottom: 2rem;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border-radius: var(--radius);
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+      border: 1px solid #bae6fd;
     }
     
+    /* CLI Section */
     .cli-section {
-      background-color: #f5f5f5;
-      border-radius: var(--border-radius);
-      padding: 1.5rem;
-      margin-bottom: 2rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-radius: var(--radius);
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+      border: 1px solid var(--light-dark);
     }
     
     .cli-command {
-      margin-bottom: 1.5rem;
+      margin-bottom: var(--space-6);
     }
     
-    footer {
-      background-color: var(--dark-bg);
+    .cli-command:last-child {
+      margin-bottom: 0;
+    }
+    
+    .cli-command p {
+      margin-bottom: var(--space-2);
+      font-weight: 500;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: var(--dark);
       color: white;
-      padding: 2rem;
-      text-align: center;
+      padding: var(--space-12) 0 var(--space-6);
+      margin-top: var(--space-12);
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+    
+    .footer-section h3 {
+      font-size: 1.25rem;
+      margin-bottom: var(--space-4);
+      color: white;
     }
     
     .footer-links {
-      margin: 1rem 0;
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: var(--space-2);
     }
     
     .footer-links a {
-      color: var(--accent-color);
-      margin: 0 0.5rem;
-      text-decoration: none;
-      transition: color 0.3s ease;
+      color: var(--gray-light);
+      transition: var(--transition);
     }
     
     .footer-links a:hover {
       color: white;
-      text-decoration: underline;
     }
     
     .matmax-section {
-      margin-top: 2rem;
-      padding-top: 2rem;
+      margin-top: var(--space-8);
+      padding-top: var(--space-8);
       border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
     }
     
     .matmax-section p {
-      opacity: 0.8;
-      font-size: 0.9rem;
+      color: var(--gray-light);
       max-width: 800px;
-      margin: 0 auto 1rem;
+      margin: 0 auto var(--space-4);
+      font-size: 0.9rem;
+    }
+    
+    .matmax-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--space-4);
+      color: white;
     }
     
     .copyright {
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      opacity: 0.6;
+      text-align: center;
+      padding-top: var(--space-6);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--gray-light);
+      font-size: 0.9rem;
     }
     
+    /* Responsive */
     @media (max-width: 768px) {
-      body {
-        padding: 1rem;
-      }
-      
-      .container {
-        border-radius: 0;
-      }
-      
-      header {
-        padding: 1.5rem 1rem;
-      }
-      
-      main {
-        padding: 1.5rem 1rem;
-      }
-      
       .logo {
         font-size: 2rem;
+      }
+      
+      .subtitle {
+        font-size: 1rem;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+      
+      .endpoints-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header {
+        padding: var(--space-8) 0;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="logo">Payload CMS MCP Server</div>
-      <p class="tagline">Server-Sent Events (SSE) and API endpoints for the Payload CMS Model Control Primitive (MCP)</p>
+  <div class="page-wrapper">
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="status-badge">Server Online</div>
+          <h1 class="logo">Payload CMS MCP Server</h1>
+          <p class="subtitle">Server-Sent Events (SSE) and API endpoints for the Payload CMS Model Control Primitive (MCP)</p>
+        </div>
+      </div>
     </header>
     
     <main>
-      <div class="status-card">
-        <h2>Server Status</h2>
+      <div class="container">
+        <section class="section">
+          <div class="card status-card">
+            <div class="card-header">
+              <div class="card-icon" style="background-color: var(--success);">
+                ✓
+              </div>
+              <h2>Server Status</h2>
+            </div>
+            
+            <div class="status-item">
+              <div class="status-icon">✓</div>
+              <div class="status-content">
+                <h3>Server</h3>
+                <p>Running at <span class="inline-code">http://localhost:${PORT}</span></p>
+              </div>
+            </div>
+            
+            <div class="status-item">
+              <div class="status-icon">✓</div>
+              <div class="status-content">
+                <h3>SSE Endpoints</h3>
+                <p>Active at <span class="inline-code">http://localhost:${PORT}/sse</span></p>
+                <p>Active at <span class="inline-code">http://localhost:${PORT}/api/sse</span></p>
+              </div>
+            </div>
+            
+            <div class="status-item">
+              <div class="status-icon">✓</div>
+              <div class="status-content">
+                <h3>API Status</h3>
+                <p>All endpoints operational</p>
+              </div>
+            </div>
+          </div>
+        </section>
         
-        <div class="status-item">
-          <h3>Server</h3>
-          <p>✅ Running at <code>http://localhost:${PORT}</code></p>
-        </div>
-        
-        <div class="status-item">
-          <h3>SSE Endpoints</h3>
-          <p>✅ Active at <code>http://localhost:${PORT}/sse</code></p>
-          <p>✅ Active at <code>http://localhost:${PORT}/api/sse</code></p>
-        </div>
-        
-        <div class="status-item">
-          <h3>API Status</h3>
-          <p>✅ All endpoints operational</p>
-        </div>
-      </div>
-      
-      <h2>Available Endpoints</h2>
-      
-      <div class="endpoint-card">
-        <h3>/sse</h3>
-        <p>Server-Sent Events endpoint for real-time communication with Cursor IDE.</p>
-        <pre><code>const eventSource = new EventSource('http://localhost:${PORT}/sse');</code></pre>
-      </div>
-      
-      <div class="endpoint-card">
-        <h3>/api/validate</h3>
-        <p>Validates Payload CMS code against best practices and patterns.</p>
-        <pre><code>fetch('http://localhost:${PORT}/api/validate', {
+        <section class="section">
+          <h2 class="section-title">Available Endpoints</h2>
+          
+          <div class="endpoints-grid">
+            <div class="card endpoint-card">
+              <div class="card-header">
+                <div class="card-icon">
+                  ⟳
+                </div>
+                <h3>/sse</h3>
+              </div>
+              <p>Server-Sent Events endpoint for real-time communication with Cursor IDE.</p>
+              <pre><code>const eventSource = new EventSource('http://localhost:${PORT}/sse');</code></pre>
+            </div>
+            
+            <div class="card endpoint-card">
+              <div class="card-header">
+                <div class="card-icon" style="background-color: var(--secondary);">
+                  ✓
+                </div>
+                <h3>/api/validate</h3>
+              </div>
+              <p>Validates Payload CMS code against best practices and patterns.</p>
+              <pre><code>fetch('http://localhost:${PORT}/api/validate', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -346,12 +646,17 @@ function serveHomepage(res) {
     fileType: "collection"
   })
 });</code></pre>
-      </div>
-      
-      <div class="endpoint-card">
-        <h3>/api/query</h3>
-        <p>Queries validation rules for Payload CMS components.</p>
-        <pre><code>fetch('http://localhost:${PORT}/api/query', {
+            </div>
+            
+            <div class="card endpoint-card">
+              <div class="card-header">
+                <div class="card-icon" style="background-color: var(--accent);">
+                  ?
+                </div>
+                <h3>/api/query</h3>
+              </div>
+              <p>Queries validation rules for Payload CMS components.</p>
+              <pre><code>fetch('http://localhost:${PORT}/api/query', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -359,64 +664,99 @@ function serveHomepage(res) {
     fileType: "collection"
   })
 });</code></pre>
-      </div>
-      
-      <div class="endpoint-card">
-        <h3>/api/mcp_query</h3>
-        <p>Executes SQL-like MCP queries to retrieve specific information.</p>
-        <pre><code>fetch('http://localhost:${PORT}/api/mcp_query', {
+            </div>
+            
+            <div class="card endpoint-card">
+              <div class="card-header">
+                <div class="card-icon" style="background-color: var(--primary-dark);">
+                  ⚙
+                </div>
+                <h3>/api/mcp_query</h3>
+              </div>
+              <p>Executes SQL-like MCP queries to retrieve specific information.</p>
+              <pre><code>fetch('http://localhost:${PORT}/api/mcp_query', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
     sql: "LIST RULES FOR \\"collection\\""
   })
 });</code></pre>
-      </div>
-      
-      <div class="integration-section">
-        <h2>Cursor IDE Integration</h2>
-        <p>To integrate with Cursor IDE, configure the IDE to use the following URL for the SSE transport:</p>
-        <pre><code>http://localhost:${PORT}/sse</code></pre>
-      </div>
-      
-      <div class="cli-section">
-        <h2>CLI Commands</h2>
-        <p>You can also use the Payload CMS MCP CLI to interact with this server:</p>
+            </div>
+          </div>
+        </section>
         
-        <div class="cli-command">
-          <p>Validate a Payload CMS file:</p>
-          <pre><code>npx @payloadcmsmcp.info validate ./collections/Posts.js</code></pre>
-        </div>
+        <section class="section">
+          <div class="integration-section">
+            <h2 class="section-title">Cursor IDE Integration</h2>
+            <p>To integrate with Cursor IDE, configure the IDE to use the following URL for the SSE transport:</p>
+            <pre><code>http://localhost:${PORT}/sse</code></pre>
+            <p>This will enable real-time communication between Cursor IDE and the MCP server, allowing for code validation and intelligent suggestions.</p>
+          </div>
+        </section>
         
-        <div class="cli-command">
-          <p>Query validation rules:</p>
-          <pre><code>npx @payloadcmsmcp.info query "list rules" collection</code></pre>
-        </div>
-        
-        <div class="cli-command">
-          <p>Execute an MCP query:</p>
-          <pre><code>npx @payloadcmsmcp.info mcp "LIST RULES FOR \\"collection\\""</code></pre>
-        </div>
+        <section class="section">
+          <div class="cli-section">
+            <h2 class="section-title">CLI Commands</h2>
+            <p>You can also use the Payload CMS MCP CLI to interact with this server:</p>
+            
+            <div class="cli-command">
+              <p>Validate a Payload CMS file:</p>
+              <pre><code>npx @payloadcmsmcp.info validate ./collections/Posts.js</code></pre>
+            </div>
+            
+            <div class="cli-command">
+              <p>Query validation rules:</p>
+              <pre><code>npx @payloadcmsmcp.info query "list rules" collection</code></pre>
+            </div>
+            
+            <div class="cli-command">
+              <p>Execute an MCP query:</p>
+              <pre><code>npx @payloadcmsmcp.info mcp "LIST RULES FOR \\"collection\\""</code></pre>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
     
-    <footer>
-      <p>Payload CMS MCP Server</p>
-      
-      <div class="footer-links">
-        <a href="https://github.com/Matmax-Worldwide/payloadcmsmcp">GitHub Repository</a> | 
-        <a href="https://payloadcms.com">Payload CMS</a> | 
-        <a href="https://cursor.sh">Cursor IDE</a>
-      </div>
-      
-      <div class="matmax-section">
-        <p>MATMAX WORLDWIDE</p>
-        <p>Creating technology that helps humans be more human. We believe in tech for good—tools that enhance our lives while respecting our humanity. Join us in building a future where technology serves wellness, connection, and purpose. Together, we can create digital experiences that bring out the best in us all.</p>
-        <p>Visit <a href="https://matmax.world">matmax.world</a> to explore our vision for human-centered technology and join our community dedicated to wellness and meaningful innovation.</p>
-      </div>
-      
-      <div class="copyright">
-        <p>© 2025 MATMAX WORLDWIDE. Made with ❤️ for humanity.</p>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Payload CMS MCP Server</h3>
+            <p>A validation and query service for Payload CMS code, designed to be used with Cursor IDE for AI-assisted development.</p>
+          </div>
+          
+          <div class="footer-section">
+            <h3>Resources</h3>
+            <ul class="footer-links">
+              <li><a href="https://github.com/Matmax-Worldwide/payloadcmsmcp">GitHub Repository</a></li>
+              <li><a href="https://payloadcms.com">Payload CMS</a></li>
+              <li><a href="https://cursor.sh">Cursor IDE</a></li>
+              <li><a href="https://modelcontextprotocol.ai">Model Context Protocol</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-section">
+            <h3>API Endpoints</h3>
+            <ul class="footer-links">
+              <li><a href="/sse">/sse</a></li>
+              <li><a href="/api/sse">/api/sse</a></li>
+              <li><a href="#api-validate">/api/validate</a></li>
+              <li><a href="#api-query">/api/query</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="matmax-section">
+          <div class="matmax-logo">MATMAX WORLDWIDE</div>
+          <p>Creating technology that helps humans be more human. We believe in tech for good—tools that enhance our lives while respecting our humanity.</p>
+          <p>Join us in building a future where technology serves wellness, connection, and purpose. Together, we can create digital experiences that bring out the best in us all.</p>
+          <p>Visit <a href="https://matmax.world">matmax.world</a> to explore our vision for human-centered technology and join our community dedicated to wellness and meaningful innovation.</p>
+        </div>
+        
+        <div class="copyright">
+          <p>© 2025 MATMAX WORLDWIDE. Made with ❤️ for humanity.</p>
+        </div>
       </div>
     </footer>
   </div>
