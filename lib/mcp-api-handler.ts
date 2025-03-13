@@ -22,10 +22,28 @@ export function initializeMcpApiHandler(
 ) {
   const maxDuration =
     vercelJson?.functions?.["api/server.ts"]?.maxDuration || 800;
-  const redisUrl = process.env.REDIS_URL || process.env.KV_URL;
+    
+  // Clean the Redis URL if it contains variable name or quotes
+  const cleanRedisUrl = (url: string | undefined): string | undefined => {
+    if (!url) return undefined;
+    
+    // If the URL contains KV_URL= or REDIS_URL=, extract just the URL part
+    if (url.includes('KV_URL=') || url.includes('REDIS_URL=')) {
+      const match = url.match(/(?:KV_URL=|REDIS_URL=)["']?(rediss?:\/\/[^"']+)["']?/);
+      return match ? match[1] : url;
+    }
+    
+    // Remove any surrounding quotes
+    return url.replace(/^["'](.+)["']$/, '$1');
+  };
+  
+  const redisUrl = cleanRedisUrl(process.env.REDIS_URL) || cleanRedisUrl(process.env.KV_URL);
   if (!redisUrl) {
-    throw new Error("REDIS_URL environment variable is not set");
+    throw new Error("REDIS_URL or KV_URL environment variable is not set");
   }
+  
+  console.log("Using Redis URL:", redisUrl);
+  
   const redis = createClient({
     url: redisUrl,
   });
