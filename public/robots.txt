@@ -1,0 +1,15 @@
+# robots.txt for https://www.payloadcmsmcp.info/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.payloadcmsmcp.info/sitemap.xml
+
+# Disallow any potential admin or private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /internal/
+
+# Crawl delay to prevent server overload
+Crawl-delay: 10 
