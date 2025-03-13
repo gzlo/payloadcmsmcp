@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { initializeMcpApiHandler } from "../lib/mcp-api-handler";
 import { validatePayloadCode, queryValidationRules, executeSqlQuery, FileType } from "../lib/payload";
+import { ensureRedisConnection } from '../lib/redis-connection';
 
 const handler = initializeMcpApiHandler(
   (server) => {
@@ -98,5 +99,10 @@ const handler = initializeMcpApiHandler(
     },
   }
 );
+
+// Ensure Redis connection is established before handling requests
+ensureRedisConnection().catch(error => {
+  console.error("Failed to ensure Redis connection in server.ts:", error);
+});
 
 export default handler;

@@ -3,6 +3,18 @@
   "functions": {
     "api/server.ts": {
       "maxDuration": 60
+    },
+    "api/keep-alive.ts": {
+      "maxDuration": 60
+    },
+    "api/cron-keep-alive.ts": {
+      "maxDuration": 60
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/cron-keep-alive",
+      "schedule": "*/5 * * * *"
+    }
+  ]
 }
