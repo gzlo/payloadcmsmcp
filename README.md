@@ -173,10 +173,15 @@ This MCP server is a contribution to the Payload CMS community by MATMAX WORLDWI
 
 Join us in building a future where technology serves wellness, connection, and purpose. Together, we can create digital experiences that bring out the best in us all.
 
-Visit [matmax.world](https://matmax.world) to explore our vision for human-centered technology and join our community dedicated to wellness and meaningful innovation.
+Visit [matmax.world](https://matmax.world) to explore our vision for human-centered technology and join our community dedicated to wellness and meaningful innovation. Connect with us on [LinkedIn](https://www.linkedin.com/company/the-wellness-brand) to stay updated on our latest initiatives.
 
 ---
 
 <div align="center">
   <p>© 2025 MATMAX WORLDWIDE. Made with ❤️ for humanity.</p>
+  <div style="margin-top: 10px;">
+    <a href="https://github.com/Matmax-Worldwide" target="_blank" style="margin: 0 10px;">GitHub</a> •
+    <a href="https://twitter.com/matmaxworldwide" target="_blank" style="margin: 0 10px;">Twitter</a> •
+    <a href="https://www.linkedin.com/company/the-wellness-brand" target="_blank" style="margin: 0 10px;">LinkedIn</a>
+  </div>
 </div>
