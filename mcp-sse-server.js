@@ -75,6 +75,13 @@ function sendEvent(res, event, data) {
  * @param {http.ServerResponse} res - The response object
  */
 function serveHomepage(res) {
+  // Get the server URL (use environment variable or default to localhost)
+  const serverUrl = process.env.SERVER_URL || `http://localhost:${PORT}`;
+  const productionUrl = 'https://www.payloadcmsmcp.info';
+  
+  // Use the production URL if available, otherwise use the server URL
+  const displayUrl = process.env.NODE_ENV === 'production' ? productionUrl : serverUrl;
+  
   // Modern HTML for the homepage
   const html = `
 <!DOCTYPE html>
@@ -592,7 +599,7 @@ function serveHomepage(res) {
               <div class="status-icon">✓</div>
               <div class="status-content">
                 <h3>Server</h3>
-                <p>Running at <span class="inline-code">http://localhost:${PORT}</span></p>
+                <p>Running at <span class="inline-code">${displayUrl}</span></p>
               </div>
             </div>
             
@@ -600,8 +607,8 @@ function serveHomepage(res) {
               <div class="status-icon">✓</div>
               <div class="status-content">
                 <h3>SSE Endpoints</h3>
-                <p>Active at <span class="inline-code">http://localhost:${PORT}/sse</span></p>
-                <p>Active at <span class="inline-code">http://localhost:${PORT}/api/sse</span></p>
+                <p>Active at <span class="inline-code">${displayUrl}/sse</span></p>
+                <p>Active at <span class="inline-code">${displayUrl}/api/sse</span></p>
               </div>
             </div>
             
@@ -627,7 +634,7 @@ function serveHomepage(res) {
                 <h3>/sse</h3>
               </div>
               <p>Server-Sent Events endpoint for real-time communication with Cursor IDE.</p>
-              <pre><code>const eventSource = new EventSource('http://localhost:${PORT}/sse');</code></pre>
+              <pre><code>const eventSource = new EventSource('${displayUrl}/sse');</code></pre>
             </div>
             
             <div class="card endpoint-card">
@@ -638,7 +645,7 @@ function serveHomepage(res) {
                 <h3>/api/validate</h3>
               </div>
               <p>Validates Payload CMS code against best practices and patterns.</p>
-              <pre><code>fetch('http://localhost:${PORT}/api/validate', {
+              <pre><code>fetch('${displayUrl}/api/validate', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -656,7 +663,7 @@ function serveHomepage(res) {
                 <h3>/api/query</h3>
               </div>
               <p>Queries validation rules for Payload CMS components.</p>
-              <pre><code>fetch('http://localhost:${PORT}/api/query', {
+              <pre><code>fetch('${displayUrl}/api/query', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -674,7 +681,7 @@ function serveHomepage(res) {
                 <h3>/api/mcp_query</h3>
               </div>
               <p>Executes SQL-like MCP queries to retrieve specific information.</p>
-              <pre><code>fetch('http://localhost:${PORT}/api/mcp_query', {
+              <pre><code>fetch('${displayUrl}/api/mcp_query', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -689,7 +696,7 @@ function serveHomepage(res) {
           <div class="integration-section">
             <h2 class="section-title">Cursor IDE Integration</h2>
             <p>To integrate with Cursor IDE, configure the IDE to use the following URL for the SSE transport:</p>
-            <pre><code>http://localhost:${PORT}/sse</code></pre>
+            <pre><code>${displayUrl}/sse</code></pre>
             <p>This will enable real-time communication between Cursor IDE and the MCP server, allowing for code validation and intelligent suggestions.</p>
           </div>
         </section>
@@ -772,6 +779,18 @@ function serveHomepage(res) {
 const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url, true);
   
+  // Set CORS headers for all responses
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
+  // Handle preflight OPTIONS requests
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+  
   // Handle SSE endpoints
   if (parsedUrl.pathname === '/sse' || parsedUrl.pathname === '/api/sse') {
     // Set SSE headers
@@ -785,13 +804,14 @@ const server = http.createServer((req, res) => {
     // Send initial ping
     res.write(': ping\n\n');
     
-    // Send MCP tools definition
-    res.write(`event: tools\n`);
-    res.write(`data: ${JSON.stringify(mcpTools)}\n\n`);
-    
-    // Generate client ID and send connected event
+    // Generate client ID
     const clientId = Date.now().toString();
+    
+    // Send connected event first
     sendEvent(res, 'connected', { clientId });
+    
+    // Send MCP tools definition - this is critical for Cursor MCP
+    sendEvent(res, 'tools', mcpTools);
     
     // Keep connection alive with periodic pings
     const pingInterval = setInterval(() => {
@@ -806,7 +826,81 @@ const server = http.createServer((req, res) => {
     
     // Log connection
     console.log(`Client connected: ${clientId}`);
-  } else if (parsedUrl.pathname === '/' || parsedUrl.pathname === '/index.html') {
+  } 
+  // Handle MCP API endpoints
+  else if (parsedUrl.pathname === '/api/validate' || parsedUrl.pathname === '/api/query' || parsedUrl.pathname === '/api/mcp_query') {
+    // Only accept POST requests for API endpoints
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Method not allowed' }));
+      return;
+    }
+    
+    // Read request body
+    let body = '';
+    req.on('data', chunk => {
+      body += chunk.toString();
+    });
+    
+    req.on('end', () => {
+      try {
+        const data = JSON.parse(body);
+        let result = { success: true, message: 'Operation completed successfully' };
+        
+        // Process based on endpoint
+        if (parsedUrl.pathname === '/api/validate') {
+          console.log(`Validating code: ${data.code && data.code.substring(0, 50)}...`);
+          result = {
+            valid: true,
+            issues: [],
+            suggestions: [
+              {
+                type: 'info',
+                message: 'This is a placeholder validation response. Implement actual validation logic here.'
+              }
+            ]
+          };
+        } else if (parsedUrl.pathname === '/api/query') {
+          console.log(`Processing query: ${data.query}`);
+          result = {
+            results: [
+              {
+                rule: 'collection-fields-required',
+                description: 'Collections should have at least one field defined'
+              },
+              {
+                rule: 'slug-required',
+                description: 'Collections must have a slug property'
+              }
+            ]
+          };
+        } else if (parsedUrl.pathname === '/api/mcp_query') {
+          console.log(`Processing MCP query: ${data.sql}`);
+          result = {
+            results: [
+              {
+                rule: 'collection-fields-required',
+                description: 'Collections should have at least one field defined'
+              },
+              {
+                rule: 'slug-required',
+                description: 'Collections must have a slug property'
+              }
+            ]
+          };
+        }
+        
+        // Send response
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(result));
+      } catch (error) {
+        console.error(`Error processing request: ${error.message}`);
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: `Invalid request: ${error.message}` }));
+      }
+    });
+  }
+  else if (parsedUrl.pathname === '/' || parsedUrl.pathname === '/index.html') {
     // Serve the homepage
     serveHomepage(res);
   } else {
