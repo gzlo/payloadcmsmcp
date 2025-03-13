@@ -1,16 +1,12 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "sse-server.js",
-      "use": "@vercel/node"
-    }
+    { "src": "mcp-sse-server.js", "use": "@vercel/node" }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/sse-server.js"
-    }
+    { "src": "/sse", "dest": "mcp-sse-server.js" },
+    { "src": "/api/sse", "dest": "mcp-sse-server.js" },
+    { "src": "/(.*)", "dest": "mcp-sse-server.js" }
   ],
   "env": {
     "PORT": "3000"
