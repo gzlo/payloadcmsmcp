@@ -35,6 +35,7 @@
     "url": "https://github.com/Matmax-Worldwide/payloadcmsmcp"
   },
   "homepage": "https://www.payloadcmsmcp.info",
+  "vercel": "https://mcp-server-payload-hf6ibfke7-beto-sacos-projects.vercel.app",
   "publishConfig": {
     "access": "public"
   },
