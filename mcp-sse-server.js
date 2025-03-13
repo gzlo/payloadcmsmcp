@@ -88,6 +88,27 @@ function sendEvent(res, event, data) {
 }
 
 /**
+ * Sends a JSON-RPC 2.0 notification via SSE
+ * @param {http.ServerResponse} res - The response object
+ * @param {string} method - The method name
+ * @param {object} params - The parameters
+ */
+function sendNotification(res, method, params) {
+  const notification = {
+    jsonrpc: "2.0",
+    method: method,
+    params: params
+  };
+  
+  res.write(`data: ${JSON.stringify(notification)}\n\n`);
+  
+  // Flush the data immediately
+  if (typeof res.flush === 'function') {
+    res.flush();
+  }
+}
+
+/**
  * Serves the homepage HTML
  * @param {http.ServerResponse} res - The response object
  */
@@ -827,6 +848,19 @@ const server = http.createServer((req, res) => {
     // Send connected event first with proper format
     sendEvent(res, 'connected', { clientId });
     
+    // Send MCP initialization notification
+    sendNotification(res, 'initialize', {
+      serverInfo: {
+        name: "Payload CMS MCP Server",
+        version: "1.0.0"
+      },
+      capabilities: {
+        tools: {
+          schemas: mcpTools.tools
+        }
+      }
+    });
+    
     // Send MCP tools definition immediately after - this is critical for Cursor MCP
     sendEvent(res, 'tools', mcpTools);
     
@@ -877,6 +911,9 @@ const server = http.createServer((req, res) => {
         const data = JSON.parse(body);
         let result = { success: true, message: 'Operation completed successfully' };
         
+        // Check if this is a JSON-RPC request
+        const isJsonRpc = data.jsonrpc === '2.0' && data.method && data.id;
+        
         // Process based on endpoint
         if (parsedUrl.pathname === '/api/validate') {
           console.log(`Validating code: ${data.code && data.code.substring(0, 50)}...`);
@@ -905,12 +942,60 @@ const server = http.createServer((req, res) => {
             ]
           };
         } else if (parsedUrl.pathname === '/api/mcp_query') {
-          console.log(`Processing MCP query: ${data.sql}`);
+          console.log(`Processing MCP query: ${isJsonRpc ? JSON.stringify(data.params) : JSON.stringify(data)}`);
           
-          // Handle MCP SQL queries
-          if (data.sql) {
+          // Handle MCP JSON-RPC requests
+          if (isJsonRpc) {
+            // Extract parameters from the JSON-RPC request
+            const params = data.params || {};
+            const sql = params.sql || '';
+            
+            // Process the SQL query
+            const sqlQuery = sql.trim().toUpperCase();
+            let queryResult;
+            
+            // Example implementation - replace with actual logic
+            if (sqlQuery.startsWith('LIST RULES')) {
+              queryResult = {
+                columns: ["rule", "description"],
+                rows: [
+                  ["collection-fields-required", "Collections should have at least one field defined"],
+                  ["slug-required", "Collections must have a slug property"],
+                  ["access-control", "Consider adding access control to collections"],
+                  ["hooks-naming", "Use consistent naming for hooks"]
+                ]
+              };
+            } else if (sqlQuery.startsWith('DESCRIBE')) {
+              queryResult = {
+                columns: ["property", "type", "required", "description"],
+                rows: [
+                  ["slug", "string", "yes", "Unique identifier for the collection"],
+                  ["fields", "array", "yes", "Array of field definitions"],
+                  ["access", "object", "no", "Access control configuration"],
+                  ["hooks", "object", "no", "Lifecycle hooks for the collection"]
+                ]
+              };
+            } else {
+              queryResult = {
+                columns: ["message"],
+                rows: [["Query not recognized. Try 'LIST RULES' or 'DESCRIBE [entity]'"]]
+              };
+            }
+            
+            // Send JSON-RPC response
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({
+              jsonrpc: '2.0',
+              id: data.id,
+              result: queryResult
+            }));
+            return;
+          } else {
+            // Handle regular API requests (non-JSON-RPC)
+            const sql = data.sql || '';
+            
             // Parse the SQL query
-            const sqlQuery = data.sql.trim().toUpperCase();
+            const sqlQuery = sql.trim().toUpperCase();
             
             // Example implementation - replace with actual logic
             if (sqlQuery.startsWith('LIST RULES')) {
@@ -939,16 +1024,14 @@ const server = http.createServer((req, res) => {
                 rows: [["Query not recognized. Try 'LIST RULES' or 'DESCRIBE [entity]'"]]
               };
             }
-          } else {
-            res.writeHead(400, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ error: "SQL query is required" }));
-            return;
           }
         }
         
-        // Send response
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify(result));
+        // Send response for non-JSON-RPC requests
+        if (!isJsonRpc || parsedUrl.pathname !== '/api/mcp_query') {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(result));
+        }
       } catch (error) {
         console.error(`Error processing request: ${error.message}`);
         res.writeHead(400, { 'Content-Type': 'application/json' });
