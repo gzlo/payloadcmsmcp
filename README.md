@@ -72,10 +72,16 @@ The SSE server provides the following endpoints:
 
 #### Configuring Cursor IDE
 
-To use the SSE server with Cursor IDE, configure the IDE to use the following URL for the SSE transport:
+To use the SSE server with Cursor IDE, configure the IDE to use one of the following URLs for the SSE transport:
 
 ```
-http://localhost:3002/sse
+http://localhost:3002/sse  # Local SSE server
+```
+
+Or use our hosted SSE server:
+
+```
+https://www.payloadcmsmcp.info/api/sse
 ```
 
 ## Development

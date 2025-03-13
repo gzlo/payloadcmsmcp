@@ -15,6 +15,7 @@ const { spawn } = require('child_process');
 
 // Server URL
 const SERVER_URL = 'https://www.payloadcmsmcp.info';
+const SSE_SERVER_URL = 'https://www.payloadcmsmcp.info';
 
 // Create readline interface for user input
 const rl = readline.createInterface({

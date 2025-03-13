@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 3002;
 
 // MCP Server URL
 const MCP_SERVER_URL = 'https://www.payloadcmsmcp.info';
+const SSE_SERVER_URL = 'https://www.payloadcmsmcp.info';
 
 /**
  * Handles SSE connections

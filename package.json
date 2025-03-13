@@ -8,7 +8,7 @@
     "payloadcmsmcp": "./cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node test.js",
     "start": "node cli.js server",
     "deploy": "./deploy.sh",
     "vercel-deploy": "vercel --prod",
@@ -41,6 +41,7 @@
   "files": [
     "cli.js",
     "sse-server.js",
+    "test.js",
     "README.md",
     "LICENSE"
   ]
