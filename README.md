@@ -14,9 +14,11 @@
 
 The Payload CMS MCP Server provides endpoints for validating Payload CMS code, querying validation rules, and executing MCP queries. It helps developers build better Payload CMS applications by providing real-time validation and suggestions.
 
-### 🌐 Production URL
+### 🌐 Production URLs
 
-The MCP server is deployed at: [https://mcp-server-payload.vercel.app](https://mcp-server-payload.vercel.app)
+The MCP server is deployed at:
+- Primary URL: [https://www.payloadcmsmcp.info](https://www.payloadcmsmcp.info)
+- Alternative URL: [https://mcp-server-payload.vercel.app](https://mcp-server-payload.vercel.app)
 
 ## ✨ Features
 
@@ -145,6 +147,12 @@ The `client` directory contains:
 This MCP server is designed to be used with [Cursor IDE](https://cursor.sh) for AI-assisted development of Payload CMS applications. The AI model can use the validation and query endpoints to provide real-time feedback and suggestions.
 
 You can use either the production endpoints:
+
+- Validation endpoint: `https://www.payloadcmsmcp.info/api/validate`
+- Query endpoint: `https://www.payloadcmsmcp.info/api/query`
+- MCP Query endpoint: `https://www.payloadcmsmcp.info/api/mcp_query`
+
+Or the alternative endpoints:
 
 - Validation endpoint: `https://mcp-server-payload.vercel.app/api/validate`
 - Query endpoint: `https://mcp-server-payload.vercel.app/api/query`
