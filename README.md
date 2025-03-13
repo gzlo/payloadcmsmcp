@@ -84,6 +84,12 @@ Or use our hosted SSE server:
 https://www.payloadcmsmcp.info/api/sse
 ```
 
+You can also use our Vercel deployment:
+
+```
+https://mcp-server-payload-hf6ibfke7-beto-sacos-projects.vercel.app/sse
+```
+
 ## Development
 
 ### Prerequisites

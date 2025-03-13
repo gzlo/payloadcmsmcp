@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3002;
 
 // MCP Server URL
 const MCP_SERVER_URL = 'https://www.payloadcmsmcp.info';
-const SSE_SERVER_URL = 'https://www.payloadcmsmcp.info';
+const SSE_SERVER_URL = 'https://mcp-server-payload-hf6ibfke7-beto-sacos-projects.vercel.app';
 
 /**
  * Handles SSE connections
@@ -38,7 +38,7 @@ async function handleSSE(req, res) {
   res.write(': ping\n\n');
   
   // Handle different endpoints
-  if (parsedUrl.pathname === '/sse') {
+  if (parsedUrl.pathname === '/sse' || parsedUrl.pathname === '/api/sse') {
     // Initial connection
     const clientId = Date.now().toString();
     console.log(`Client connected: ${clientId}`);
@@ -582,8 +582,9 @@ function startServer() {
                         <p>Running at http://localhost:${PORT}</p>
                       </div>
                       <div class="status-item">
-                        <h3>SSE Endpoint</h3>
+                        <h3>SSE Endpoints</h3>
                         <p>Active at http://localhost:${PORT}/sse</p>
+                        <p>Active at http://localhost:${PORT}/api/sse</p>
                       </div>
                       <div class="status-item">
                         <h3>API Status</h3>
@@ -733,7 +734,9 @@ function startServer() {
   
   server.listen(PORT, () => {
     console.log(`Payload CMS MCP SSE Server running at http://localhost:${PORT}`);
-    console.log(`SSE endpoint: http://localhost:${PORT}/sse`);
+    console.log(`SSE endpoints:`);
+    console.log(`  - http://localhost:${PORT}/sse`);
+    console.log(`  - http://localhost:${PORT}/api/sse`);
     console.log(`API endpoints:`);
     console.log(`  - http://localhost:${PORT}/api/validate`);
     console.log(`  - http://localhost:${PORT}/api/query`);
