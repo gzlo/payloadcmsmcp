@@ -181,7 +181,7 @@ Visit [matmax.world](https://matmax.world) to explore our vision for human-cente
   <p>© 2025 MATMAX WORLDWIDE. Made with ❤️ for humanity.</p>
   <div style="margin-top: 10px;">
     <a href="https://github.com/Matmax-Worldwide" target="_blank" style="margin: 0 10px;">GitHub</a> •
-    <a href="https://twitter.com/matmaxworldwide" target="_blank" style="margin: 0 10px;">Twitter</a> •
+    <a href="https://instagram.com/matmaxyoga" target="_blank" style="margin: 0 10px;">Instagram</a> •
     <a href="https://www.linkedin.com/company/the-wellness-brand" target="_blank" style="margin: 0 10px;">LinkedIn</a>
   </div>
 </div>
