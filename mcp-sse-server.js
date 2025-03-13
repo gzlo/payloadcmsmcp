@@ -21,6 +21,18 @@ const mcpTools = {
   },
   tools: [
     {
+      name: "mcp__query",
+      description: "Run a read-only SQL query",
+      parameters: {
+        type: "object",
+        properties: {
+          sql: {
+            type: "string"
+          }
+        }
+      }
+    },
+    {
       name: "validate_code",
       description: "Validates Payload CMS code against best practices",
       parameters: {
@@ -60,14 +72,19 @@ const mcpTools = {
 };
 
 /**
- * Sends an SSE event
+ * Sends an SSE event with proper formatting
  * @param {http.ServerResponse} res - The response object
  * @param {string} event - The event name
  * @param {object} data - The event data
  */
 function sendEvent(res, event, data) {
+  // Ensure proper formatting with newlines
   res.write(`event: ${event}\n`);
   res.write(`data: ${JSON.stringify(data)}\n\n`);
+  // Flush the data immediately
+  if (typeof res.flush === 'function') {
+    res.flush();
+  }
 }
 
 /**
@@ -807,15 +824,19 @@ const server = http.createServer((req, res) => {
     // Generate client ID
     const clientId = Date.now().toString();
     
-    // Send connected event first
+    // Send connected event first with proper format
     sendEvent(res, 'connected', { clientId });
     
-    // Send MCP tools definition - this is critical for Cursor MCP
+    // Send MCP tools definition immediately after - this is critical for Cursor MCP
     sendEvent(res, 'tools', mcpTools);
     
     // Keep connection alive with periodic pings
     const pingInterval = setInterval(() => {
       res.write(': ping\n\n');
+      // Flush the data immediately
+      if (typeof res.flush === 'function') {
+        res.flush();
+      }
     }, 30000);
     
     // Handle client disconnect
@@ -824,8 +845,17 @@ const server = http.createServer((req, res) => {
       clearInterval(pingInterval);
     });
     
+    // Handle errors
+    req.on('error', (err) => {
+      console.error(`Error with client ${clientId}: ${err.message}`);
+      clearInterval(pingInterval);
+    });
+    
     // Log connection
     console.log(`Client connected: ${clientId}`);
+    
+    // Handle connection timeout
+    req.setTimeout(0); // Disable timeout
   } 
   // Handle MCP API endpoints
   else if (parsedUrl.pathname === '/api/validate' || parsedUrl.pathname === '/api/query' || parsedUrl.pathname === '/api/mcp_query') {
@@ -876,18 +906,44 @@ const server = http.createServer((req, res) => {
           };
         } else if (parsedUrl.pathname === '/api/mcp_query') {
           console.log(`Processing MCP query: ${data.sql}`);
-          result = {
-            results: [
-              {
-                rule: 'collection-fields-required',
-                description: 'Collections should have at least one field defined'
-              },
-              {
-                rule: 'slug-required',
-                description: 'Collections must have a slug property'
-              }
-            ]
-          };
+          
+          // Handle MCP SQL queries
+          if (data.sql) {
+            // Parse the SQL query
+            const sqlQuery = data.sql.trim().toUpperCase();
+            
+            // Example implementation - replace with actual logic
+            if (sqlQuery.startsWith('LIST RULES')) {
+              result = {
+                columns: ["rule", "description"],
+                rows: [
+                  ["collection-fields-required", "Collections should have at least one field defined"],
+                  ["slug-required", "Collections must have a slug property"],
+                  ["access-control", "Consider adding access control to collections"],
+                  ["hooks-naming", "Use consistent naming for hooks"]
+                ]
+              };
+            } else if (sqlQuery.startsWith('DESCRIBE')) {
+              result = {
+                columns: ["property", "type", "required", "description"],
+                rows: [
+                  ["slug", "string", "yes", "Unique identifier for the collection"],
+                  ["fields", "array", "yes", "Array of field definitions"],
+                  ["access", "object", "no", "Access control configuration"],
+                  ["hooks", "object", "no", "Lifecycle hooks for the collection"]
+                ]
+              };
+            } else {
+              result = {
+                columns: ["message"],
+                rows: [["Query not recognized. Try 'LIST RULES' or 'DESCRIBE [entity]'"]]
+              };
+            }
+          } else {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: "SQL query is required" }));
+            return;
+          }
         }
         
         // Send response
