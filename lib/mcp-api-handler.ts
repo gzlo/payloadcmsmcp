@@ -49,6 +49,12 @@ export function initializeMcpApiHandler(
     parseInt(process.env.REDIS_CONNECT_TIMEOUT, 10) : 30000;
   const keepAlive = process.env.REDIS_KEEP_ALIVE ? 
     parseInt(process.env.REDIS_KEEP_ALIVE, 10) : 5000;
+  const pingInterval = process.env.REDIS_PING_INTERVAL ? 
+    parseInt(process.env.REDIS_PING_INTERVAL, 10) : 1000;
+  const commandTimeout = process.env.REDIS_COMMAND_TIMEOUT ? 
+    parseInt(process.env.REDIS_COMMAND_TIMEOUT, 10) : 5000;
+  const heartbeatInterval = process.env.REDIS_HEARTBEAT_INTERVAL ? 
+    parseInt(process.env.REDIS_HEARTBEAT_INTERVAL, 10) : 30000;
   
   const redis = createClient({
     url: redisUrl,
@@ -61,6 +67,13 @@ export function initializeMcpApiHandler(
       },
       connectTimeout: connectTimeout,
       keepAlive: keepAlive,
+    },
+    pingInterval: pingInterval,
+    disableOfflineQueue: false,
+    commandTimeout: commandTimeout,
+    retryStrategy: (times) => {
+      // More aggressive retry strategy for commands
+      return Math.min(times * 200, 3000);
     }
   });
   const redisPublisher = createClient({
@@ -74,6 +87,13 @@ export function initializeMcpApiHandler(
       },
       connectTimeout: connectTimeout,
       keepAlive: keepAlive,
+    },
+    pingInterval: pingInterval,
+    disableOfflineQueue: false,
+    commandTimeout: commandTimeout,
+    retryStrategy: (times) => {
+      // More aggressive retry strategy for commands
+      return Math.min(times * 200, 3000);
     }
   });
   redis.on("error", (err) => {
@@ -117,6 +137,24 @@ export function initializeMcpApiHandler(
       console.error("Failed to reconnect to Redis:", error);
     }
   };
+  
+  // Set up a heartbeat to keep the Redis connection alive
+  const heartbeatIntervalId = setInterval(async () => {
+    try {
+      if (isRedisConnected) {
+        // Send a ping to keep the connection alive
+        await redis.ping();
+        console.log("Redis heartbeat: connection alive");
+      } else {
+        console.log("Redis heartbeat: reconnecting...");
+        await ensureRedisConnection();
+      }
+    } catch (error) {
+      console.error("Redis heartbeat error:", error);
+      isRedisConnected = false;
+      await ensureRedisConnection();
+    }
+  }, heartbeatInterval);
   
   // Update connection state
   redis.on("connect", () => {
@@ -257,6 +295,22 @@ export function initializeMcpApiHandler(
         res.end();
       }
       req.on("close", () => resolveTimeout("client hang up"));
+
+      // Handle process termination to clean up resources
+      const handleTermination = async () => {
+        console.log("Cleaning up resources before termination");
+        clearInterval(heartbeatIntervalId);
+        await cleanup();
+        process.exit(0);
+      };
+      
+      // Register termination handlers if they haven't been registered yet
+      if (process.listenerCount('SIGTERM') === 0) {
+        process.on('SIGTERM', handleTermination);
+      }
+      if (process.listenerCount('SIGINT') === 0) {
+        process.on('SIGINT', handleTermination);
+      }
 
       await server.connect(transport);
       const closeReason = await waitPromise;
