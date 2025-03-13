@@ -193,3 +193,40 @@ Visit [matmax.world](https://matmax.world) to explore our vision for human-cente
     <a href="https://www.linkedin.com/company/the-wellness-brand" target="_blank" style="margin: 0 10px;">LinkedIn</a>
   </div>
 </div>
+
+## 🚀 Deployment
+
+### Vercel Deployment
+
+To deploy this MCP server to Vercel with a permanent Redis connection:
+
+1. **Set up a Redis instance**:
+   - Use [Upstash Redis](https://upstash.com/) (recommended for Vercel)
+   - Or [Redis Cloud](https://redis.com/redis-enterprise-cloud/overview/)
+   - Or any other Redis provider that offers a persistent connection
+
+2. **Configure environment variables in Vercel**:
+   - Go to your Vercel project settings
+   - Navigate to the "Environment Variables" section
+   - Add the following variables:
+     - `REDIS_URL` or `KV_URL`: Your Redis connection string (required)
+     - `REDIS_CONNECT_TIMEOUT`: Connection timeout in milliseconds (optional, default: 30000)
+     - `REDIS_KEEP_ALIVE`: Keep-alive interval in milliseconds (optional, default: 5000)
+
+3. **Using Vercel KV (recommended)**:
+   - Create a Vercel KV database from your project dashboard
+   - Vercel will automatically set the `KV_URL` environment variable
+   - This provides the most reliable connection for Vercel deployments
+
+4. **Redeploy your application**:
+   - After setting the environment variables, redeploy your application
+   - The Redis connection will now be persistent across serverless function invocations
+
+### Troubleshooting Connection Issues
+
+If you experience Redis connection issues:
+
+1. Check your Redis provider's dashboard for connection limits or errors
+2. Verify that your environment variables are correctly set in Vercel
+3. Increase the `REDIS_CONNECT_TIMEOUT` value if connections are timing out
+4. Check the function logs in Vercel for any Redis-related error messages

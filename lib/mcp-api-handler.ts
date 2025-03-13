@@ -44,26 +44,108 @@ export function initializeMcpApiHandler(
   
   console.log("Using Redis URL:", redisUrl);
   
+  // Get optional configuration from environment variables
+  const connectTimeout = process.env.REDIS_CONNECT_TIMEOUT ? 
+    parseInt(process.env.REDIS_CONNECT_TIMEOUT, 10) : 30000;
+  const keepAlive = process.env.REDIS_KEEP_ALIVE ? 
+    parseInt(process.env.REDIS_KEEP_ALIVE, 10) : 5000;
+  
   const redis = createClient({
     url: redisUrl,
+    socket: {
+      reconnectStrategy: (retries) => {
+        // Exponential backoff with a maximum delay of 10 seconds
+        const delay = Math.min(Math.pow(2, retries) * 100, 10000);
+        console.log(`Redis reconnecting in ${delay}ms (attempt ${retries})`);
+        return delay;
+      },
+      connectTimeout: connectTimeout,
+      keepAlive: keepAlive,
+    }
   });
   const redisPublisher = createClient({
     url: redisUrl,
+    socket: {
+      reconnectStrategy: (retries) => {
+        // Exponential backoff with a maximum delay of 10 seconds
+        const delay = Math.min(Math.pow(2, retries) * 100, 10000);
+        console.log(`Redis publisher reconnecting in ${delay}ms (attempt ${retries})`);
+        return delay;
+      },
+      connectTimeout: connectTimeout,
+      keepAlive: keepAlive,
+    }
   });
   redis.on("error", (err) => {
     console.error("Redis error", err);
   });
+  redis.on("reconnecting", () => {
+    console.log("Redis reconnecting...");
+  });
+  redis.on("connect", () => {
+    console.log("Redis connected");
+  });
   redisPublisher.on("error", (err) => {
-    console.error("Redis error", err);
+    console.error("Redis publisher error", err);
+  });
+  redisPublisher.on("reconnecting", () => {
+    console.log("Redis publisher reconnecting...");
+  });
+  redisPublisher.on("connect", () => {
+    console.log("Redis publisher connected");
   });
   const redisPromise = Promise.all([redis.connect(), redisPublisher.connect()]);
 
   let servers: McpServer[] = [];
+  
+  // Implement reconnection logic for Redis
+  let isRedisConnected = false;
+  let isRedisPublisherConnected = false;
+  
+  // Function to handle reconnection
+  const ensureRedisConnection = async () => {
+    try {
+      if (!isRedisConnected) {
+        console.log("Ensuring Redis connection...");
+        await redis.connect();
+      }
+      if (!isRedisPublisherConnected) {
+        console.log("Ensuring Redis publisher connection...");
+        await redisPublisher.connect();
+      }
+    } catch (error) {
+      console.error("Failed to reconnect to Redis:", error);
+    }
+  };
+  
+  // Update connection state
+  redis.on("connect", () => {
+    console.log("Redis connected");
+    isRedisConnected = true;
+  });
+  
+  redis.on("end", () => {
+    console.log("Redis disconnected");
+    isRedisConnected = false;
+  });
+  
+  redisPublisher.on("connect", () => {
+    console.log("Redis publisher connected");
+    isRedisPublisherConnected = true;
+  });
+  
+  redisPublisher.on("end", () => {
+    console.log("Redis publisher disconnected");
+    isRedisPublisherConnected = false;
+  });
 
   return async function mcpApiHandler(
     req: IncomingMessage,
     res: ServerResponse
   ) {
+    // Ensure Redis connection before processing request
+    await ensureRedisConnection();
+    
     await redisPromise;
     const url = new URL(req.url || "", "https://example.com");
     if (url.pathname === "/sse") {
