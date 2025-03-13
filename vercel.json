@@ -1,8 +1,5 @@
 {
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/server" },
-    { "source": "/sse", "destination": "/api/server" }
-  ],
+  "rewrites": [{ "source": "/(.+)", "destination": "/api/server" }],
   "functions": {
     "api/server.ts": {
       "maxDuration": 60
