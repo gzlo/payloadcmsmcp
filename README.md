@@ -68,13 +68,6 @@ The Payload CMS 3.0 MCP Server is a specialized Model Context Protocol server de
 * `scaffold_project` - Create entire Payload CMS project structures
 * `validate_scaffold_options` - Ensure scaffold options follow best practices
 
-### Technical Implementation
-
-* `Express.js` - For HTTP request handling
-* `TypeScript` - For type safety and better developer experience
-* `Zod` - For schema validation
-* `Redis` - For caching and state management
-
 <hr>
 
 ## 🚀 Getting Started
