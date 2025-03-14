@@ -163,6 +163,7 @@
             background-color: white;
             padding: 5px;
             animation: subtle-pulse 3s ease-in-out infinite;
+            flex-shrink: 0;
         }
 
         .logo-text {
@@ -172,6 +173,12 @@
             text-overflow: ellipsis;
             max-width: 150px;
             transition: all 0.3s ease;
+            line-height: 1.2;
+        }
+
+        .version-text {
+            display: inline-block;
+            margin-left: 3px;
         }
 
         @keyframes subtle-pulse {
@@ -648,20 +655,28 @@
             .logo {
                 font-size: 1.2rem;
                 gap: 0.5rem;
+                align-items: center;
             }
 
             .logo-image {
                 width: 40px;
                 height: 40px;
                 padding: 3px;
+                margin-right: 2px;
             }
 
             .logo span {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
 
             .logo-text {
-                max-width: 120px;
+                max-width: 100px;
+                line-height: 1.1;
+            }
+
+            .version-text {
+                margin-left: 1px;
+                font-size: 0.8rem;
             }
 
             nav ul {
@@ -1102,6 +1117,7 @@
             .logo {
                 font-size: 1rem;
                 gap: 0.4rem;
+                align-items: center;
             }
 
             .logo-icon {
@@ -1111,17 +1127,19 @@
             }
 
             .logo-image {
-                width: 32px;
-                height: 32px;
+                width: 36px;
+                height: 36px;
                 padding: 3px;
+                margin-right: 0;
             }
 
             .logo span {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
 
             .logo-text {
                 max-width: 100px;
+                line-height: 1.1;
             }
 
             .mobile-nav-toggle {
@@ -1365,7 +1383,10 @@
         <div class="container header-content">
             <a href="/" class="logo" aria-label="Payload CMS 3.0 MCP Home">
                 <img src="/logopayload.png" alt="Payload CMS 3.0 Logo" class="logo-image" width="50" height="50" loading="eager">
-                <span class="logo-text"><strong>Payload CMS</strong> <span style="opacity: 0.9; font-weight: 500;">3.0 MCP</span></span>
+                <span class="logo-text">
+                    <strong>Payload CMS</strong>
+                    <span class="version-text" style="opacity: 0.9; font-weight: 500;">3.0 MCP</span>
+                </span>
             </a>
             <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
                 <div class="hamburger-icon">
