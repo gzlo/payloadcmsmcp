@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install packages without running scripts
-RUN npm install --ignore-scripts
+RUN npm install
 
 # Copy source files
 COPY . .
@@ -16,7 +16,8 @@ COPY . .
 # Build the TypeScript project
 RUN npm run build
 
-# Expose necessary port(s) if required (MCP typically communicate over stdio, so not needed)
+# Expose HTTP port
+EXPOSE 8080
 
-# Start the MCP server
-CMD ["node", "build/index.js"]
+# Start the combined server (web + MCP)
+CMD ["node", "server.js"]
