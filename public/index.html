@@ -91,6 +91,10 @@
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -318,9 +322,74 @@
             color: var(--dark);
         }
 
-        .api-section {
+        /* Tools Section Styles */
+        .tools-section {
             padding: 5rem 0;
             background-color: var(--light);
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tool-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+        
+        .tool-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .tool-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.5;
+        }
+        
+        .tool-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .tool-name {
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .api-section {
+            padding: 5rem 0;
+            background-color: var(--light-bg);
         }
 
         .api-container {
@@ -652,28 +721,78 @@
             <div class="container">
                 <div class="section-title">
                     <h2 id="features-heading">Features</h2>
-                    <p>Enhance your Payload CMS development experience with powerful validation and query capabilities.</p>
+                    <p>Enhance your Payload CMS development experience with powerful Railway integration capabilities.</p>
                 </div>
                 <div class="features-grid">
                     <article class="feature-card">
-                        <div class="feature-icon" aria-hidden="true">✓</div>
-                        <h3>Code Validation</h3>
-                        <p>Validates Payload CMS collections, fields, globals, and other components with detailed feedback on validation issues.</p>
+                        <div class="feature-icon" aria-hidden="true">🚀</div>
+                        <h3>Railway Integration</h3>
+                        <p>Deploy and manage Payload CMS projects on Railway with simple natural language commands.</p>
                     </article>
                     <article class="feature-card">
                         <div class="feature-icon" aria-hidden="true">🔍</div>
-                        <h3>Smart Queries</h3>
-                        <p>Supports SQL-like queries for validation rules, making it easy to find and understand best practices.</p>
+                        <h3>Database Management</h3>
+                        <p>Create and configure MongoDB, PostgreSQL, and other databases for your Payload CMS projects.</p>
                     </article>
                     <article class="feature-card">
-                        <div class="feature-icon" aria-hidden="true">💡</div>
-                        <h3>Suggestions</h3>
-                        <p>Offers intelligent suggestions for improving code quality and security in your Payload CMS applications.</p>
+                        <div class="feature-icon" aria-hidden="true">🔄</div>
+                        <h3>Deployment Control</h3>
+                        <p>Trigger deployments, check logs, and monitor the status of your Payload CMS applications.</p>
                     </article>
                     <article class="feature-card">
                         <div class="feature-icon" aria-hidden="true">🤖</div>
                         <h3>AI Integration</h3>
-                        <p>Seamlessly integrates with Cursor IDE for AI-assisted development of Payload CMS applications.</p>
+                        <p>Seamlessly integrates with Claude AI through Cursor IDE and Claude for Desktop.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="tools-section" id="tools" aria-labelledby="tools-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="tools-heading">Available Tools</h2>
+                    <p>Powerful Railway MCP tools to manage your Payload CMS projects with natural language.</p>
+                </div>
+                <div class="tools-grid">
+                    <article class="tool-card">
+                        <h3>Project Management</h3>
+                        <ul class="tool-list">
+                            <li><span class="tool-name">project_list</span> - List all your Railway projects</li>
+                            <li><span class="tool-name">project_info</span> - Get detailed information about a project</li>
+                            <li><span class="tool-name">project_create</span> - Create a new Railway project</li>
+                            <li><span class="tool-name">project_delete</span> - Delete a project and all its resources</li>
+                        </ul>
+                    </article>
+                    
+                    <article class="tool-card">
+                        <h3>Database Tools</h3>
+                        <ul class="tool-list">
+                            <li><span class="tool-name">database_list_types</span> - List available database types</li>
+                            <li><span class="tool-name">database_deploy</span> - Deploy a pre-configured database</li>
+                            <li><span class="tool-name">volume_create</span> - Create persistent storage for databases</li>
+                            <li><span class="tool-name">volume_list</span> - List all volumes in a project</li>
+                        </ul>
+                    </article>
+                    
+                    <article class="tool-card">
+                        <h3>Service Management</h3>
+                        <ul class="tool-list">
+                            <li><span class="tool-name">service_list</span> - List all services in a project</li>
+                            <li><span class="tool-name">service_create_from_repo</span> - Deploy from GitHub</li>
+                            <li><span class="tool-name">service_update</span> - Update service configuration</li>
+                            <li><span class="tool-name">service_restart</span> - Restart a service</li>
+                        </ul>
+                    </article>
+                    
+                    <article class="tool-card">
+                        <h3>Deployment & Variables</h3>
+                        <ul class="tool-list">
+                            <li><span class="tool-name">deployment_trigger</span> - Trigger a new deployment</li>
+                            <li><span class="tool-name">deployment_logs</span> - View deployment logs</li>
+                            <li><span class="tool-name">variable_set</span> - Set environment variables</li>
+                            <li><span class="tool-name">domain_create</span> - Create custom domains</li>
+                        </ul>
                     </article>
                 </div>
             </div>
@@ -682,52 +801,41 @@
         <section class="api-section" id="api" aria-labelledby="api-heading">
             <div class="container">
                 <div class="section-title">
-                    <h2 id="api-heading">API Endpoints</h2>
-                    <p>Powerful endpoints to validate and query your Payload CMS code.</p>
+                    <h2 id="api-heading">MCP Integration</h2>
+                    <p>Connect to Railway through the Model Context Protocol for AI-assisted infrastructure management.</p>
                 </div>
                 <div class="api-container">
                     <article class="api-card">
                         <div class="api-header">
-                            <span class="api-name">/sse</span>
-                            <span class="api-method">GET</span>
+                            <span class="api-name">Cursor IDE Integration</span>
                         </div>
                         <div class="api-description">
-                            Server-Sent Events endpoint for real-time communication with the MCP server.
+                            Use the MCP server with Cursor IDE to manage your Payload CMS infrastructure through natural language commands.
                         </div>
-                        <div class="api-url">https://www.payloadcmsmcp.info/sse</div>
+                        <div class="code-block">
+                            <code>// In Cursor Settings > MCP Servers</code>
+                            <code>Name: "Payload CMS MCP"</code>
+                            <code>Transport Type: "Command"</code>
+                            <code>Command: node /path/to/payloadcmsmcp/server.js YOUR_RAILWAY_API_TOKEN</code>
+                        </div>
                     </article>
                     
                     <article class="api-card">
                         <div class="api-header">
-                            <span class="api-name">/api/sse</span>
-                            <span class="api-method">GET</span>
+                            <span class="api-name">Claude for Desktop Integration</span>
                         </div>
                         <div class="api-description">
-                            Alternative SSE endpoint for API-based communication.
+                            Configure Claude for Desktop to use the Payload CMS MCP server for Railway management.
                         </div>
-                        <div class="api-url">https://www.payloadcmsmcp.info/api/sse</div>
-                    </article>
-                    
-                    <article class="api-card">
-                        <div class="api-header">
-                            <span class="api-name">/api/validate</span>
-                            <span class="api-method">POST</span>
+                        <div class="code-block">
+                            <code>"mcpServers": {</code>
+                            <code>  "payloadcms": {</code>
+                            <code>    "command": "node",</code>
+                            <code>    "args": ["/path/to/payloadcmsmcp/server.js", "YOUR_RAILWAY_API_TOKEN"],</code>
+                            <code>    "env": {}</code>
+                            <code>  }</code>
+                            <code>}</code>
                         </div>
-                        <div class="api-description">
-                            Validates Payload CMS code and provides detailed feedback on validation issues.
-                        </div>
-                        <div class="api-url">https://www.payloadcmsmcp.info/api/validate</div>
-                    </article>
-                    
-                    <article class="api-card">
-                        <div class="api-header">
-                            <span class="api-name">/api/query</span>
-                            <span class="api-method">POST</span>
-                        </div>
-                        <div class="api-description">
-                            Query endpoint for retrieving validation rules and best practices.
-                        </div>
-                        <div class="api-url">https://www.payloadcmsmcp.info/api/query</div>
                     </article>
                 </div>
             </div>
@@ -847,23 +955,23 @@
                     <ul>
                         <li><a href="https://github.com/Matmax-Worldwide/payloadcmsmcp" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
                         <li><a href="https://payloadcms.com" target="_blank" rel="noopener noreferrer">Payload CMS</a></li>
+                        <li><a href="https://railway.app" target="_blank" rel="noopener noreferrer">Railway</a></li>
                         <li><a href="https://cursor.sh" target="_blank" rel="noopener noreferrer">Cursor IDE</a></li>
-                        <li><a href="https://modelcontextprotocol.ai" target="_blank" rel="noopener noreferrer">Model Context Protocol</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>API Endpoints</h3>
+                    <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#api">/sse</a></li>
-                        <li><a href="#api">/api/sse</a></li>
-                        <li><a href="#api">/api/validate</a></li>
-                        <li><a href="#api">/api/query</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#tools">Available Tools</a></li>
+                        <li><a href="#setup">Getting Started</a></li>
+                        <li><a href="#api">MCP Integration</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>About Us</h3>
                     <p>Explore our vision for human-centered technology and join our community dedicated to wellness and meaningful innovation.</p>
-                    <a href="https://matmax.world" class="btn" target="_blank" rel="noopener noreferrer" style="margin-top: 1rem;">Learn More</a>
+                    <a href="https://matmax.world" class="btn" target="_blank" rel="noopener noreferrer" style="margin-top: 1rem;">Visit matmax.world</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -891,6 +999,36 @@
         "https://www.linkedin.com/company/the-wellness-brand"
       ]
     }
+    </script>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            const footerLinks = document.querySelectorAll('.footer-column a[href^="#"]');
+            const heroButtons = document.querySelectorAll('.hero-buttons a[href^="#"]');
+            
+            const allLinks = [...navLinks, ...footerLinks, ...heroButtons];
+            
+            allLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html> 
