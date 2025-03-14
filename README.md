@@ -22,11 +22,11 @@
 
 The Payload CMS MCP Server provides a powerful interface for validating Payload CMS code, querying validation rules, and executing MCP queries. It helps developers build better Payload CMS applications by providing real-time validation and suggestions through natural language commands.
 
-### 🌐 Production URLs
+### 🌐 Production URL
 
 The MCP server is deployed at:
 
-* Primary URL: [https://www.payloadcmsmcp.info](https://www.payloadcmsmcp.info)
+* [https://www.payloadcmsmcp.info](https://www.payloadcmsmcp.info)
 
 <hr>
 
@@ -36,7 +36,7 @@ The MCP server is deployed at:
   <table>
     <tr>
       <td align="center">
-        <h3>✅</h3>
+        <h3>✓</h3>
         <b>Code Validation</b>
         <p>Validates Payload CMS collections, fields, globals, and other components</p>
       </td>
@@ -74,6 +74,22 @@ The MCP server is deployed at:
 <hr>
 
 ## 🔌 API Endpoints
+
+### Server-Sent Events (SSE)
+
+```http
+GET /sse
+```
+
+Server-Sent Events endpoint for real-time communication with the MCP server.
+
+### API SSE Endpoint
+
+```http
+GET /api/sse
+```
+
+Alternative SSE endpoint for API-based communication.
 
 ### Validation Endpoint
 
