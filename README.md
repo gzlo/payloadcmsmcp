@@ -9,6 +9,7 @@
     <img src="https://img.shields.io/badge/Model%20Context%20Protocol-Enabled-6366F1?style=for-the-badge" alt="MCP Enabled" />
     <img src="https://img.shields.io/badge/Payload%20CMS-Integration-3B82F6?style=for-the-badge" alt="Payload CMS" />
     <img src="https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge" alt="License" />
+    <img src="https://img.shields.io/badge/Railway-Deployment-0B0D0E?style=for-the-badge" alt="Railway Deployment" />
   </p>
   
   <h3>A validation and query service for Payload CMS code</h3>
@@ -26,7 +27,6 @@ The Payload CMS MCP Server provides a powerful interface for validating Payload 
 The MCP server is deployed at:
 
 * Primary URL: [https://www.payloadcmsmcp.info](https://www.payloadcmsmcp.info)
-* Alternative URL: [https://mcp-server-payload.vercel.app](https://mcp-server-payload.vercel.app)
 
 <hr>
 
@@ -195,17 +195,11 @@ The `client` directory contains:
 
 This MCP server is designed to be used with Cursor IDE for AI-assisted development of Payload CMS applications. The AI model can use the validation and query endpoints to provide real-time feedback and suggestions.
 
-You can use either the production endpoints:
+You can use the production endpoints:
 
 * Validation endpoint: `https://www.payloadcmsmcp.info/api/validate`
 * Query endpoint: `https://www.payloadcmsmcp.info/api/query`
 * MCP Query endpoint: `https://www.payloadcmsmcp.info/api/mcp_query`
-
-Or the alternative endpoints:
-
-* Validation endpoint: `https://mcp-server-payload.vercel.app/api/validate`
-* Query endpoint: `https://mcp-server-payload.vercel.app/api/query`
-* MCP Query endpoint: `https://mcp-server-payload.vercel.app/api/mcp_query`
 
 Or the local endpoints:
 
@@ -217,31 +211,25 @@ Or the local endpoints:
 
 ## 🚀 Deployment
 
-### Vercel Deployment
+### Railway Deployment
 
-To deploy this MCP server to Vercel with a permanent Redis connection:
+To deploy this MCP server to Railway:
 
-1. **Set up a Redis instance**:
-   * Use Upstash Redis (recommended for Vercel)
-   * Or Redis Cloud
-   * Or any other Redis provider that offers a persistent connection
+1. **Create a new Railway project**:
+   * Go to [Railway.app](https://railway.app) and create a new project
+   * Choose "Deploy from GitHub repo" and select your repository
 
-2. **Configure environment variables in Vercel**:
-   * Go to your Vercel project settings
-   * Navigate to the "Environment Variables" section
-   * Add the following variables:
-     * `REDIS_URL` or `KV_URL`: Your Redis connection string (required)
-     * `REDIS_CONNECT_TIMEOUT`: Connection timeout in milliseconds (optional, default: 30000)
-     * `REDIS_KEEP_ALIVE`: Keep-alive interval in milliseconds (optional, default: 5000)
+2. **Configure environment variables**:
+   * Add any necessary environment variables in the Railway dashboard
+   * For Redis connection (if needed), add your Redis connection string
 
-3. **Using Vercel KV (recommended)**:
-   * Create a Vercel KV database from your project dashboard
-   * Vercel will automatically set the `KV_URL` environment variable
-   * This provides the most reliable connection for Vercel deployments
+3. **Deploy your application**:
+   * Railway will automatically deploy your application
+   * You can monitor the deployment in the Railway dashboard
 
-4. **Redeploy your application**:
-   * After setting the environment variables, redeploy your application
-   * The Redis connection will now be persistent across serverless function invocations
+4. **Access your deployed application**:
+   * Railway will provide a URL for your deployed application
+   * You can also configure a custom domain in the Railway dashboard
 
 <hr>
 
