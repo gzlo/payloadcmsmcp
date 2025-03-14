@@ -130,6 +130,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .logo {
@@ -140,6 +141,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            z-index: 1001;
         }
 
         .logo-icon {
@@ -260,6 +262,15 @@
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 0.5rem;
             }
         }
 
@@ -740,25 +751,41 @@
             border: none;
             cursor: pointer;
             padding: 0.5rem;
-            z-index: 1000;
+            z-index: 1001;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-nav-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .mobile-nav-toggle span {
             display: block;
             width: 25px;
             height: 3px;
-            margin: 5px 0;
+            margin: 5px auto;
             background-color: white;
             transition: var(--transition);
+            border-radius: 3px;
         }
 
         @media (max-width: 768px) {
             .mobile-nav-toggle {
-                display: block;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
             }
 
             .header-content {
-                justify-content: space-between;
+                padding: 0.5rem 0;
             }
 
             nav {
@@ -773,6 +800,7 @@
                 transition: right 0.3s ease;
                 z-index: 999;
                 box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+                overflow-y: auto;
             }
 
             nav.active {
@@ -782,10 +810,22 @@
             nav ul {
                 flex-direction: column;
                 gap: 1.5rem;
+                align-items: flex-start;
+            }
+
+            nav a {
+                display: block;
+                padding: 0.5rem 0;
+                font-size: 1.1rem;
+                width: 100%;
+            }
+
+            nav a::after {
+                bottom: 0;
             }
 
             .mobile-nav-toggle.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
+                transform: rotate(45deg) translate(5px, 6px);
             }
 
             .mobile-nav-toggle.active span:nth-child(2) {
@@ -793,7 +833,7 @@
             }
 
             .mobile-nav-toggle.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
+                transform: rotate(-45deg) translate(5px, -6px);
             }
 
             .overlay {
@@ -805,10 +845,14 @@
                 height: 100%;
                 background-color: rgba(0, 0, 0, 0.5);
                 z-index: 998;
+                backdrop-filter: blur(2px);
+                transition: opacity 0.3s ease;
+                opacity: 0;
             }
 
             .overlay.active {
                 display: block;
+                opacity: 1;
             }
         }
 
@@ -816,6 +860,36 @@
         @media (max-width: 480px) {
             .container {
                 padding: 0 1rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
+            }
+
+            .mobile-nav-toggle {
+                width: 36px;
+                height: 36px;
+                right: 0.5rem;
+            }
+
+            .mobile-nav-toggle span {
+                width: 22px;
+                height: 2px;
+            }
+
+            header {
+                padding: 0.8rem 0;
+            }
+
+            nav {
+                width: 85%;
+                padding: 4.5rem 1.5rem 1.5rem;
             }
 
             .hero h1 {
@@ -830,7 +904,7 @@
                 font-size: 2rem;
             }
 
-            .feature-card, .tool-card, .setup-step {
+            .feature-card, .tool-card, .setup-step, .api-card {
                 padding: 1.5rem;
             }
 
@@ -903,6 +977,71 @@
 
             .tool-list li, .command-examples li {
                 font-size: 0.9rem;
+            }
+        }
+
+        /* Improved Responsive Layout */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .features, .tools-section, .api-section, .about-section, .setup-section {
+                padding: 3rem 0;
+            }
+
+            .section-title {
+                margin-bottom: 2rem;
+            }
+
+            .about-image {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .about-text {
+                text-align: center;
+            }
+
+            .about-text .btn {
+                margin: 0 auto;
+                display: block;
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .features, .tools-section, .api-section, .about-section, .setup-section {
+                padding: 2.5rem 0;
+            }
+
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .feature-card h3, .tool-card h3, .setup-step h3 {
+                font-size: 1.3rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .tool-list li, .command-examples li {
+                font-size: 0.9rem;
+            }
+
+            footer {
+                padding: 3rem 0 1.5rem;
             }
         }
     </style>
@@ -1248,20 +1387,36 @@
             const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
             const nav = document.querySelector('nav');
             const overlay = document.querySelector('.overlay');
+            const body = document.body;
 
             function toggleMobileNav() {
                 mobileNavToggle.classList.toggle('active');
                 nav.classList.toggle('active');
                 overlay.classList.toggle('active');
-                document.body.classList.toggle('no-scroll');
+                body.classList.toggle('no-scroll');
                 
                 // Update aria-expanded attribute
                 const isExpanded = mobileNavToggle.getAttribute('aria-expanded') === 'true';
                 mobileNavToggle.setAttribute('aria-expanded', !isExpanded);
+                
+                // Add focus trap for accessibility
+                if (nav.classList.contains('active')) {
+                    // Focus the first link in the menu
+                    setTimeout(() => {
+                        nav.querySelector('a').focus();
+                    }, 100);
+                }
             }
 
             mobileNavToggle.addEventListener('click', toggleMobileNav);
             overlay.addEventListener('click', toggleMobileNav);
+
+            // Close menu when pressing Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && nav.classList.contains('active')) {
+                    toggleMobileNav();
+                }
+            });
 
             // Handle window resize
             window.addEventListener('resize', function() {
@@ -1269,6 +1424,16 @@
                     toggleMobileNav();
                 }
             });
+
+            // Prevent body scrolling when menu is open
+            function preventScroll(e) {
+                if (body.classList.contains('no-scroll')) {
+                    e.preventDefault();
+                }
+            }
+
+            // Apply to touch devices
+            document.addEventListener('touchmove', preventScroll, { passive: false });
         });
 
         // Add no-scroll class to body
@@ -1276,6 +1441,9 @@
             <style>
                 .no-scroll {
                     overflow: hidden;
+                    position: fixed;
+                    width: 100%;
+                    height: 100%;
                 }
                 
                 @media (prefers-reduced-motion: reduce) {
