@@ -637,6 +637,9 @@
             box-shadow: var(--shadow);
             position: relative;
             transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
         .setup-step:hover {
@@ -711,6 +714,7 @@
             line-height: 1.5;
             white-space: pre;
             margin: 0.25rem 0;
+            font-size: 0.9rem;
         }
         
         @media (max-width: 768px) {
@@ -720,6 +724,69 @@
             
             .setup-step {
                 margin-bottom: 2rem;
+                padding: 1.75rem 1.5rem;
+            }
+
+            .step-number {
+                top: -12px;
+                left: -12px;
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+
+            .setup-step h3 {
+                font-size: 1.4rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .code-block {
+                padding: 0.8rem;
+                margin: 0.8rem 0;
+            }
+
+            .code-block code {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+
+            .setup-step ul, .setup-step ol {
+                padding-left: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .setup-step {
+                padding: 1.5rem 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .step-number {
+                top: -10px;
+                left: -10px;
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+
+            .setup-step h3 {
+                font-size: 1.3rem;
+                margin-bottom: 0.7rem;
+            }
+
+            .setup-step p, .setup-step li {
+                font-size: 0.95rem;
+            }
+
+            .code-block {
+                padding: 0.7rem;
+                margin: 0.7rem 0;
+                border-radius: 6px;
+            }
+
+            .code-block code {
+                font-size: 0.8rem;
+                line-height: 1.3;
             }
         }
 
@@ -744,6 +811,14 @@
             transform: translateX(5px);
         }
 
+        @media (max-width: 480px) {
+            .command-examples li {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.85rem;
+                margin-bottom: 0.8rem;
+            }
+        }
+
         /* Mobile Navigation */
         .mobile-nav-toggle {
             display: none;
@@ -760,10 +835,12 @@
             height: 40px;
             border-radius: 50%;
             transition: background-color 0.3s ease;
+            background-color: var(--primary);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .mobile-nav-toggle:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--primary-light);
         }
 
         .mobile-nav-toggle span {
@@ -795,12 +872,13 @@
                 width: 80%;
                 max-width: 300px;
                 height: 100vh;
-                background-color: var(--dark);
+                background-color: var(--primary);
                 padding: 5rem 2rem 2rem;
                 transition: right 0.3s ease;
                 z-index: 999;
                 box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
                 overflow-y: auto;
+                border-left: 3px solid white;
             }
 
             nav.active {
@@ -818,10 +896,19 @@
                 padding: 0.5rem 0;
                 font-size: 1.1rem;
                 width: 100%;
+                color: white;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                padding-bottom: 0.8rem;
+            }
+
+            nav a:hover {
+                color: white;
+                opacity: 0.8;
             }
 
             nav a::after {
                 bottom: 0;
+                background-color: white;
             }
 
             .mobile-nav-toggle.active span:nth-child(1) {
@@ -904,7 +991,7 @@
                 font-size: 2rem;
             }
 
-            .feature-card, .tool-card, .setup-step, .api-card {
+            .feature-card, .tool-card, .api-card {
                 padding: 1.5rem;
             }
 
