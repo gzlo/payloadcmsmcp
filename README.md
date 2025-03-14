@@ -1,288 +1,274 @@
-# Railway MCP Server
+# 🚀 Payload CMS MCP Server
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://avatars.githubusercontent.com/u/66716858?s=200&v=4" />
-    <source media="(prefers-color-scheme: light)" srcset="https://avatars.githubusercontent.com/u/66716858?s=200&v=4" />
-    <img alt="Railway" src="https://avatars.githubusercontent.com/u/66716858?s=200&v=4" height="40" />
-  </picture>
-  &nbsp;&nbsp;
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/38db1bcd-50df-4a49-a106-1b5afd924cb2" />
-    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/82603097-07c9-42bb-9cbc-fb8f03560926" />
-    <img alt="MCP" src="https://github.com/user-attachments/assets/82603097-07c9-42bb-9cbc-fb8f03560926" height="40" />
-  </picture>
-</p>
+<div align="center">
+  <img src="https://github.com/payloadcms/payload/raw/main/packages/payload/src/admin/assets/images/payload-logo-light.svg" alt="Payload CMS Logo" width="180" />
+  <br>
+  <br>
+  
+  <p align="center">
+    <img src="https://img.shields.io/badge/Model%20Context%20Protocol-Enabled-6366F1?style=for-the-badge" alt="MCP Enabled" />
+    <img src="https://img.shields.io/badge/Payload%20CMS-Integration-3B82F6?style=for-the-badge" alt="Payload CMS" />
+    <img src="https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge" alt="License" />
+  </p>
+  
+  <h3>A validation and query service for Payload CMS code</h3>
+  <p>Designed to be used with Cursor IDE and Claude for AI-assisted development</p>
+</div>
 
-<p align="center">
-  <strong>
-  Let Claude and other MCP clients manage your Railway.app infrastructure. Deploy services, manage variables, and monitor deployments - all through natural language.
-  </strong>
-</p>
-<p align="center">
-  <table align="center">
-    <th align="center">
-       Please Note: This is under development and not all features are available yet. 🚧 
-    </th>
+<hr>
+
+## 📋 Overview
+
+The Payload CMS MCP Server provides a powerful interface for validating Payload CMS code, querying validation rules, and executing MCP queries. It helps developers build better Payload CMS applications by providing real-time validation and suggestions through natural language commands.
+
+### 🌐 Production URLs
+
+The MCP server is deployed at:
+
+* Primary URL: [https://www.payloadcmsmcp.info](https://www.payloadcmsmcp.info)
+* Alternative URL: [https://mcp-server-payload.vercel.app](https://mcp-server-payload.vercel.app)
+
+<hr>
+
+## ✨ Features
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <h3>✅</h3>
+        <b>Code Validation</b>
+        <p>Validates Payload CMS collections, fields, globals, and other components</p>
+      </td>
+      <td align="center">
+        <h3>📝</h3>
+        <b>Detailed Feedback</b>
+        <p>Provides comprehensive feedback on validation issues</p>
+      </td>
+      <td align="center">
+        <h3>💡</h3>
+        <b>Smart Suggestions</b>
+        <p>Offers intelligent suggestions for improving code quality and security</p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <h3>🔍</h3>
+        <b>SQL-like Queries</b>
+        <p>Supports SQL-like queries for validation rules</p>
+      </td>
+      <td align="center">
+        <h3>🤖</h3>
+        <b>AI Integration</b>
+        <p>Seamlessly integrates with Cursor IDE for AI-assisted development</p>
+      </td>
+      <td align="center">
+        <h3>🔄</h3>
+        <b>Content Modeling</b>
+        <p>Define collections, fields, and relationships through conversation</p>
+      </td>
+    </tr>
   </table>
-</p>
+</div>
 
-<a href="https://glama.ai/mcp/servers/lwn74iwigz">
-  <img width="380" height="200" src="https://glama.ai/mcp/servers/lwn74iwigz/badge" alt="railway-mcp MCP server" />
-</a>
+<hr>
 
-A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server for integrating with the [Railway.app](https://railway.app) platform.
+## 🔌 API Endpoints
 
-[![smithery badge](https://smithery.ai/badge/@jason-tan-swe/railway-mcp)](https://smithery.ai/server/@jason-tan-swe/railway-mcp)
+### Validation Endpoint
 
-## Table of Contents
-
-<p align="center">
-  <a href="#features">Features</a> •
-  <a href="#installation">Installation</a> •
-  <a href="#available-tools">Available Tools</a> •
-  <a href="#example-workflows">Example Workflows</a> •
-  <a href="#security-considerations">Security</a> •
-  <a href="#troubleshooting">Troubleshooting</a> •
-  <a href="#contributing">Contributing</a>
-</p>
-
-## Features
-
-
-| Status | Meaning |
-|--------|---------|
-| ✅ | Complete |
-| 🚧🔨⏳ | Being Built or Needs Testing |
-| ❌ | Not Built at the moment |
-
-- ✅ Authentication with Railway API tokens
-- ✅ Project management (list, info, delete)
-- ✅ Deployment management (list, restart)
-- ✅  Service management (create from GitHub repo or Docker image, list)
-- ✅  Variable management (list, create/update, delete)
-- ✅ Service Network management
-- ✅ Volume management
-- ❌ Full support for all templates
-   - 🚧🔨⏳	 Database template support
-   - Automatic database and networking workflows
-- 🚧🔨⏳	Most commonly used workflows
-- ❌ Automatic GitHub repository linking for services
-
-## Installation
-
-### Prerequisites
-
-- Node.js 18+ (for built-in fetch API support)
-- An active Railway account
-- A Railway API token (create one at https://railway.app/account/tokens)
-
-
-#### Quick Start
-
-This MCP server is designed to work with MCP Clients like:
-- Claude for Desktop | ✅ Battle-Tested
-- Cursor | ✅ Needs Testing
-- Cline | 🚧🔨⏳ Needs Testing
-- Windsurf | 🚧🔨⏳ Needs Testing
-- Other MCP Clients | 🚧🔨⏳ Needs Testing
-
-### Installing via Smithery
-
-To install railway-mcp automatically, we recommend using [Smithery](https://smithery.ai/server/@jason-tan-swe/railway-mcp)
-
-**Claude Desktop**
-
-```bash
-npx -y @smithery/cli install @jason-tan-swe/railway-mcp --client claude
+```http
+POST /api/validate
 ```
 
-**Cursor**
-```
-npx -y @smithery/cli@latest run @jason-tan-swe/railway-mcp --config "{\"railwayApiToken\":\"token\"}"
-```
-
-
-<details>
-<summary> <h3>Manual Installation For Cursor</h3></summary>
-
-1. Head to your cursor settings and find the MCP section
-
-2. Click 'Add new MCP server'
-
-3. Name it however, you like, we recommend `railway-mcp` for better clarity
-
-4. Paste this command into the 'Command' section, where <RAILWAY_API_TOKEN> is your accounts Railway token:
-
-```bash
-npx -y @jasontanswe/railway-mcp <RAILWAY_API_TOKEN>
-```
-</details>
-
-<details>
-
-<summary><h3>Manual Installation For Claude</h3></summary>
-
-1. Create or edit your Claude for Desktop config file:
-   - macOS: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
-   - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
-
-2. Add the railway-mcp server to your configuration with your API token:
-
-```json
-   "railway": {
-      "command": "npx",
-      "args": ["-y", "@jasontanswe/railway-mcp"],
-      "env": {
-         "RAILWAY_API_TOKEN": "your-railway-api-token-here"
-      }
-   }
-```
-
-When you have multiple MCP servers, your config file might look like this:
-
+Request body:
 ```json
 {
-  "mcpServers": {
-    // ... All of your existing MCP servers ...
-
-    // Add the railway-mcp server to your configuration with your API token
-    "railway": {
-      "command": "npx",
-      "args": ["-y", "@jasontanswe/railway-mcp"],
-      "env": {
-        "RAILWAY_API_TOKEN": "your-railway-api-token-here"
-      }
-    }
-  }
+  "code": "const Posts = { slug: 'posts', fields: [...] }",
+  "fileType": "collection"
 }
 ```
 
-3. Restart Claude for Desktop
-
-4. You can now start using Railway tools directly in Claude. For example:
-
+Response:
+```json
+{
+  "isValid": true|false,
+  "messages": ["..."],
+  "suggestions": [
+    {
+      "message": "...",
+      "code": "..."
+    }
+  ],
+  "references": [
+    {
+      "title": "...",
+      "url": "..."
+    }
+  ]
+}
 ```
-Please list all my Railway projects
+
+### Query Endpoint
+
+```http
+POST /api/query
 ```
 
-5. Alternatively, if you don't want to add your token to the configuration file, you can configure it within Claude using:
-
+Request body:
+```json
+{
+  "query": "security",
+  "fileType": "collection"
+}
 ```
-Please configure the Railway API with my token: {YOUR_API_TOKEN_HERE}
+
+Response:
+```json
+{
+  "rules": [
+    {
+      "id": "...",
+      "description": "...",
+      "type": "collection|field|global"
+    }
+  ]
+}
 ```
-</details>
 
-## Recommendations and Other Information
-This server best combines with MCP-clients that have access to terminal or with Git **(Cursor, Windsurf)**. Using this MCP with others is recommended as railway-mcp orchestrates containers and streamlines your deployment process seamlessly.
+### MCP Query Endpoint
 
-### Recommended MCP servers to combine with
-- Git || [Official Link](https://github.com/modelcontextprotocol/servers/tree/main/src/git)
-- GitHub || [Official](https://github.com/modelcontextprotocol/servers/tree/main/src/github) || [Smithery](https://smithery.ai/server/@smithery-ai/github)
+```http
+POST /api/mcp_query
+```
 
+Request body:
+```json
+{
+  "query": "SELECT * FROM validation_rules WHERE type = 'collection'"
+}
+```
 
-### For Claude
-- Out of the box, Claude does not have terminal access, so it cannot trigger deployments as it will not be able to get the latest commit.
-- Spinning up different services and monitoring them are the best use case with Claude.
+Response:
+```json
+{
+  "results": [...]
+}
+```
 
+<hr>
 
-### For Cursor
-- Use with GitHub MCP or have the repository already setup on GitHub and cloned locally on your machine to leverage full integration with railway-mcp.
-- When Cursor makes a change, it may forget to push it's changes to GitHub causing it to try and deploy a commit that Railway cannot pull.
-  - **SOLUTION:** Always ask or include somewhere in your prompt: `Have you pushed our changes to GitHub yet?`
+## 🚀 Quick Start
 
-## Security Considerations
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Matmax-Worldwide/payloadcmsmcp.git
+   ```
 
-- Railway API tokens provide full access to your account. Keep them secure.
-- When using the environment variable method, your token is stored in the Claude Desktop configuration file.
-- Sensitive variable values are automatically masked when displayed.
-- All API calls use HTTPS for secure communication.
-- The server's memory-only token storage means your token is never written to disk outside of the configuration file.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Troubleshooting
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-If you encounter issues:
+4. Access the server at `http://localhost:3000`
 
-1. **Token Authentication Issues**
-   - Ensure your API token is valid and has the necessary permissions
-   - If using the environment variable method, check that the token is correctly formatted in the config file
-   - Try using the `configure` tool directly in Claude if the environment token isn't working
+5. Open `local-landing.html` in your browser
 
-2. **Server Connection Issues**
-   - Check that you've installed the latest version of the server
-   - Verify that Node.js version 18 or higher is installed
-   - Restart Claude for Desktop after making changes to the configuration
+<hr>
 
-3. **API Errors**
-   - Verify that you're using correct project, environment, and service IDs
-   - Check Railway's status page for any service disruptions
-   - Railway API has rate limits - avoid making too many requests in a short period
+## 💻 Client Code
 
-## Contributing
+The `client` directory contains:
 
-We welcome contributions from the community! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on how to get started, development guidelines, and debugging information.
+1. `mcp-client.js` - A JavaScript client for Node.js applications
+2. `index.html` - An HTML page for web application demonstration
+3. `index-local.html` - A local version of the client that works with the local server
 
+<hr>
 
+## 🔗 Integration with Cursor IDE
 
-</details>
+This MCP server is designed to be used with Cursor IDE for AI-assisted development of Payload CMS applications. The AI model can use the validation and query endpoints to provide real-time feedback and suggestions.
 
-## Available Tools
+You can use either the production endpoints:
 
-<details>
-<summary>View All</summary>
+* Validation endpoint: `https://www.payloadcmsmcp.info/api/validate`
+* Query endpoint: `https://www.payloadcmsmcp.info/api/query`
+* MCP Query endpoint: `https://www.payloadcmsmcp.info/api/mcp_query`
 
-### Authentication
-- `configure` - Set your Railway API token (only needed if not provided in environment variables)
+Or the alternative endpoints:
 
-### Projects
-- `project-list` - List all projects in your account
-- `project-info` - Get detailed information about a specific project
-- `project-create` - Create a new project with optional team ID
-- `project-delete` - Delete a project
-- `project-environments` - List all environments in a project
+* Validation endpoint: `https://mcp-server-payload.vercel.app/api/validate`
+* Query endpoint: `https://mcp-server-payload.vercel.app/api/query`
+* MCP Query endpoint: `https://mcp-server-payload.vercel.app/api/mcp_query`
 
-### Services
-- `service-list` - List all services in a specific project
-- `service-info` - Get detailed information about a specific service
-- `service-create-from-repo` - Create a new service from a GitHub repository
-- `service-create-from-image` - Create a new service from a Docker image
-- `service-delete` - Delete a service from a project
-- `service-restart` - Restart a service in a specific environment
-- `service-update` - Update service configuration (build command, start command, etc.) | 🚧 Needs Testing
+Or the local endpoints:
 
-### Deployments
-- `deployment-list` - List recent deployments for a service
-- `deployment-trigger` - Trigger a new deployment for a service
-- `deployment-logs` - Get logs for a specific deployment
-- `deployment-health-check` - Check the health/status of a deployment
+* Validation endpoint: `http://localhost:3000/api/validate`
+* Query endpoint: `http://localhost:3000/api/query`
+* MCP Query endpoint: `http://localhost:3000/api/mcp_query`
 
-### Variables
-- `variable-list` - List variables for a service or environment
-- `variable-set` - Create or update a variable
-- `variable-delete` - Delete a variable
-- `variable-bulk-set` - Bulk update variables for a service | 🚧 Needs Testing
-- `variable-copy` - Copy variables between environments | 🚧 Needs Testing
+<hr>
 
-### Databases
-- `database-list-types` - List all available database types that can be deployed
-- `database-deploy` - Deploy a new database service
-</details>
+## 🚀 Deployment
 
-<details>
-<summary>Example Workflows</summary>
+### Vercel Deployment
 
-### Setting up a new service
+To deploy this MCP server to Vercel with a permanent Redis connection:
 
-1. List projects to get the project ID
-2. Create a new service from a template
-3. Add environment variables
-4. View the service deployment
+1. **Set up a Redis instance**:
+   * Use Upstash Redis (recommended for Vercel)
+   * Or Redis Cloud
+   * Or any other Redis provider that offers a persistent connection
 
-### Managing environment variables
+2. **Configure environment variables in Vercel**:
+   * Go to your Vercel project settings
+   * Navigate to the "Environment Variables" section
+   * Add the following variables:
+     * `REDIS_URL` or `KV_URL`: Your Redis connection string (required)
+     * `REDIS_CONNECT_TIMEOUT`: Connection timeout in milliseconds (optional, default: 30000)
+     * `REDIS_KEEP_ALIVE`: Keep-alive interval in milliseconds (optional, default: 5000)
 
-1. List projects to find your project ID
-2. List variables to see what's currently set
-3. Create or update variables as needed
-4. Delete any obsolete variables
+3. **Using Vercel KV (recommended)**:
+   * Create a Vercel KV database from your project dashboard
+   * Vercel will automatically set the `KV_URL` environment variable
+   * This provides the most reliable connection for Vercel deployments
 
-</details>
+4. **Redeploy your application**:
+   * After setting the environment variables, redeploy your application
+   * The Redis connection will now be persistent across serverless function invocations
+
+<hr>
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+<hr>
+
+## 🌍 About MATMAX WORLDWIDE
+
+<div align="center">
+  <h3>MATMAX WORLDWIDE</h3>
+  <p>Creating technology that helps humans be more human.</p>
+</div>
+
+This MCP server is a contribution to the Payload CMS community by MATMAX WORLDWIDE. We believe in tech for good—tools that enhance our lives while respecting our humanity.
+
+Join us in building a future where technology serves wellness, connection, and purpose. Together, we can create digital experiences that bring out the best in us all.
+
+Visit [matmax.world](https://matmax.world) to explore our vision for human-centered technology and join our community dedicated to wellness and meaningful innovation.
+
+<div align="center">
+  <p>
+    <a href="https://github.com/Matmax-Worldwide" target="_blank">GitHub</a> •
+    <a href="https://www.linkedin.com/company/the-wellness-brand" target="_blank">LinkedIn</a> •
+    <a href="https://matmax.world" target="_blank">Website</a>
+  </p>
+  <p>© 2025 MATMAX WORLDWIDE. Made with ❤️ for humanity.</p>
+</div>
