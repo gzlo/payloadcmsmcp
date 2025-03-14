@@ -367,6 +367,261 @@ The project is ready to be initialized with `npm install` and `npm run dev`.
 
 <hr>
 
+## 📋 Scaffolding Examples & Detailed Prompts
+
+### Project Scaffolding Examples
+
+When you scaffold a project using the MCP server, you'll receive a complete project structure. Here's what a scaffolded e-commerce project might look like:
+
+```
+e-commerce-platform/
+├── .env
+├── .eslintrc.js
+├── .gitignore
+├── README.md
+├── package.json
+├── tsconfig.json
+├── src/
+│   ├── payload.config.ts
+│   ├── server.ts
+│   ├── collections/
+│   │   ├── Products.ts
+│   │   ├── Categories.ts
+│   │   ├── Orders.ts
+│   │   ├── Customers.ts
+│   │   ├── Media.ts
+│   │   └── Users.ts
+│   ├── globals/
+│   │   ├── Settings.ts
+│   │   └── Footer.ts
+│   ├── blocks/
+│   │   ├── Hero.ts
+│   │   ├── ProductGrid.ts
+│   │   └── CallToAction.ts
+│   ├── fields/
+│   │   ├── richText/
+│   │   ├── metaImage.ts
+│   │   └── slug.ts
+│   ├── hooks/
+│   │   ├── beforeChange.ts
+│   │   └── afterChange.ts
+│   ├── access/
+│   │   ├── isAdmin.ts
+│   │   └── isAdminOrSelf.ts
+│   └── utilities/
+│       ├── formatSlug.ts
+│       └── sendEmail.ts
+```
+
+### Example Scaffold Project Prompt (Basic)
+
+```
+Scaffold a Payload CMS project for a blog platform with the following:
+- Project name: blog-platform
+- Database: MongoDB
+- Authentication: Yes
+- Collections: Posts, Categories, Authors, Media
+- Globals: SiteSettings
+- TypeScript: Yes
+```
+
+### Example Scaffold Project Prompt (Detailed)
+
+```
+Scaffold a comprehensive Payload CMS project for an e-commerce platform with the following specifications:
+
+Project details:
+- Name: luxury-watches-store
+- Description: "An e-commerce platform for luxury watches"
+- Database: PostgreSQL
+- TypeScript: Yes
+
+Collections needed:
+1. Products collection with:
+   - Name (text, required)
+   - Description (rich text)
+   - Price (number, required)
+   - SKU (text, unique)
+   - Brand (relationship to Brands collection)
+   - Categories (relationship to Categories, multiple)
+   - Features (array of text fields)
+   - Specifications (array of key-value pairs)
+   - Images (array of media uploads with alt text)
+   - Stock quantity (number)
+   - Status (select: available, out of stock, discontinued)
+
+2. Categories collection with:
+   - Name (text, required)
+   - Description (rich text)
+   - Parent category (self-relationship)
+   - Image (media upload)
+
+3. Brands collection with:
+   - Name (text, required)
+   - Logo (media upload)
+   - Description (rich text)
+   - Founded year (number)
+   - Country of origin (text)
+
+4. Orders collection with:
+   - Order number (text, generated)
+   - Customer (relationship to Users)
+   - Products (array of relationships to Products with quantity)
+   - Status (select: pending, processing, shipped, delivered, cancelled)
+   - Shipping address (group of fields)
+   - Billing address (group of fields)
+   - Payment method (select)
+   - Total amount (number, calculated)
+   - Notes (text)
+
+5. Users collection (auth enabled) with:
+   - Email (email, required)
+   - Name (text, required)
+   - Shipping addresses (array of address groups)
+   - Order history (relationship to Orders)
+   - Wishlist (relationship to Products)
+   - Role (select: customer, admin)
+
+Globals:
+1. SiteSettings with:
+   - Site name
+   - Logo
+   - Contact information
+   - Social media links
+   - SEO defaults
+
+2. ShippingMethods with:
+   - Array of shipping options with prices
+
+Include access control for:
+- Admin-only access to manage products, categories, brands
+- Customer access to their own orders and profile
+- Public read access to products and categories
+
+Add hooks for:
+- Updating stock when orders are placed
+- Generating order numbers
+- Sending email notifications on order status changes
+```
+
+### Example Collection Creation Prompt (Basic)
+
+```
+Generate a Payload CMS collection for blog posts with title, content, author, and published date fields.
+```
+
+### Example Collection Creation Prompt (Detailed)
+
+```
+Generate a Payload CMS collection for a real estate property listing with the following specifications:
+
+Collection name: Properties
+Admin configuration:
+- Use "title" as the display field
+- Group under "Listings" in the admin panel
+- Default columns: title, price, location, status, createdAt
+
+Fields:
+1. Title (text, required)
+2. Slug (text, unique, generated from title)
+3. Description (rich text with basic formatting options)
+4. Price (number, required)
+5. Location (group) with:
+   - Address (text)
+   - City (text, required)
+   - State/Province (text, required)
+   - Postal code (text)
+   - Country (select from predefined list)
+   - Coordinates (point) for map display
+6. Property details (group) with:
+   - Property type (select: house, apartment, condo, land, commercial)
+   - Bedrooms (number)
+   - Bathrooms (number)
+   - Square footage (number)
+   - Lot size (number)
+   - Year built (number)
+   - Parking spaces (number)
+7. Features (array of checkboxes) including:
+   - Air conditioning
+   - Swimming pool
+   - Garden
+   - Garage
+   - Fireplace
+   - Security system
+   - Elevator
+   - Furnished
+8. Images (array of media uploads with alt text and caption)
+9. Documents (array of file uploads for floor plans, certificates, etc.)
+10. Status (select: available, under contract, sold, off market)
+11. Featured (checkbox to highlight on homepage)
+12. Agent (relationship to Users collection, required)
+13. Related properties (relationship to self, multiple)
+
+Access control:
+- Public read access
+- Agent can create and edit their own listings
+- Admin can manage all listings
+
+Hooks:
+- Before change: Format slug from title
+- After change: Notify agent of status changes
+
+Versioning: Enabled
+Timestamps: Enabled
+```
+
+### Level of Detail in Prompts
+
+The MCP server can handle prompts with varying levels of detail:
+
+#### Minimal Detail (AI fills in the gaps)
+```
+Generate a collection for blog posts.
+```
+
+#### Moderate Detail (Specific requirements)
+```
+Generate a collection for blog posts with title, content, featured image, categories, and author fields. Make title and content required.
+```
+
+#### High Detail (Complete specifications)
+```
+Generate a collection for blog posts with:
+- Slug: posts
+- Fields:
+  - Title (text, required)
+  - Content (rich text with custom formatting options)
+  - Featured image (upload with alt text)
+  - Categories (relationship to categories collection, multiple)
+  - Author (relationship to users collection)
+  - Status (select: draft, published, archived)
+  - Published date (date)
+  - SEO (group with title, description, and keywords)
+- Admin configuration:
+  - Use title as display field
+  - Group under "Content"
+  - Default columns: title, author, status, publishedDate
+- Access control for different user roles
+- Hooks for slug generation and notification
+- Enable versioning and timestamps
+```
+
+### Tips for Effective Prompts
+
+1. **Be specific about requirements**: The more details you provide, the more tailored the output will be.
+
+2. **Specify relationships**: Clearly indicate how collections relate to each other.
+
+3. **Include validation needs**: Mention any validation rules or constraints for fields.
+
+4. **Describe admin UI preferences**: Specify how you want the collection to appear in the admin panel.
+
+5. **Mention hooks and access control**: If you need specific business logic or security rules, include them in your prompt.
+
+6. **Use domain-specific terminology**: Describe your project using terms relevant to your industry or use case.
+
+<hr>
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
