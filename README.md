@@ -1,7 +1,7 @@
 # 🚀 Payload CMS MCP SERVER
 
 <div align="center">
-  <img src="https://github.com/payloadcms/payload/raw/main/packages/payload/src/admin/assets/images/payload-logo-light.svg" alt="Payload CMS Logo" width="180" />
+  <img src="public/00Matmax-world-logo-_1_-svg.png" alt="MATMAX WORLDWIDE Logo" width="180" />
   <br>
   <br>
   
