@@ -142,7 +142,7 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 1rem;
             z-index: 1001;
             position: relative;
             transition: all 0.3s ease;
@@ -170,11 +170,11 @@
         .logo-text {
             display: inline-block;
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 150px;
+            overflow: visible;
+            text-overflow: unset;
+            max-width: none;
             transition: all 0.3s ease;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .version-text {
@@ -257,6 +257,21 @@
 
         nav a:hover::after {
             width: 100%;
+        }
+
+        .github-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .nav-icon {
+            filter: invert(1);
+            transition: var(--transition);
+        }
+        
+        .github-link:hover .nav-icon {
+            filter: invert(0.7) sepia(1) saturate(5) hue-rotate(175deg);
         }
 
         /* Hero Section */
@@ -638,7 +653,7 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-top: 1rem;
         }
 
@@ -646,10 +661,28 @@
             color: #ccc;
             font-size: 1.25rem;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .social-links a:hover {
             color: var(--primary-light);
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .social-icon {
+            filter: invert(0.8);
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover .social-icon {
+            filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
         }
 
         @media (max-width: 768px) {
@@ -664,6 +697,7 @@
                 font-size: 1.2rem;
                 gap: 0.5rem;
                 align-items: center;
+                max-width: 65%;
             }
 
             .logo-image {
@@ -678,8 +712,9 @@
             }
 
             .logo-text {
-                max-width: 100px;
+                max-width: none;
                 line-height: 1.1;
+                font-size: 0.85rem;
             }
 
             .version-text {
@@ -1153,8 +1188,9 @@
             }
 
             .logo-text {
-                max-width: 100px;
+                max-width: none;
                 line-height: 1.1;
+                font-size: 0.85rem;
             }
 
             .mobile-nav-toggle {
@@ -1415,7 +1451,10 @@
                     <li><a href="#tools">Capabilities</a></li>
                     <li><a href="#api">Integration</a></li>
                     <li><a href="#setup">Setup</a></li>
-                    <li><a href="https://github.com/Matmax-Worldwide/payloadcmsmcp" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a href="https://github.com/Matmax-Worldwide/payloadcmsmcp" target="_blank" rel="noopener noreferrer" class="github-link">
+                        <img src="/images/github-icon.svg" alt="GitHub" width="18" height="18" class="nav-icon">
+                        GitHub
+                    </a></li>
                 </ul>
             </nav>
             <div class="overlay"></div>
@@ -1679,9 +1718,15 @@
             <div class="footer-bottom">
                 <p>© 2025 MATMAX WORLDWIDE. Made with ❤️ for humanity.</p>
                 <div class="social-links">
-                    <a href="https://github.com/Matmax-Worldwide" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
-                    <a href="https://instagram.com/matmaxyoga" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
-                    <a href="https://www.linkedin.com/company/the-wellness-brand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+                    <a href="https://github.com/Matmax-Worldwide" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <img src="/images/github-icon.svg" alt="GitHub" width="24" height="24" class="social-icon">
+                    </a>
+                    <a href="https://instagram.com/matmaxyoga" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <img src="/images/instagram-icon.svg" alt="Instagram" width="24" height="24" class="social-icon">
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-wellness-brand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <img src="/images/linkedin-icon.svg" alt="LinkedIn" width="24" height="24" class="social-icon">
+                    </a>
                 </div>
             </div>
         </div>
