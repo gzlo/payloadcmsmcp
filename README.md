@@ -640,3 +640,33 @@ We believe in tech for good—tools that enhance our lives while respecting our 
 Join us in building a future where technology serves wellness, connection, and purpose. Together, we can create digital experiences that bring out the best in us all.
 
 Visit [matmax.world](https://matmax.world) to learn more about our vision for human-centered technology.
+
+<hr>
+
+## 🖥️ Running Locally
+
+You can also run the Payload CMS MCP Server locally by following these steps:
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Matmax-Worldwide/payloadcmsmcp.git
+cd payloadcmsmcp
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables:
+Create a `.env` file and add your Railway API token:
+```env
+RAILWAY_API_TOKEN=your_railway_api_token_here
+```
+
+4. Run the server:
+```bash
+npm run dev
+```
+
+Your MCP server will now be running locally and accessible for development and testing.
