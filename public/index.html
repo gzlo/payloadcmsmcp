@@ -79,6 +79,16 @@
             --border-radius: 12px;
             --box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+            --primary-color: #6366f1;
+            --primary-hover: #4f46e5;
+            --secondary-color: #0ea5e9;
+            --text-color: #1e293b;
+            --light-text: #64748b;
+            --bg-color: #ffffff;
+            --light-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
         }
 
         * {
@@ -170,54 +180,82 @@
             width: 100%;
         }
 
+        /* Hero Section */
         .hero {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
             color: white;
+            padding: 6rem 0;
             text-align: center;
         }
-
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
         .hero h1 {
             font-size: 3.5rem;
-            font-weight: 700;
             margin-bottom: 1.5rem;
-            line-height: 1.2;
+            font-weight: 700;
         }
-
+        
         .hero p {
-            font-size: 1.25rem;
-            max-width: 800px;
-            margin: 0 auto 2.5rem;
-            color: #ccc;
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            line-height: 1.6;
         }
-
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
         .btn {
             display: inline-block;
             padding: 0.75rem 1.5rem;
-            background-color: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             font-weight: 600;
+            text-decoration: none;
             transition: var(--transition);
-            border: none;
             cursor: pointer;
         }
-
-        .btn:hover {
-            background-color: var(--primary-light);
+        
+        .btn-primary {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #f8fafc;
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(80, 70, 229, 0.3);
         }
-
+        
         .btn-secondary {
-            background-color: transparent;
-            border: 2px solid var(--primary);
-            margin-left: 1rem;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            backdrop-filter: blur(4px);
         }
-
+        
         .btn-secondary:hover {
-            background-color: var(--primary);
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
         }
 
         .features {
@@ -337,8 +375,8 @@
         }
 
         .about-section {
+            background-color: var(--light-bg);
             padding: 5rem 0;
-            background-color: white;
         }
 
         .about-content {
@@ -466,6 +504,116 @@
                 margin-top: 1rem;
             }
         }
+
+        /* Setup Section Styles */
+        .setup-section {
+            padding: 5rem 0;
+            background: linear-gradient(to bottom right, #f1f5f9, #e2e8f0);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .setup-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .setup-step {
+            background-color: var(--bg-color);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .setup-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .setup-step h3 {
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .setup-step p, .setup-step li {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .setup-step ul, .setup-step ol {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .setup-step li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .code-block {
+            background-color: #1e293b;
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .code-block code {
+            display: block;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            white-space: pre;
+            margin: 0.25rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .setup-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .setup-step {
+                margin-bottom: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -478,8 +626,8 @@
             <nav role="navigation" aria-label="Main Navigation">
                 <ul>
                     <li><a href="#features">Features</a></li>
-                    <li><a href="#api">API</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#tools">Tools</a></li>
+                    <li><a href="#setup">Setup</a></li>
                     <li><a href="https://github.com/Matmax-Worldwide/payloadcmsmcp" target="_blank" rel="noopener noreferrer">GitHub</a></li>
                 </ul>
             </nav>
@@ -489,11 +637,13 @@
     <main>
         <section class="hero" aria-labelledby="hero-heading">
             <div class="container">
-                <h1 id="hero-heading">Payload CMS MCP Server</h1>
-                <p>A validation and query service for Payload CMS code, designed to be used with Cursor IDE for AI-assisted development.</p>
-                <div class="cta-buttons">
-                    <a href="https://github.com/Matmax-Worldwide/payloadcmsmcp" class="btn" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-                    <a href="#api" class="btn btn-secondary">Explore API</a>
+                <div class="hero-content">
+                    <h1 id="hero-heading">Payload CMS MCP Server</h1>
+                    <p>Manage your Payload CMS projects on Railway with natural language commands through Claude AI.</p>
+                    <div class="hero-buttons">
+                        <a href="#features" class="btn btn-primary">Explore Features</a>
+                        <a href="#setup" class="btn btn-secondary">Get Started</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -594,6 +744,95 @@
                         <p>Creating technology that helps humans be more human. We believe in tech for good—tools that enhance our lives while respecting our humanity.</p>
                         <p>Join us in building a future where technology serves wellness, connection, and purpose. Together, we can create digital experiences that bring out the best in us all.</p>
                         <a href="https://matmax.world" class="btn" target="_blank" rel="noopener noreferrer">Visit matmax.world</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="setup-section" id="setup" aria-labelledby="setup-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="setup-heading">Getting Started</h2>
+                    <p>Follow these steps to set up and start using the Payload CMS MCP Server.</p>
+                </div>
+                <div class="setup-steps">
+                    <div class="setup-step">
+                        <div class="step-number">1</div>
+                        <h3>Prerequisites</h3>
+                        <p>Before you begin, make sure you have:</p>
+                        <ul>
+                            <li>Node.js 18+ (for built-in fetch API support)</li>
+                            <li>An active Railway account</li>
+                            <li>A Railway API token (create one at <a href="https://railway.app/account/tokens" target="_blank" rel="noopener noreferrer">railway.app/account/tokens</a>)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="setup-step">
+                        <div class="step-number">2</div>
+                        <h3>Installation</h3>
+                        <p>Clone the repository and install dependencies:</p>
+                        <div class="code-block">
+                            <code>git clone https://github.com/Matmax-Worldwide/payloadcmsmcp.git</code>
+                            <code>cd payloadcmsmcp</code>
+                            <code>npm install</code>
+                        </div>
+                        <p>Run the server with your Railway API token:</p>
+                        <div class="code-block">
+                            <code>node server.js YOUR_RAILWAY_API_TOKEN</code>
+                        </div>
+                    </div>
+                    
+                    <div class="setup-step">
+                        <div class="step-number">3</div>
+                        <h3>Configure Cursor</h3>
+                        <p>To use with Cursor IDE:</p>
+                        <ol>
+                            <li>Open Cursor Settings</li>
+                            <li>Go to MCP Servers section</li>
+                            <li>Add a new MCP server</li>
+                            <li>Name it "Payload CMS MCP"</li>
+                            <li>Set Transport Type to "Command"</li>
+                            <li>Set Command to: <code>node /path/to/payloadcmsmcp/server.js YOUR_RAILWAY_API_TOKEN</code></li>
+                            <li>Save the configuration</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="setup-step">
+                        <div class="step-number">4</div>
+                        <h3>Configure Claude for Desktop</h3>
+                        <p>To use with Claude for Desktop:</p>
+                        <ol>
+                            <li>Edit your Claude for Desktop config file:
+                                <ul>
+                                    <li>macOS: <code>~/Library/Application\ Support/Claude/claude_desktop_config.json</code></li>
+                                    <li>Windows: <code>%APPDATA%\Claude\claude_desktop_config.json</code></li>
+                                </ul>
+                            </li>
+                            <li>Add this configuration:
+                                <div class="code-block">
+                                    <code>"mcpServers": {</code>
+                                    <code>  "payloadcms": {</code>
+                                    <code>    "command": "node",</code>
+                                    <code>    "args": ["/path/to/payloadcmsmcp/server.js", "YOUR_RAILWAY_API_TOKEN"],</code>
+                                    <code>    "env": {}</code>
+                                    <code>  }</code>
+                                    <code>}</code>
+                                </div>
+                            </li>
+                            <li>Restart Claude for Desktop</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="setup-step">
+                        <div class="step-number">5</div>
+                        <h3>Start Using</h3>
+                        <p>Once configured, you can use natural language to manage your Payload CMS projects:</p>
+                        <ul>
+                            <li>"Create a new Payload CMS project with MongoDB"</li>
+                            <li>"Set up a blog collection with title, content, and author fields"</li>
+                            <li>"Configure authentication with email and password"</li>
+                            <li>"Deploy my Payload CMS project to Railway"</li>
+                        </ul>
                     </div>
                 </div>
             </div>
