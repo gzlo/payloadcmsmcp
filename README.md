@@ -2,9 +2,9 @@
 
 <div align="center">
   <p align="center">
-    <img src="public/logopayload.png" alt="Payload CMS Logo" width="80" height="80" />
+    <img src="public/logopayload.png" alt="Payload CMS Logo" width="120" height="120" style="border-radius: 10px; padding: 5px; background-color: white; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);" />
   </p>
-  <p align="center">
+<p align="center">
     <img src="https://img.shields.io/badge/Model%20Context%20Protocol-Enabled-6366F1?style=for-the-badge" alt="MCP Enabled" />
     <img src="https://img.shields.io/badge/Payload%20CMS-Integration-3B82F6?style=for-the-badge" alt="Payload CMS" />
     <img src="https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge" alt="License" />
@@ -172,15 +172,15 @@ To use with Claude for Desktop:
    * macOS: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
    * Windows: `%APPDATA%\Claude\claude_desktop_config.json`
 2. Add this configuration:
-   ```json
-   "mcpServers": {
+```json
+  "mcpServers": {
      "payloadcms": {
        "command": "node",
        "args": ["/path/to/payloadcmsmcp/server.js", "YOUR_RAILWAY_API_TOKEN"],
        "env": {}
-     }
-   }
-   ```
+  }
+}
+```
 3. Restart Claude for Desktop
 
 ### 5. Start Using
