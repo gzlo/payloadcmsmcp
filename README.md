@@ -1,10 +1,6 @@
 # 🚀 Payload CMS MCP SERVER
 
 <div align="center">
-  <img src="public/00Matmax-world-logo-_1_-svg.png" alt="MATMAX WORLDWIDE Logo" width="180" />
-  <br>
-  <br>
-  
   <p align="center">
     <img src="https://img.shields.io/badge/Model%20Context%20Protocol-Enabled-6366F1?style=for-the-badge" alt="MCP Enabled" />
     <img src="https://img.shields.io/badge/Payload%20CMS-Integration-3B82F6?style=for-the-badge" alt="Payload CMS" />

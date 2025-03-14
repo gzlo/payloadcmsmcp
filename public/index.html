@@ -142,20 +142,45 @@
             align-items: center;
             gap: 0.5rem;
             z-index: 1001;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .logo-icon {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .logo-icon {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
             letter-spacing: -0.5px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .logo:hover .logo-icon::before {
+            left: 100%;
         }
 
         nav ul {
@@ -857,26 +882,20 @@
             right: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
             background-color: transparent;
             box-shadow: none;
         }
 
         .mobile-nav-toggle:hover {
-            background-color: transparent;
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .mobile-nav-toggle span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            margin: 5px auto;
-            background-color: white;
-            transition: var(--transition);
-            border-radius: 3px;
+        .mobile-nav-toggle:active {
+            transform: translateY(-50%) scale(0.95);
         }
 
         /* Classic hamburger icon */
@@ -892,10 +911,10 @@
         .hamburger-icon span {
             display: block;
             position: absolute;
-            height: 3px;
+            height: 2px;
             width: 100%;
             background: white;
-            border-radius: 3px;
+            border-radius: 4px;
             opacity: 1;
             left: 0;
             transform: rotate(0deg);
@@ -904,6 +923,9 @@
 
         .hamburger-icon span:nth-child(1) {
             top: 0px;
+            width: 80%;
+            right: 0;
+            left: auto;
         }
 
         .hamburger-icon span:nth-child(2) {
@@ -912,11 +934,16 @@
 
         .hamburger-icon span:nth-child(3) {
             top: 16px;
+            width: 80%;
+            right: 0;
+            left: auto;
         }
 
         .mobile-nav-toggle.active .hamburger-icon span:nth-child(1) {
             top: 8px;
             transform: rotate(135deg);
+            width: 100%;
+            left: 0;
         }
 
         .mobile-nav-toggle.active .hamburger-icon span:nth-child(2) {
@@ -927,6 +954,8 @@
         .mobile-nav-toggle.active .hamburger-icon span:nth-child(3) {
             top: 8px;
             transform: rotate(-135deg);
+            width: 100%;
+            left: 0;
         }
 
         @media (max-width: 768px) {
@@ -948,13 +977,14 @@
                 width: 80%;
                 max-width: 300px;
                 height: 100vh;
-                background-color: var(--primary);
+                background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
                 padding: 5rem 2rem 2rem;
-                transition: right 0.3s ease;
+                transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
                 z-index: 999;
-                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+                box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
                 overflow-y: auto;
-                border-left: 3px solid white;
+                border-left: none;
+                border-radius: 0 0 0 20px;
             }
 
             nav.active {
@@ -1263,7 +1293,7 @@
     <header role="banner">
         <div class="container header-content">
             <a href="/" class="logo" aria-label="Payload CMS 3.0 MCP Home">
-                <div class="logo-icon" aria-hidden="true">P3.0</div>
+                <div class="logo-icon" aria-hidden="true"><span style="font-size: 1.1rem;">P</span><span style="font-size: 0.8rem;">3.0</span></div>
                 <span>Payload CMS 3.0 MCP</span>
             </a>
             <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
