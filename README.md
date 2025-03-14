@@ -1,4 +1,4 @@
-# 🚀 Payload CMS MCP Server
+# 🚀 Payload CMS MCP SERVER
 
 <div align="center">
   <img src="https://github.com/payloadcms/payload/raw/main/packages/payload/src/admin/assets/images/payload-logo-light.svg" alt="Payload CMS Logo" width="180" />
@@ -12,21 +12,21 @@
     <img src="https://img.shields.io/badge/Railway-Deployment-0B0D0E?style=for-the-badge" alt="Railway Deployment" />
   </p>
   
-  <h3>A validation and query service for Payload CMS code</h3>
-  <p>Designed to be used with Cursor IDE and Claude for AI-assisted development</p>
+  <h3>Enhance your Payload CMS development experience with natural language commands</h3>
+  <p>Build, deploy, and manage your content infrastructure through conversational AI</p>
 </div>
 
 <hr>
 
 ## 📋 Overview
 
-The Payload CMS MCP Server provides a powerful interface for validating Payload CMS code, querying validation rules, and executing MCP queries. It helps developers build better Payload CMS applications by providing real-time validation and suggestions through natural language commands.
+The Payload CMS MCP Server enables you to manage Payload CMS projects with simple natural language commands. It helps developers build better Payload CMS applications by providing a conversational interface for project management, content modeling, and deployment automation.
 
 ### 🌐 Production URL
 
 The MCP server is deployed at:
 
-* [https://www.payloadcmsmcp.info](https://www.payloadcmsmcp.info)
+* [https://payload-cms-mcp-production.up.railway.app/](https://payload-cms-mcp-production.up.railway.app/)
 
 <hr>
 
@@ -36,36 +36,36 @@ The MCP server is deployed at:
   <table>
     <tr>
       <td align="center">
-        <h3>✓</h3>
-        <b>Code Validation</b>
-        <p>Validates Payload CMS collections, fields, globals, and other components</p>
+        <h3>✅</h3>
+        <b>Payload CMS Project Management</b>
+        <p>Create, configure, and manage your Payload CMS projects with simple natural language commands</p>
       </td>
       <td align="center">
-        <h3>📝</h3>
-        <b>Detailed Feedback</b>
-        <p>Provides comprehensive feedback on validation issues</p>
+        <h3>🚀</h3>
+        <b>Content Modeling</b>
+        <p>Define collections, fields, and relationships for your Payload CMS content models through conversation</p>
       </td>
       <td align="center">
-        <h3>💡</h3>
-        <b>Smart Suggestions</b>
-        <p>Offers intelligent suggestions for improving code quality and security</p>
+        <h3>🔄</h3>
+        <b>Deployment Automation</b>
+        <p>Automate Payload CMS deployments, monitor status, and troubleshoot issues with AI assistance</p>
       </td>
     </tr>
     <tr>
       <td align="center">
-        <h3>🔍</h3>
-        <b>SQL-like Queries</b>
-        <p>Supports SQL-like queries for validation rules</p>
+        <h3>🔑</h3>
+        <b>Authentication & Access Control</b>
+        <p>Configure users, roles, and permissions for your Payload CMS projects with natural language</p>
       </td>
       <td align="center">
-        <h3>🤖</h3>
-        <b>AI Integration</b>
-        <p>Seamlessly integrates with Cursor IDE for AI-assisted development</p>
+        <h3>🌐</h3>
+        <b>API & Integration Management</b>
+        <p>Set up and manage Payload CMS APIs, webhooks, and third-party integrations effortlessly</p>
       </td>
       <td align="center">
-        <h3>🔄</h3>
-        <b>Content Modeling</b>
-        <p>Define collections, fields, and relationships through conversation</p>
+        <h3>💾</h3>
+        <b>Database & Media Management</b>
+        <p>Configure databases, media storage, and backups for your Payload CMS projects with ease</p>
       </td>
     </tr>
   </table>
@@ -73,155 +73,131 @@ The MCP server is deployed at:
 
 <hr>
 
-## 🔌 API Endpoints
+## 🔧 Available Tools
 
-### Server-Sent Events (SSE)
+### Project Tools
 
-```http
-GET /sse
-```
+Manage your Railway projects with these tools:
 
-Server-Sent Events endpoint for real-time communication with the MCP server.
+* `project-list` - List all projects
+* `project-info` - Get project details
+* `project-create` - Create a new project
+* `project-delete` - Delete a project
+* `project-environments` - List environments
 
-### API SSE Endpoint
+### Service Tools
 
-```http
-GET /api/sse
-```
+Deploy and manage services:
 
-Alternative SSE endpoint for API-based communication.
+* `service-list` - List all services
+* `service-info` - Get service details
+* `service-create-from-repo` - Create from GitHub
+* `service-create-from-image` - Create from Docker
+* `service-delete` - Delete a service
+* `service-restart` - Restart a service
 
-### Validation Endpoint
+### Deployment Tools
 
-```http
-POST /api/validate
-```
+Manage your deployments:
 
-Request body:
-```json
-{
-  "code": "const Posts = { slug: 'posts', fields: [...] }",
-  "fileType": "collection"
-}
-```
+* `deployment-list` - List deployments
+* `deployment-trigger` - Trigger a deployment
+* `deployment-logs` - View deployment logs
+* `deployment-health-check` - Check status
 
-Response:
-```json
-{
-  "isValid": true|false,
-  "messages": ["..."],
-  "suggestions": [
-    {
-      "message": "...",
-      "code": "..."
-    }
-  ],
-  "references": [
-    {
-      "title": "...",
-      "url": "..."
-    }
-  ]
-}
-```
+### Variable Tools
 
-### Query Endpoint
+Manage environment variables:
 
-```http
-POST /api/query
-```
+* `variable-list` - List variables
+* `variable-set` - Create/update variables
+* `variable-delete` - Delete variables
+* `variable-bulk-set` - Bulk update variables
+* `variable-copy` - Copy between environments
 
-Request body:
-```json
-{
-  "query": "security",
-  "fileType": "collection"
-}
-```
+### Database Tools
 
-Response:
-```json
-{
-  "rules": [
-    {
-      "id": "...",
-      "description": "...",
-      "type": "collection|field|global"
-    }
-  ]
-}
-```
+Deploy and manage databases:
 
-### MCP Query Endpoint
+* `database-list-types` - List available types
+* `database-deploy` - Deploy a new database
 
-```http
-POST /api/mcp_query
-```
+### Network Tools
 
-Request body:
-```json
-{
-  "query": "SELECT * FROM validation_rules WHERE type = 'collection'"
-}
-```
+Configure networking:
 
-Response:
-```json
-{
-  "results": [...]
-}
-```
+* `domain-list` - List domains
+* `domain-create` - Create a domain
+* `tcp-proxy-list` - List TCP proxies
+* `tcp-proxy-create` - Create a TCP proxy
 
 <hr>
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Matmax-Worldwide/payloadcmsmcp.git
+### 1. Prerequisites
+
+Before you begin, make sure you have:
+
+* Node.js 18+ (for built-in fetch API support)
+* An active Railway account
+* A Railway API token (create one at [https://railway.app/account/tokens](https://railway.app/account/tokens))
+
+### 2. Installation
+
+Install the Railway MCP server globally:
+
+```bash
+npm install -g @jasontanswe/railway-mcp
+```
+
+Or use it directly with npx:
+
+```bash
+npx -y @jasontanswe/railway-mcp YOUR_RAILWAY_API_TOKEN
+```
+
+### 3. Configure Cursor
+
+To use with Cursor IDE:
+
+1. Open Cursor Settings
+2. Go to MCP Servers section
+3. Add a new MCP server
+4. Name it "Railway MCP"
+5. Set Transport Type to "Command"
+6. Set Command to: `railway-mcp YOUR_RAILWAY_API_TOKEN`
+7. Save the configuration
+
+### 4. Configure Claude for Desktop
+
+To use with Claude for Desktop:
+
+1. Edit your Claude for Desktop config file:
+   * macOS: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
+   * Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+2. Add this configuration:
+   ```json
+   "mcpServers": {
+     "railway": {
+       "command": "npx",
+       "args": ["-y", "@jasontanswe/railway-mcp"],
+       "env": {
+         "RAILWAY_API_TOKEN": "your-railway-api-token-here"
+       }
+     }
+   }
    ```
+3. Restart Claude for Desktop
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+### 5. Start Using
 
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+Once configured, you can use natural language to manage your Payload CMS projects:
 
-4. Access the server at `http://localhost:3000`
-
-5. Open `local-landing.html` in your browser
-
-<hr>
-
-## 💻 Client Code
-
-The `client` directory contains:
-
-1. `mcp-client.js` - A JavaScript client for Node.js applications
-2. `index.html` - An HTML page for web application demonstration
-3. `index-local.html` - A local version of the client that works with the local server
-
-<hr>
-
-## 🔗 Integration with Cursor IDE
-
-This MCP server is designed to be used with Cursor IDE for AI-assisted development of Payload CMS applications. The AI model can use the validation and query endpoints to provide real-time feedback and suggestions.
-
-You can use the production endpoints:
-
-* Validation endpoint: `https://www.payloadcmsmcp.info/api/validate`
-* Query endpoint: `https://www.payloadcmsmcp.info/api/query`
-* MCP Query endpoint: `https://www.payloadcmsmcp.info/api/mcp_query`
-
-Or the local endpoints:
-
-* Validation endpoint: `http://localhost:3000/api/validate`
-* Query endpoint: `http://localhost:3000/api/query`
-* MCP Query endpoint: `http://localhost:3000/api/mcp_query`
+* "Create a new Payload CMS project with MongoDB"
+* "Set up a blog collection with title, content, and author fields"
+* "Configure authentication with email and password"
+* "Deploy my Payload CMS project to Railway"
 
 <hr>
 
@@ -265,6 +241,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 This MCP server is a contribution to the Payload CMS community by MATMAX WORLDWIDE. We believe in tech for good—tools that enhance our lives while respecting our humanity.
 
 Join us in building a future where technology serves wellness, connection, and purpose. Together, we can create digital experiences that bring out the best in us all.
+
+Our Payload CMS MCP Server bridges the gap between content management and AI, enabling developers to build powerful, flexible applications with natural language commands.
 
 Visit [matmax.world](https://matmax.world) to explore our vision for human-centered technology and join our community dedicated to wellness and meaningful innovation.
 
