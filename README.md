@@ -22,12 +22,6 @@
 
 The Payload CMS MCP Server enables you to manage Payload CMS projects with simple natural language commands. It helps developers build better Payload CMS applications by providing a conversational interface for project management, content modeling, and deployment automation.
 
-### 🌐 Production URL
-
-The MCP server is deployed at:
-
-* [https://payload-cms-mcp-production.up.railway.app/](https://payload-cms-mcp-production.up.railway.app/)
-
 <hr>
 
 ## ✨ Features
