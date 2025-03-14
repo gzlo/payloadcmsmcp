@@ -200,18 +200,32 @@ To deploy this MCP server to Railway:
 1. **Create a new Railway project**:
    * Go to [Railway.app](https://railway.app) and create a new project
    * Choose "Deploy from GitHub repo" and select your repository
+   * Alternatively, use the Railway CLI with `railway init` in your project directory
 
 2. **Configure environment variables**:
-   * Add any necessary environment variables in the Railway dashboard
-   * For Redis connection (if needed), add your Redis connection string
+   * Add necessary environment variables in the Railway dashboard
+   * Set `NODE_ENV=production` for production deployments
+   * Configure any API keys or service connections needed
 
-3. **Deploy your application**:
-   * Railway will automatically deploy your application
-   * You can monitor the deployment in the Railway dashboard
+3. **Set up resources**:
+   * Railway automatically detects your Dockerfile for containerized deployment
+   * Add a MongoDB database from the Railway dashboard if needed
+   * Configure networking and domains in the Railway dashboard
 
-4. **Access your deployed application**:
-   * Railway will provide a URL for your deployed application
-   * You can also configure a custom domain in the Railway dashboard
+4. **Deploy your application**:
+   * Railway will automatically deploy your application on push to your repository
+   * Use `railway up` from the CLI for manual deployments
+   * Monitor build and deployment logs in the Railway dashboard
+
+5. **Access and monitor your application**:
+   * Railway provides a generated URL for your deployed application
+   * Configure custom domains in the Railway dashboard
+   * Set up monitoring and alerts for your application
+
+6. **Optimize for production**:
+   * Enable auto-scaling in the Railway dashboard for production workloads
+   * Configure memory and CPU limits appropriate for your application
+   * Set up health checks for improved reliability
 
 <hr>
 

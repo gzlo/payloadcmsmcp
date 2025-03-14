@@ -1350,7 +1350,7 @@
                     <article class="feature-card">
                         <div class="feature-icon" aria-hidden="true">🚀</div>
                         <h3>Railway Deployment</h3>
-                        <p>Seamlessly deploy Payload CMS 3.0 projects to Railway with optimized configurations.</p>
+                        <p>Seamlessly deploy Payload CMS 3.0 projects to Railway with containerization, auto-scaling, and integrated monitoring.</p>
                     </article>
                     <article class="feature-card">
                         <div class="feature-icon" aria-hidden="true">🤖</div>
@@ -1401,10 +1401,10 @@
                     <article class="tool-card">
                         <h3>Deployment & Infrastructure</h3>
                         <ul class="tool-list">
-                            <li><span class="tool-name">railway_deploy</span> - Deploy to Railway with optimized settings</li>
-                            <li><span class="tool-name">database_setup</span> - Configure MongoDB for Payload CMS 3.0</li>
-                            <li><span class="tool-name">environment_config</span> - Set up environment variables</li>
-                            <li><span class="tool-name">performance_optimize</span> - Optimize for production</li>
+                            <li><span class="tool-name">railway_deploy</span> - Deploy to Railway with containerization</li>
+                            <li><span class="tool-name">railway_resources</span> - Configure databases and services</li>
+                            <li><span class="tool-name">railway_monitor</span> - Set up monitoring and alerts</li>
+                            <li><span class="tool-name">railway_scale</span> - Configure auto-scaling for production</li>
                         </ul>
                     </article>
                 </div>
@@ -1429,7 +1429,7 @@
                             <code>// In Cursor Settings > MCP Servers</code>
                             <code>Name: "Payload CMS 3.0 MCP"</code>
                             <code>Transport Type: "Command"</code>
-                            <code>Command: YOUR_RAILWAY_API_TOKEN</code>
+                            <code>Command: railway run --service=YOUR_SERVICE_ID</code>
                         </div>
                     </article>
                     
@@ -1496,7 +1496,7 @@
                             <li>Add a new MCP server</li>
                             <li>Name it "Payload CMS 3.0 MCP"</li>
                             <li>Set Transport Type to "Command"</li>
-                            <li>Set Command to: <code>YOUR_RAILWAY_API_TOKEN</code></li>
+                            <li>Set Command to: <code>railway run --service=YOUR_SERVICE_ID</code></li>
                             <li>Save the configuration</li>
                         </ol>
                     </div>
@@ -1516,7 +1516,9 @@
                                 <code>
 "mcpServers": {
   "payloadcms3": {
-    "command": "YOUR_RAILWAY_API_TOKEN"
+    "command": "railway",
+    "args": ["run", "--service=YOUR_SERVICE_ID"],
+    "env": {}
   }
 }
                                 </code>
