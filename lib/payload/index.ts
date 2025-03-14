@@ -1,14 +1,22 @@
+import { validatePayloadCode } from './validator';
+import { queryValidationRules } from './query';
+import { executeSqlQuery } from './sql';
+import { FileType } from './types';
 export * from './schemas';
 export * from './validator';
 export * from './query';
+export * from './generator';
+export * from './scaffolder';
 
-// Export a convenience function to check if a string is valid Payload CMS code
-export const isValidPayloadCode = (code: string, fileType: 'collection' | 'field' | 'global' | 'config'): boolean => {
-  try {
-    const { validatePayloadCode } = require('./validator');
-    const result = validatePayloadCode(code, fileType);
-    return result.isValid;
-  } catch (error) {
-    return false;
-  }
-}; 
+export { validatePayloadCode, queryValidationRules, executeSqlQuery, FileType };
+
+/**
+ * Convenience function to validate Payload CMS code
+ * @param code The code to validate
+ * @param fileType The type of file to validate
+ * @returns A boolean indicating if the code is valid
+ */
+export function isValidPayloadCode(code: string, fileType: FileType): boolean {
+  const result = validatePayloadCode(code, fileType);
+  return result.isValid;
+} 

@@ -1,154 +1,87 @@
-import { FileType } from './validator';
-
-export type ValidationRule = {
-  id: string;
-  description: string;
-  type: FileType;
-  category: 'security' | 'performance' | 'best-practice' | 'naming';
-  severity: 'error' | 'warning' | 'suggestion';
-  documentation: string;
-};
-
-// Define validation rules for Payload CMS
-const validationRules: ValidationRule[] = [
-  // Collection rules
-  {
-    id: 'collection-naming',
-    description: 'Collection slugs should follow consistent naming conventions',
-    type: 'collection',
-    category: 'naming',
-    severity: 'error',
-    documentation: 'Collection slugs should use camelCase or snake_case consistently and avoid spaces or special characters.',
-  },
-  {
-    id: 'collection-access-control',
-    description: 'Collections should define access control',
-    type: 'collection',
-    category: 'security',
-    severity: 'warning',
-    documentation: 'Define access control for collections to prevent unauthorized access to data.',
-  },
-  {
-    id: 'collection-timestamps',
-    description: 'Collections should enable timestamps',
-    type: 'collection',
-    category: 'best-practice',
-    severity: 'suggestion',
-    documentation: 'Enable timestamps to automatically track creation and update times for documents.',
-  },
-  {
-    id: 'collection-use-as-title',
-    description: 'Collections should specify useAsTitle',
-    type: 'collection',
-    category: 'best-practice',
-    severity: 'suggestion',
-    documentation: 'Specify which field to use as the title in the admin UI for better usability.',
-  },
-  
-  // Field rules
-  {
-    id: 'field-naming',
-    description: 'Field names should follow consistent naming conventions',
-    type: 'field',
-    category: 'naming',
-    severity: 'error',
-    documentation: 'Field names should use camelCase or snake_case consistently and avoid spaces or special characters.',
-  },
-  {
-    id: 'field-sensitive-access-control',
-    description: 'Sensitive fields should have explicit access control',
-    type: 'field',
-    category: 'security',
-    severity: 'warning',
-    documentation: 'Fields containing sensitive information like passwords or tokens should have explicit read access control.',
-  },
-  {
-    id: 'field-relationship-max-depth',
-    description: 'Relationship fields should specify maxDepth',
-    type: 'field',
-    category: 'performance',
-    severity: 'warning',
-    documentation: 'Specify maxDepth for relationship fields to prevent deep queries that could impact performance.',
-  },
-  {
-    id: 'field-text-validation',
-    description: 'Required text fields should have validation',
-    type: 'field',
-    category: 'best-practice',
-    severity: 'suggestion',
-    documentation: 'Add validation for required text fields to ensure they contain valid data.',
-  },
-  {
-    id: 'field-unique-index',
-    description: 'Unique fields should be indexed',
-    type: 'field',
-    category: 'performance',
-    severity: 'warning',
-    documentation: 'Fields marked as unique should also be indexed for better query performance.',
-  },
-  
-  // Global rules
-  {
-    id: 'global-naming',
-    description: 'Global slugs should follow consistent naming conventions',
-    type: 'global',
-    category: 'naming',
-    severity: 'error',
-    documentation: 'Global slugs should use camelCase or snake_case consistently and avoid spaces or special characters.',
-  },
-  {
-    id: 'global-access-control',
-    description: 'Globals should define access control',
-    type: 'global',
-    category: 'security',
-    severity: 'warning',
-    documentation: 'Define access control for globals to prevent unauthorized access to data.',
-  },
-  
-  // Config rules
-  {
-    id: 'config-server-url',
-    description: 'Config should specify serverURL',
-    type: 'config',
-    category: 'best-practice',
-    severity: 'warning',
-    documentation: 'Specify serverURL in the config for proper URL generation.',
-  },
-  {
-    id: 'config-admin-settings',
-    description: 'Config should configure admin panel',
-    type: 'config',
-    category: 'best-practice',
-    severity: 'suggestion',
-    documentation: 'Configure the admin panel for better usability and branding.',
-  },
-];
+import { validationRules } from './validator';
+import { FileType, ValidationRule } from './types';
 
 /**
- * Query validation rules based on search term and file type
+ * Query validation rules based on a search term
+ * @param query The search query
+ * @param fileType Optional file type to filter by
+ * @returns Matching validation rules
  */
-export const queryValidationRules = (
-  query: string,
-  fileType?: FileType
-): ValidationRule[] => {
-  const searchTerms = query.toLowerCase().split(/\s+/);
+export function queryValidationRules(query: string, fileType?: FileType): ValidationRule[] {
+  // Normalize the query
+  const normalizedQuery = query.toLowerCase().trim();
   
+  // If the query is empty, return all rules (filtered by fileType if provided)
+  if (!normalizedQuery) {
+    return fileType 
+      ? validationRules.filter(rule => rule.fileTypes.includes(fileType))
+      : validationRules;
+  }
+  
+  // Search for matching rules
   return validationRules.filter(rule => {
-    // Filter by file type if specified
-    if (fileType && rule.type !== fileType) {
+    // Filter by fileType if provided
+    if (fileType && !rule.fileTypes.includes(fileType)) {
       return false;
     }
     
-    // Check if all search terms match
-    return searchTerms.every(term => 
-      rule.id.toLowerCase().includes(term) ||
-      rule.description.toLowerCase().includes(term) ||
-      rule.category.toLowerCase().includes(term) ||
-      rule.severity.toLowerCase().includes(term) ||
-      rule.documentation.toLowerCase().includes(term)
+    // Check if the query matches any of the rule's properties
+    return (
+      rule.id.toLowerCase().includes(normalizedQuery) ||
+      rule.name.toLowerCase().includes(normalizedQuery) ||
+      rule.description.toLowerCase().includes(normalizedQuery) ||
+      rule.category.toLowerCase().includes(normalizedQuery)
     );
   });
-};
+}
+
+/**
+ * Get a validation rule by ID
+ * @param id The rule ID
+ * @returns The validation rule or undefined if not found
+ */
+export function getValidationRuleById(id: string): ValidationRule | undefined {
+  return validationRules.find(rule => rule.id === id);
+}
+
+/**
+ * Get validation rules by category
+ * @param category The category to filter by
+ * @returns Validation rules in the specified category
+ */
+export function getValidationRulesByCategory(category: string): ValidationRule[] {
+  return validationRules.filter(rule => rule.category === category);
+}
+
+/**
+ * Get validation rules by file type
+ * @param fileType The file type to filter by
+ * @returns Validation rules applicable to the specified file type
+ */
+export function getValidationRulesByFileType(fileType: FileType): ValidationRule[] {
+  return validationRules.filter(rule => rule.fileTypes.includes(fileType));
+}
+
+/**
+ * Get all available categories
+ * @returns Array of unique categories
+ */
+export function getCategories(): string[] {
+  const categories = new Set<string>();
+  validationRules.forEach(rule => categories.add(rule.category));
+  return Array.from(categories);
+}
+
+/**
+ * Get validation rules with examples
+ * @param query Optional search query
+ * @param fileType Optional file type to filter by
+ * @returns Validation rules with examples
+ */
+export function getValidationRulesWithExamples(query?: string, fileType?: FileType): ValidationRule[] {
+  return query ? queryValidationRules(query, fileType) : 
+    fileType ? getValidationRulesByFileType(fileType) : validationRules;
+}
 
 /**
  * Execute an SQL-like query against validation rules

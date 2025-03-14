@@ -1,5 +1,6 @@
 import { CollectionSchema, FieldSchema, GlobalSchema, ConfigSchema } from './schemas';
 import { z } from 'zod';
+import { ValidationRule } from './types';
 
 export type ValidationResult = {
   isValid: boolean;
@@ -16,6 +17,109 @@ export type ValidationResult = {
 };
 
 export type FileType = 'collection' | 'field' | 'global' | 'config';
+
+// Define validation rules that can be queried
+export const validationRules: ValidationRule[] = [
+  {
+    id: 'naming-conventions',
+    name: 'Naming Conventions',
+    description: 'Names should follow consistent conventions (camelCase or snake_case)',
+    category: 'best-practices',
+    fileTypes: ['collection', 'field', 'global', 'config'],
+    examples: {
+      valid: ['myField', 'my_field'],
+      invalid: ['my field', 'my-field', 'my_Field']
+    }
+  },
+  {
+    id: 'reserved-words',
+    name: 'Reserved Words',
+    description: 'Avoid using JavaScript reserved words for names',
+    category: 'best-practices',
+    fileTypes: ['collection', 'field', 'global', 'config'],
+    examples: {
+      valid: ['title', 'content', 'author'],
+      invalid: ['constructor', 'prototype', '__proto__']
+    }
+  },
+  {
+    id: 'access-control',
+    name: 'Access Control',
+    description: 'Define access control for collections and fields',
+    category: 'security',
+    fileTypes: ['collection', 'field', 'global'],
+    examples: {
+      valid: ['access: { read: () => true, update: () => true }'],
+      invalid: ['// No access control defined']
+    }
+  },
+  {
+    id: 'sensitive-fields',
+    name: 'Sensitive Fields Protection',
+    description: 'Sensitive fields should have explicit read access control',
+    category: 'security',
+    fileTypes: ['field'],
+    examples: {
+      valid: ['{ name: "password", type: "text", access: { read: () => false } }'],
+      invalid: ['{ name: "password", type: "text" }']
+    }
+  },
+  {
+    id: 'indexed-fields',
+    name: 'Indexed Fields',
+    description: 'Fields used for searching or filtering should be indexed',
+    category: 'performance',
+    fileTypes: ['field'],
+    examples: {
+      valid: ['{ name: "email", type: "email", index: true }'],
+      invalid: ['{ name: "email", type: "email" }']
+    }
+  },
+  {
+    id: 'relationship-depth',
+    name: 'Relationship Depth',
+    description: 'Relationship fields should have a maxDepth to prevent deep queries',
+    category: 'performance',
+    fileTypes: ['field'],
+    examples: {
+      valid: ['{ type: "relationship", relationTo: "posts", maxDepth: 1 }'],
+      invalid: ['{ type: "relationship", relationTo: "posts" }']
+    }
+  },
+  {
+    id: 'field-validation',
+    name: 'Field Validation',
+    description: 'Required fields should have validation',
+    category: 'data-integrity',
+    fileTypes: ['field'],
+    examples: {
+      valid: ['{ name: "title", type: "text", required: true, validate: (value) => value ? true : "Required" }'],
+      invalid: ['{ name: "title", type: "text", required: true }']
+    }
+  },
+  {
+    id: 'timestamps',
+    name: 'Timestamps',
+    description: 'Collections should have timestamps enabled',
+    category: 'best-practices',
+    fileTypes: ['collection'],
+    examples: {
+      valid: ['{ slug: "posts", timestamps: true }'],
+      invalid: ['{ slug: "posts" }']
+    }
+  },
+  {
+    id: 'admin-ui',
+    name: 'Admin UI Configuration',
+    description: 'Collections should specify which field to use as title in admin UI',
+    category: 'usability',
+    fileTypes: ['collection'],
+    examples: {
+      valid: ['{ admin: { useAsTitle: "title" } }'],
+      invalid: ['{ admin: {} }']
+    }
+  }
+];
 
 // Common validation rules
 const commonValidationRules = {
