@@ -139,16 +139,18 @@ Before you begin, make sure you have:
 
 ### 2. Installation
 
-Install the Railway MCP server globally:
+Clone the repository and install dependencies:
 
 ```bash
-npm install -g @jasontanswe/railway-mcp
+git clone https://github.com/Matmax-Worldwide/payloadcmsmcp.git
+cd payloadcmsmcp
+npm install
 ```
 
-Or use it directly with npx:
+Run the server with your Railway API token:
 
 ```bash
-npx -y @jasontanswe/railway-mcp YOUR_RAILWAY_API_TOKEN
+node server.js YOUR_RAILWAY_API_TOKEN
 ```
 
 ### 3. Configure Cursor
@@ -158,9 +160,9 @@ To use with Cursor IDE:
 1. Open Cursor Settings
 2. Go to MCP Servers section
 3. Add a new MCP server
-4. Name it "Railway MCP"
+4. Name it "Payload CMS MCP"
 5. Set Transport Type to "Command"
-6. Set Command to: `railway-mcp YOUR_RAILWAY_API_TOKEN`
+6. Set Command to: `node /path/to/payloadcmsmcp/server.js YOUR_RAILWAY_API_TOKEN`
 7. Save the configuration
 
 ### 4. Configure Claude for Desktop
@@ -173,12 +175,10 @@ To use with Claude for Desktop:
 2. Add this configuration:
    ```json
    "mcpServers": {
-     "railway": {
-       "command": "npx",
-       "args": ["-y", "@jasontanswe/railway-mcp"],
-       "env": {
-         "RAILWAY_API_TOKEN": "your-railway-api-token-here"
-       }
+     "payloadcms": {
+       "command": "node",
+       "args": ["/path/to/payloadcmsmcp/server.js", "YOUR_RAILWAY_API_TOKEN"],
+       "env": {}
      }
    }
    ```
