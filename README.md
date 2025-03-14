@@ -2,6 +2,9 @@
 
 <div align="center">
   <p align="center">
+    <img src="public/logopayload.png" alt="Payload CMS Logo" width="80" height="80" />
+  </p>
+  <p align="center">
     <img src="https://img.shields.io/badge/Model%20Context%20Protocol-Enabled-6366F1?style=for-the-badge" alt="MCP Enabled" />
     <img src="https://img.shields.io/badge/Payload%20CMS-Integration-3B82F6?style=for-the-badge" alt="Payload CMS" />
     <img src="https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge" alt="License" />

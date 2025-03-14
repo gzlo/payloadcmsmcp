@@ -57,9 +57,11 @@
       "creator": {
         "@type": "Organization",
         "name": "MATMAX WORLDWIDE",
-        "url": "https://matmax.world"
+        "url": "https://matmax.world",
+        "logo": "https://www.payloadcmsmcp.info/00Matmax-world-logo-_1_-svg.png"
       },
       "url": "https://www.payloadcmsmcp.info/",
+      "image": "https://www.payloadcmsmcp.info/logopayload.png",
       "sameAs": [
         "https://github.com/Matmax-Worldwide/payloadcmsmcp",
         "https://payload-cms-mcp-production.up.railway.app"
@@ -147,6 +149,19 @@
         }
 
         .logo:hover .logo-icon {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .logo-image {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
@@ -1053,6 +1068,11 @@
                 font-size: 0.9rem;
             }
 
+            .logo-image {
+                width: 28px;
+                height: 28px;
+            }
+
             .mobile-nav-toggle {
                 width: 36px;
                 height: 36px;
@@ -1293,7 +1313,7 @@
     <header role="banner">
         <div class="container header-content">
             <a href="/" class="logo" aria-label="Payload CMS 3.0 MCP Home">
-                <div class="logo-icon" aria-hidden="true"><span style="font-size: 1.1rem;">P</span><span style="font-size: 0.8rem;">3.0</span></div>
+                <img src="/logopayload.png" alt="Payload CMS 3.0 Logo" class="logo-image" width="40" height="40">
                 <span>Payload CMS 3.0 MCP</span>
             </a>
             <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -1455,7 +1475,8 @@
             <div class="container">
                 <div class="about-content">
                     <div class="about-image">
-                        <img src="/00Matmax-world-logo-_1_-svg.png" alt="MATMAX WORLDWIDE - Technology for humanity" width="600" height="600" loading="lazy">
+                        <img src="/00Matmax-world-logo-_1_-svg.png" alt="MATMAX WORLDWIDE - Technology for humanity" width="300" height="300" loading="lazy" style="margin-bottom: 20px;">
+                        <img src="/logopayload.png" alt="Payload CMS Logo" width="300" height="300" loading="lazy">
                     </div>
                     <div class="about-text">
                         <h2 id="about-heading">MATMAX WORLDWIDE</h2>
@@ -1588,12 +1609,18 @@
       "@type": "Organization",
       "name": "MATMAX WORLDWIDE",
       "url": "https://matmax.world",
-      "logo": "https://www.payloadcmsmcp.info/favicon.svg",
+      "logo": "https://www.payloadcmsmcp.info/00Matmax-world-logo-_1_-svg.png",
       "sameAs": [
         "https://github.com/Matmax-Worldwide",
         "https://instagram.com/matmaxyoga",
         "https://www.linkedin.com/company/the-wellness-brand"
-      ]
+      ],
+      "subOrganization": {
+        "@type": "Organization",
+        "name": "Payload CMS MCP Server",
+        "url": "https://www.payloadcmsmcp.info/",
+        "logo": "https://www.payloadcmsmcp.info/logopayload.png"
+      }
     }
     </script>
     
