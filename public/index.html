@@ -12,9 +12,9 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payload CMS MCP Server - Validation & Query Service for Payload CMS</title>
-    <meta name="description" content="A validation and query service for Payload CMS code, designed to be used with Cursor IDE for AI-assisted development. Enhance your Payload CMS development with real-time validation and suggestions.">
-    <meta name="keywords" content="Payload CMS, MCP, Model Context Protocol, validation, API, Cursor IDE, AI-assisted development">
+    <title>Payload CMS 3 MCP Server - AI-Powered Development Assistant</title>
+    <meta name="description" content="A specialized MCP server for Payload CMS 3, ensuring AI agents follow developer guidelines, respect structure, and adhere to best practices. Build Payload CMS 3 applications with confidence using AI assistance.">
+    <meta name="keywords" content="Payload CMS 3, MCP, Model Context Protocol, AI agent, developer guidelines, structure validation, best practices, Cursor IDE, AI-assisted development">
     <meta name="author" content="MATMAX WORLDWIDE">
     <meta name="robots" content="index, follow">
     
@@ -45,7 +45,7 @@
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Payload CMS MCP Server",
+      "name": "Payload CMS 3 MCP Server",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -53,7 +53,7 @@
         "price": "0",
         "priceCurrency": "USD"
       },
-      "description": "A validation and query service for Payload CMS code, designed to be used with Cursor IDE for AI-assisted development.",
+      "description": "A specialized MCP server for Payload CMS 3, ensuring AI agents follow developer guidelines, respect structure, and adhere to best practices.",
       "creator": {
         "@type": "Organization",
         "name": "MATMAX WORLDWIDE",
@@ -62,7 +62,7 @@
       "url": "https://www.payloadcmsmcp.info/",
       "sameAs": [
         "https://github.com/Matmax-Worldwide/payloadcmsmcp",
-        "https://mcp-server-payload.vercel.app"
+        "https://payload-cms-mcp-production.up.railway.app"
       ]
     }
     </script>
@@ -722,14 +722,15 @@
 <body>
     <header role="banner">
         <div class="container header-content">
-            <a href="/" class="logo" aria-label="Payload MCP Home">
-                <div class="logo-icon" aria-hidden="true">P</div>
-                <span>Payload MCP</span>
+            <a href="/" class="logo" aria-label="Payload CMS 3 MCP Home">
+                <div class="logo-icon" aria-hidden="true">P3</div>
+                <span>Payload CMS 3 MCP</span>
             </a>
             <nav role="navigation" aria-label="Main Navigation">
                 <ul>
                     <li><a href="#features">Features</a></li>
-                    <li><a href="#tools">Tools</a></li>
+                    <li><a href="#tools">Capabilities</a></li>
+                    <li><a href="#api">Integration</a></li>
                     <li><a href="#setup">Setup</a></li>
                     <li><a href="https://github.com/Matmax-Worldwide/payloadcmsmcp" target="_blank" rel="noopener noreferrer">GitHub</a></li>
                 </ul>
@@ -741,8 +742,8 @@
         <section class="hero" aria-labelledby="hero-heading">
             <div class="container">
                 <div class="hero-content">
-                    <h1 id="hero-heading">Payload CMS MCP Server</h1>
-                    <p>Manage your Payload CMS projects on Railway with natural language commands through Claude AI.</p>
+                    <h1 id="hero-heading">Payload CMS 3 MCP Server</h1>
+                    <p>Build Payload CMS 3 applications with AI that follows developer guidelines, respects structure, and adheres to best practices.</p>
                     <div class="hero-buttons">
                         <a href="#features" class="btn btn-primary">Explore Features</a>
                         <a href="#setup" class="btn btn-secondary">Get Started</a>
@@ -755,28 +756,28 @@
             <div class="container">
                 <div class="section-title">
                     <h2 id="features-heading">Features</h2>
-                    <p>Enhance your Payload CMS development experience with powerful Railway integration capabilities.</p>
+                    <p>Enhance your Payload CMS 3 development with AI that understands the framework's architecture and best practices.</p>
                 </div>
                 <div class="features-grid">
                     <article class="feature-card">
-                        <div class="feature-icon" aria-hidden="true">🚀</div>
-                        <h3>Railway Integration</h3>
-                        <p>Deploy and manage Payload CMS projects on Railway with simple natural language commands.</p>
+                        <div class="feature-icon" aria-hidden="true">📚</div>
+                        <h3>Payload CMS 3 Expertise</h3>
+                        <p>AI agents with deep knowledge of Payload CMS 3 architecture, patterns, and best practices.</p>
                     </article>
                     <article class="feature-card">
                         <div class="feature-icon" aria-hidden="true">🔍</div>
-                        <h3>Database Management</h3>
-                        <p>Create and configure MongoDB, PostgreSQL, and other databases for your Payload CMS projects.</p>
+                        <h3>Structure Validation</h3>
+                        <p>Ensures AI-generated code follows Payload CMS 3 conventions for collections, fields, and endpoints.</p>
                     </article>
                     <article class="feature-card">
-                        <div class="feature-icon" aria-hidden="true">🔄</div>
-                        <h3>Deployment Control</h3>
-                        <p>Trigger deployments, check logs, and monitor the status of your Payload CMS applications.</p>
+                        <div class="feature-icon" aria-hidden="true">🚀</div>
+                        <h3>Railway Deployment</h3>
+                        <p>Seamlessly deploy Payload CMS 3 projects to Railway with optimized configurations.</p>
                     </article>
                     <article class="feature-card">
                         <div class="feature-icon" aria-hidden="true">🤖</div>
-                        <h3>AI Integration</h3>
-                        <p>Seamlessly integrates with Claude AI through Cursor IDE and Claude for Desktop.</p>
+                        <h3>AI-Guided Development</h3>
+                        <p>Get intelligent suggestions for collections, fields, access control, and hooks based on your requirements.</p>
                     </article>
                 </div>
             </div>
@@ -785,47 +786,47 @@
         <section class="tools-section" id="tools" aria-labelledby="tools-heading">
             <div class="container">
                 <div class="section-title">
-                    <h2 id="tools-heading">Available Tools</h2>
-                    <p>Powerful Railway MCP tools to manage your Payload CMS projects with natural language.</p>
+                    <h2 id="tools-heading">Payload CMS 3 Capabilities</h2>
+                    <p>AI-powered tools to help you build robust Payload CMS 3 applications following best practices.</p>
                 </div>
                 <div class="tools-grid">
                     <article class="tool-card">
-                        <h3>Project Management</h3>
+                        <h3>Collection Design</h3>
                         <ul class="tool-list">
-                            <li><span class="tool-name">project_list</span> - List all your Railway projects</li>
-                            <li><span class="tool-name">project_info</span> - Get detailed information about a project</li>
-                            <li><span class="tool-name">project_create</span> - Create a new Railway project</li>
-                            <li><span class="tool-name">project_delete</span> - Delete a project and all its resources</li>
+                            <li><span class="tool-name">collection_create</span> - Generate collection schemas with proper typing</li>
+                            <li><span class="tool-name">field_design</span> - Create field configurations with validation</li>
+                            <li><span class="tool-name">relationship_setup</span> - Configure relationships between collections</li>
+                            <li><span class="tool-name">access_control</span> - Implement proper access control patterns</li>
                         </ul>
                     </article>
                     
                     <article class="tool-card">
-                        <h3>Database Tools</h3>
+                        <h3>API & Endpoints</h3>
                         <ul class="tool-list">
-                            <li><span class="tool-name">database_list_types</span> - List available database types</li>
-                            <li><span class="tool-name">database_deploy</span> - Deploy a pre-configured database</li>
-                            <li><span class="tool-name">volume_create</span> - Create persistent storage for databases</li>
-                            <li><span class="tool-name">volume_list</span> - List all volumes in a project</li>
+                            <li><span class="tool-name">endpoint_create</span> - Create custom API endpoints</li>
+                            <li><span class="tool-name">hook_implementation</span> - Implement hooks for collections</li>
+                            <li><span class="tool-name">middleware_setup</span> - Configure Express middleware</li>
+                            <li><span class="tool-name">graphql_extension</span> - Extend GraphQL schema</li>
                         </ul>
                     </article>
                     
                     <article class="tool-card">
-                        <h3>Service Management</h3>
+                        <h3>Authentication & Users</h3>
                         <ul class="tool-list">
-                            <li><span class="tool-name">service_list</span> - List all services in a project</li>
-                            <li><span class="tool-name">service_create_from_repo</span> - Deploy from GitHub</li>
-                            <li><span class="tool-name">service_update</span> - Update service configuration</li>
-                            <li><span class="tool-name">service_restart</span> - Restart a service</li>
+                            <li><span class="tool-name">auth_setup</span> - Configure authentication strategies</li>
+                            <li><span class="tool-name">user_roles</span> - Implement role-based access control</li>
+                            <li><span class="tool-name">jwt_configuration</span> - Set up JWT tokens and refresh</li>
+                            <li><span class="tool-name">oauth_integration</span> - Integrate with OAuth providers</li>
                         </ul>
                     </article>
                     
                     <article class="tool-card">
-                        <h3>Deployment & Variables</h3>
+                        <h3>Deployment & Infrastructure</h3>
                         <ul class="tool-list">
-                            <li><span class="tool-name">deployment_trigger</span> - Trigger a new deployment</li>
-                            <li><span class="tool-name">deployment_logs</span> - View deployment logs</li>
-                            <li><span class="tool-name">variable_set</span> - Set environment variables</li>
-                            <li><span class="tool-name">domain_create</span> - Create custom domains</li>
+                            <li><span class="tool-name">railway_deploy</span> - Deploy to Railway with optimized settings</li>
+                            <li><span class="tool-name">database_setup</span> - Configure MongoDB for Payload CMS 3</li>
+                            <li><span class="tool-name">environment_config</span> - Set up environment variables</li>
+                            <li><span class="tool-name">performance_optimize</span> - Optimize for production</li>
                         </ul>
                     </article>
                 </div>
@@ -835,8 +836,8 @@
         <section class="api-section" id="api" aria-labelledby="api-heading">
             <div class="container">
                 <div class="section-title">
-                    <h2 id="api-heading">MCP Integration</h2>
-                    <p>Connect to Railway through the Model Context Protocol for AI-assisted infrastructure management.</p>
+                    <h2 id="api-heading">Payload CMS 3 AI Integration</h2>
+                    <p>Connect to the MCP server to build Payload CMS 3 applications with AI that follows best practices and developer guidelines.</p>
                 </div>
                 <div class="api-container">
                     <article class="api-card">
@@ -844,11 +845,11 @@
                             <span class="api-name">Cursor IDE Integration</span>
                         </div>
                         <div class="api-description">
-                            Use the MCP server with Cursor IDE to manage your Payload CMS infrastructure through natural language commands.
+                            Use the MCP server with Cursor IDE to build Payload CMS 3 applications with AI that understands the framework's architecture.
                         </div>
                         <div class="code-block">
                             <code>// In Cursor Settings > MCP Servers</code>
-                            <code>Name: "Railway MCP"</code>
+                            <code>Name: "Payload CMS 3 MCP"</code>
                             <code>Transport Type: "Command"</code>
                             <code>Command: YOUR_RAILWAY_API_TOKEN</code>
                         </div>
@@ -859,13 +860,13 @@
                             <span class="api-name">Example Commands</span>
                         </div>
                         <div class="api-description">
-                            Once configured, you can use natural language to manage your Payload CMS projects on Railway.
+                            Once configured, you can use natural language to build Payload CMS 3 applications with AI assistance.
                         </div>
                         <ul class="command-examples">
-                            <li>"Create a new Payload CMS project with MongoDB"</li>
-                            <li>"Deploy my Payload CMS application from GitHub"</li>
-                            <li>"Add environment variables for my database connection"</li>
-                            <li>"Create a custom domain for my Payload CMS project"</li>
+                            <li>"Create a blog collection with title, content, and author fields in Payload CMS 3"</li>
+                            <li>"Set up authentication with email and password in Payload CMS 3"</li>
+                            <li>"Implement access control for the posts collection based on user roles"</li>
+                            <li>"Create a custom API endpoint for fetching related posts by tag"</li>
                         </ul>
                     </article>
                 </div>
@@ -900,9 +901,10 @@
                         <h3>Prerequisites</h3>
                         <p>Before you begin, make sure you have:</p>
                         <ul>
-                            <li>Node.js 18+ (for built-in fetch API support)</li>
+                            <li>Node.js 18+ (required for Payload CMS 3)</li>
                             <li>An active Railway account</li>
                             <li>A Railway API token (create one at <a href="https://railway.app/account/tokens" target="_blank" rel="noopener noreferrer">railway.app/account/tokens</a>)</li>
+                            <li>Basic familiarity with Payload CMS 3 concepts</li>
                         </ul>
                     </div>
                     
@@ -914,7 +916,7 @@
                             <li>Open Cursor Settings</li>
                             <li>Go to MCP Servers section</li>
                             <li>Add a new MCP server</li>
-                            <li>Name it "Railway MCP"</li>
+                            <li>Name it "Payload CMS 3 MCP"</li>
                             <li>Set Transport Type to "Command"</li>
                             <li>Set Command to: <code>YOUR_RAILWAY_API_TOKEN</code></li>
                             <li>Save the configuration</li>
@@ -935,7 +937,7 @@
                             <li>Add this configuration:
                                 <code>
 "mcpServers": {
-  "railway": {
+  "payloadcms3": {
     "command": "YOUR_RAILWAY_API_TOKEN"
   }
 }
@@ -947,13 +949,13 @@
                     
                     <div class="setup-step">
                         <div class="step-number">4</div>
-                        <h3>Start Using</h3>
-                        <p>Once configured, you can use natural language to manage your Payload CMS projects:</p>
+                        <h3>Start Building with Payload CMS 3</h3>
+                        <p>Once configured, you can use natural language to build Payload CMS 3 applications:</p>
                         <ul>
-                            <li>"Create a new Payload CMS project with MongoDB"</li>
-                            <li>"Set up a blog collection with title, content, and author fields"</li>
-                            <li>"Configure authentication with email and password"</li>
-                            <li>"Deploy my Payload CMS project to Railway"</li>
+                            <li>"Create a new Payload CMS 3 project with proper TypeScript configuration"</li>
+                            <li>"Set up a blog collection with proper field validation and access control"</li>
+                            <li>"Implement authentication with email verification and password reset"</li>
+                            <li>"Create a custom hook for processing uploaded images"</li>
                         </ul>
                     </div>
                 </div>
@@ -965,21 +967,21 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Resources</h3>
+                    <h3>Payload CMS 3 Resources</h3>
                     <ul>
                         <li><a href="https://github.com/Matmax-Worldwide/payloadcmsmcp" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
-                        <li><a href="https://payloadcms.com" target="_blank" rel="noopener noreferrer">Payload CMS</a></li>
-                        <li><a href="https://railway.app" target="_blank" rel="noopener noreferrer">Railway</a></li>
-                        <li><a href="https://cursor.sh" target="_blank" rel="noopener noreferrer">Cursor IDE</a></li>
+                        <li><a href="https://payloadcms.com/docs" target="_blank" rel="noopener noreferrer">Payload CMS 3 Docs</a></li>
+                        <li><a href="https://github.com/payloadcms/payload" target="_blank" rel="noopener noreferrer">Payload CMS GitHub</a></li>
+                        <li><a href="https://discord.com/invite/payload" target="_blank" rel="noopener noreferrer">Payload CMS Discord</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="#features">Features</a></li>
-                        <li><a href="#tools">Available Tools</a></li>
+                        <li><a href="#tools">Payload CMS 3 Capabilities</a></li>
                         <li><a href="#setup">Getting Started</a></li>
-                        <li><a href="#api">MCP Integration</a></li>
+                        <li><a href="#api">AI Integration</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
