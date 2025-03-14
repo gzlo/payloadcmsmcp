@@ -1,4 +1,4 @@
-# 🚀 Payload CMS MCP SERVER
+# 🚀 Payload CMS 3.0 MCP Server
 
 <div align="center">
   <p align="center">
@@ -6,20 +6,20 @@
   </p>
 <p align="center">
     <img src="https://img.shields.io/badge/Model%20Context%20Protocol-Enabled-6366F1?style=for-the-badge" alt="MCP Enabled" />
-    <img src="https://img.shields.io/badge/Payload%20CMS-Integration-3B82F6?style=for-the-badge" alt="Payload CMS" />
+    <img src="https://img.shields.io/badge/Payload%20CMS%203.0-Integration-3B82F6?style=for-the-badge" alt="Payload CMS" />
     <img src="https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge" alt="License" />
     <img src="https://img.shields.io/badge/Railway-Deployment-0B0D0E?style=for-the-badge" alt="Railway Deployment" />
   </p>
   
-  <h3>Enhance your Payload CMS development experience with natural language commands</h3>
-  <p>Build, deploy, and manage your content infrastructure through conversational AI</p>
+  <h3>A specialized MCP server for Payload CMS 3.0</h3>
+  <p>Validate code, generate templates, and scaffold projects following best practices</p>
 </div>
 
 <hr>
 
 ## 📋 Overview
 
-The Payload CMS MCP Server enables you to manage Payload CMS projects with simple natural language commands. It helps developers build better Payload CMS applications by providing a conversational interface for project management, content modeling, and deployment automation.
+The Payload CMS 3.0 MCP Server is a specialized Model Context Protocol server designed to enhance your Payload CMS development experience. It helps developers build better Payload CMS applications by providing code validation, template generation, and project scaffolding capabilities that follow best practices.
 
 <hr>
 
@@ -29,36 +29,19 @@ The Payload CMS MCP Server enables you to manage Payload CMS projects with simpl
   <table>
     <tr>
       <td align="center">
-        <h3>✅</h3>
-        <b>Payload CMS Project Management</b>
-        <p>Create, configure, and manage your Payload CMS projects with simple natural language commands</p>
+        <h3>📚</h3>
+        <b>Code Validation</b>
+        <p>Validate Payload CMS code for collections, fields, globals, and config files with detailed feedback on syntax errors and best practices.</p>
+      </td>
+      <td align="center">
+        <h3>🔍</h3>
+        <b>Code Generation</b>
+        <p>Generate code templates for collections, fields, globals, access control, hooks, endpoints, plugins, blocks, and migrations.</p>
       </td>
       <td align="center">
         <h3>🚀</h3>
-        <b>Content Modeling</b>
-        <p>Define collections, fields, and relationships for your Payload CMS content models through conversation</p>
-      </td>
-      <td align="center">
-        <h3>🔄</h3>
-        <b>Deployment Automation</b>
-        <p>Automate Payload CMS deployments, monitor status, and troubleshoot issues with AI assistance</p>
-      </td>
-    </tr>
-    <tr>
-      <td align="center">
-        <h3>🔑</h3>
-        <b>Authentication & Access Control</b>
-        <p>Configure users, roles, and permissions for your Payload CMS projects with natural language</p>
-      </td>
-      <td align="center">
-        <h3>🌐</h3>
-        <b>API & Integration Management</b>
-        <p>Set up and manage Payload CMS APIs, webhooks, and third-party integrations effortlessly</p>
-      </td>
-      <td align="center">
-        <h3>💾</h3>
-        <b>Database & Media Management</b>
-        <p>Configure databases, media storage, and backups for your Payload CMS projects with ease</p>
+        <b>Project Scaffolding</b>
+        <p>Scaffold entire Payload CMS projects with validated options for consistency and adherence to best practices.</p>
       </td>
     </tr>
   </table>
@@ -66,63 +49,31 @@ The Payload CMS MCP Server enables you to manage Payload CMS projects with simpl
 
 <hr>
 
-## 🔧 Available Tools
+## 🔧 Payload CMS 3.0 Capabilities
 
-### Project Tools
+### Validation Tools
 
-Manage your Railway projects with these tools:
+* `validate` - Validate code for collections, fields, globals, and config
+* `query` - Query validation rules and best practices
+* `mcp_query` - Execute SQL-like queries for Payload CMS structures
 
-* `project-list` - List all projects
-* `project-info` - Get project details
-* `project-create` - Create a new project
-* `project-delete` - Delete a project
-* `project-environments` - List environments
+### Code Generation
 
-### Service Tools
+* `generate_template` - Generate code templates for various components
+* `generate_collection` - Create complete collection definitions
+* `generate_field` - Generate field definitions with proper typing
 
-Deploy and manage services:
+### Project Setup
 
-* `service-list` - List all services
-* `service-info` - Get service details
-* `service-create-from-repo` - Create from GitHub
-* `service-create-from-image` - Create from Docker
-* `service-delete` - Delete a service
-* `service-restart` - Restart a service
+* `scaffold_project` - Create entire Payload CMS project structures
+* `validate_scaffold_options` - Ensure scaffold options follow best practices
 
-### Deployment Tools
+### Technical Implementation
 
-Manage your deployments:
-
-* `deployment-list` - List deployments
-* `deployment-trigger` - Trigger a deployment
-* `deployment-logs` - View deployment logs
-* `deployment-health-check` - Check status
-
-### Variable Tools
-
-Manage environment variables:
-
-* `variable-list` - List variables
-* `variable-set` - Create/update variables
-* `variable-delete` - Delete variables
-* `variable-bulk-set` - Bulk update variables
-* `variable-copy` - Copy between environments
-
-### Database Tools
-
-Deploy and manage databases:
-
-* `database-list-types` - List available types
-* `database-deploy` - Deploy a new database
-
-### Network Tools
-
-Configure networking:
-
-* `domain-list` - List domains
-* `domain-create` - Create a domain
-* `tcp-proxy-list` - List TCP proxies
-* `tcp-proxy-create` - Create a TCP proxy
+* `Express.js` - For HTTP request handling
+* `TypeScript` - For type safety and better developer experience
+* `Zod` - For schema validation
+* `Redis` - For caching and state management
 
 <hr>
 
@@ -132,103 +83,41 @@ Configure networking:
 
 Before you begin, make sure you have:
 
-* Node.js 18+ (for built-in fetch API support)
+* Node.js 18+ (required for Payload CMS 3.0)
 * An active Railway account
-* A Railway API token (create one at [https://railway.app/account/tokens](https://railway.app/account/tokens))
+* A Railway API token (create one at [railway.app/account/tokens](https://railway.app/account/tokens))
+* Basic familiarity with Payload CMS 3.0 concepts
 
-### 2. Installation
-
-Clone the repository and install dependencies:
-
-```bash
-git clone https://github.com/Matmax-Worldwide/payloadcmsmcp.git
-cd payloadcmsmcp
-npm install
-```
-
-Run the server with your Railway API token:
-
-```bash
-node server.js YOUR_RAILWAY_API_TOKEN
-```
-
-### 3. Configure Cursor
+### 2. Configure Cursor
 
 To use with Cursor IDE:
 
 1. Open Cursor Settings
 2. Go to MCP Servers section
 3. Add a new MCP server
-4. Name it "Payload CMS MCP"
+4. Name it "Payload CMS 3.0 MCP"
 5. Set Transport Type to "Command"
-6. Set Command to: `node /path/to/payloadcmsmcp/server.js YOUR_RAILWAY_API_TOKEN`
+6. Set Command to: `railway run --service=YOUR_SERVICE_ID`
 7. Save the configuration
 
-### 4. Configure Claude for Desktop
+### 3. Using the MCP Server
 
-To use with Claude for Desktop:
+Once configured, you can use these tools in your AI prompts:
 
-1. Edit your Claude for Desktop config file:
-   * macOS: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
-   * Windows: `%APPDATA%\Claude\claude_desktop_config.json`
-2. Add this configuration:
-```json
-  "mcpServers": {
-     "payloadcms": {
-       "command": "node",
-       "args": ["/path/to/payloadcmsmcp/server.js", "YOUR_RAILWAY_API_TOKEN"],
-       "env": {}
-  }
-}
-```
-3. Restart Claude for Desktop
+* **Code Validation:** "Validate this Payload CMS collection code"
+* **Template Generation:** "Generate a template for a media collection"
+* **Query Rules:** "Query validation rules for access control"
+* **SQL-like Queries:** "Execute a query to find field types for collections"
 
-### 5. Start Using
+### 4. Example Workflow
 
-Once configured, you can use natural language to manage your Payload CMS projects:
+A typical workflow with the Payload CMS MCP Server:
 
-* "Create a new Payload CMS project with MongoDB"
-* "Set up a blog collection with title, content, and author fields"
-* "Configure authentication with email and password"
-* "Deploy my Payload CMS project to Railway"
-
-<hr>
-
-## 🚀 Deployment
-
-### Railway Deployment
-
-To deploy this MCP server to Railway:
-
-1. **Create a new Railway project**:
-   * Go to [Railway.app](https://railway.app) and create a new project
-   * Choose "Deploy from GitHub repo" and select your repository
-   * Alternatively, use the Railway CLI with `railway init` in your project directory
-
-2. **Configure environment variables**:
-   * Add necessary environment variables in the Railway dashboard
-   * Set `NODE_ENV=production` for production deployments
-   * Configure any API keys or service connections needed
-
-3. **Set up resources**:
-   * Railway automatically detects your Dockerfile for containerized deployment
-   * Add a MongoDB database from the Railway dashboard if needed
-   * Configure networking and domains in the Railway dashboard
-
-4. **Deploy your application**:
-   * Railway will automatically deploy your application on push to your repository
-   * Use `railway up` from the CLI for manual deployments
-   * Monitor build and deployment logs in the Railway dashboard
-
-5. **Access and monitor your application**:
-   * Railway provides a generated URL for your deployed application
-   * Configure custom domains in the Railway dashboard
-   * Set up monitoring and alerts for your application
-
-6. **Optimize for production**:
-   * Enable auto-scaling in the Railway dashboard for production workloads
-   * Configure memory and CPU limits appropriate for your application
-   * Set up health checks for improved reliability
+1. Generate a collection template with specific fields
+2. Validate the generated code for best practices
+3. Query for specific validation rules to improve the code
+4. Generate additional components like hooks or endpoints
+5. Scaffold a complete project structure when ready
 
 <hr>
 
@@ -245,19 +134,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
   <p>Creating technology that helps humans be more human.</p>
 </div>
 
-This MCP server is a contribution to the Payload CMS community by MATMAX WORLDWIDE. We believe in tech for good—tools that enhance our lives while respecting our humanity.
+We believe in tech for good—tools that enhance our lives while respecting our humanity.
 
 Join us in building a future where technology serves wellness, connection, and purpose. Together, we can create digital experiences that bring out the best in us all.
 
-Our Payload CMS MCP Server bridges the gap between content management and AI, enabling developers to build powerful, flexible applications with natural language commands.
-
-Visit [matmax.world](https://matmax.world) to explore our vision for human-centered technology and join our community dedicated to wellness and meaningful innovation.
-
-<div align="center">
-  <p>
-    <a href="https://github.com/Matmax-Worldwide" target="_blank">GitHub</a> •
-    <a href="https://www.linkedin.com/company/the-wellness-brand" target="_blank">LinkedIn</a> •
-    <a href="https://matmax.world" target="_blank">Website</a>
-  </p>
-  <p>© 2025 MATMAX WORLDWIDE. Made with ❤️ for humanity.</p>
-</div>
+Visit [matmax.world](https://matmax.world) to learn more about our vision for human-centered technology.
