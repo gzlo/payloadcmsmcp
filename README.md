@@ -691,4 +691,4 @@ Your MCP server will now be running locally and accessible for development and t
 
 The easiest way to deploy the MCP server is using Railway's one-click deployment:
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/payload-cms-mcp?referralCode=matmax)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/Matmax-Worldwide/payloadcmsmcp)
