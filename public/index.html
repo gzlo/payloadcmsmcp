@@ -1650,7 +1650,12 @@
                             <li>Add a new MCP server</li>
                             <li>Name it "Payload CMS 3.0 MCP"</li>
                             <li>Set Transport Type to "Command"</li>
-                            <li>Set Command to: <code>payload-cms-mcp</code> (if installed via npm) or <code>npm run dev</code> (if using local repository)</li>
+                            <li>Set Command to one of the following options:</li>
+                            <ul>
+                                <li><strong>For Railway deployment:</strong> <code>railway run</code> (after linking with <code>railway link</code>)</li>
+                                <li><strong>For local installation:</strong> <code>payload-cms-mcp</code> (if installed via npm)</li>
+                                <li><strong>For local repository:</strong> <code>npm run dev</code> (in the repository directory)</li>
+                            </ul>
                             <li>Save the configuration</li>
                         </ol>
                     </div>
@@ -1686,7 +1691,12 @@
                                 <img src="https://railway.app/button.svg" alt="Deploy on Railway">
                             </a>
                         </div>
-                        <p>After clicking the button, select "Deploy from GitHub repo" and search for "Matmax-Worldwide/payloadcmsmcp".</p>
+                        <p>After clicking the button:</p>
+                        <ol>
+                            <li>Select "Deploy from GitHub repo"</li>
+                            <li>Search for "Matmax-Worldwide/payloadcmsmcp"</li>
+                            <li>Click "Deploy Now"</li>
+                        </ol>
                         
                         <h4 style="margin-top: 20px;">Quick Cursor IDE Setup</h4>
                         <p>After deployment, set up with Cursor IDE in just a few steps:</p>
@@ -1701,12 +1711,16 @@
                     <div class="setup-step">
                         <div class="step-number">2</div>
                         <h3>Run Locally</h3>
-                        <p>For development or testing, run the server locally:</p>
+                        <p>For development or testing, you can run the server locally:</p>
                         <div class="code-block">
-                            <code># If installed via npm</code>
+                            <code># Option 1: Install from npm</code>
+                            <code>npm install -g payload-cms-mcp</code>
                             <code>payload-cms-mcp</code>
                             <code></code>
-                            <code># If using local repository</code>
+                            <code># Option 2: Clone the repository</code>
+                            <code>git clone https://github.com/Matmax-Worldwide/payloadcmsmcp.git</code>
+                            <code>cd payloadcmsmcp</code>
+                            <code>npm install</code>
                             <code>npm run dev</code>
                         </div>
                         <p>Your server will be available at <code>http://localhost:8080</code> by default.</p>
