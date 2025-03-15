@@ -697,3 +697,12 @@ After clicking the button:
 1. Select "Deploy from GitHub repo"
 2. Search for "Matmax-Worldwide/payloadcmsmcp"
 3. Click "Deploy Now"
+
+#### Configuring Railway for Cursor IDE
+
+After deployment, you can use your Railway service with Cursor IDE:
+
+1. Generate a Railway API token at [railway.app/account/tokens](https://railway.app/account/tokens)
+2. Copy your service ID from the Railway dashboard (found in the URL when viewing your service)
+3. In Cursor Settings > MCP Servers, set the Command to: `railway run --service=YOUR_SERVICE_ID`
+4. Alternatively, set the Command to: `railway run` after linking your project locally
