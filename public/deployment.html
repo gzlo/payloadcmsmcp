@@ -281,6 +281,104 @@
             transform: translateY(-2px);
         }
 
+        /* Mobile navigation styles */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .hamburger-icon {
+            width: 24px;
+            height: 18px;
+            position: relative;
+            transform: rotate(0deg);
+            transition: .5s ease-in-out;
+        }
+
+        .hamburger-icon span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: white;
+            border-radius: 2px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger-icon span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger-icon span:nth-child(2) {
+            top: 8px;
+        }
+
+        .hamburger-icon span:nth-child(3) {
+            top: 16px;
+        }
+
+        .mobile-nav-toggle.active .hamburger-icon span:nth-child(1) {
+            top: 8px;
+            transform: rotate(135deg);
+        }
+
+        .mobile-nav-toggle.active .hamburger-icon span:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+        }
+
+        .mobile-nav-toggle.active .hamburger-icon span:nth-child(3) {
+            top: 8px;
+            transform: rotate(-135deg);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .github-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .nav-icon {
+            filter: invert(1);
+            transition: var(--transition);
+        }
+        
+        .github-link:hover .nav-icon {
+            filter: invert(0.7) sepia(1) saturate(5) hue-rotate(175deg);
+        }
+
+        .no-scroll {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
         @media (max-width: 768px) {
             .setup-steps {
                 grid-template-columns: 1fr;
@@ -300,6 +398,42 @@
                 gap: 1rem;
                 text-align: center;
             }
+
+            .mobile-nav-toggle {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 1.5rem;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--secondary-dark);
+                padding: 6rem 2rem 2rem;
+                z-index: 1000;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                overflow-y: auto;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
         }
     </style>
 </head>
@@ -312,12 +446,27 @@
                     <strong>Payload CMS MCP Server</strong>
                 </span>
             </a>
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <div class="hamburger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
             <nav role="navigation" aria-label="Main Navigation">
                 <ul>
-                    <li><a href="/">Home</a></li>
+                    <li><a href="/#features">Features</a></li>
+                    <li><a href="/#tools">Capabilities</a></li>
+                    <li><a href="/#api">Integration</a></li>
+                    <li><a href="/#setup">Setup</a></li>
                     <li><a href="/deployment.html">Deployment Options</a></li>
+                    <li><a href="https://github.com/Matmax-Worldwide/payloadcmsmcp" target="_blank" rel="noopener noreferrer" class="github-link">
+                        <img src="/images/github-icon.svg" alt="GitHub" width="18" height="18" class="nav-icon">
+                        GitHub
+                    </a></li>
                 </ul>
             </nav>
+            <div class="overlay"></div>
         </div>
     </header>
 
@@ -445,11 +594,88 @@
                                 top: targetPosition,
                                 behavior: 'smooth'
                             });
+
+                            // Close mobile menu if open
+                            if (document.querySelector('nav').classList.contains('active')) {
+                                toggleMobileNav();
+                            }
                         }
                     }
                 });
             });
+
+            // Mobile Navigation Toggle
+            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+            const nav = document.querySelector('nav');
+            const overlay = document.querySelector('.overlay');
+            const body = document.body;
+
+            function toggleMobileNav() {
+                mobileNavToggle.classList.toggle('active');
+                nav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                body.classList.toggle('no-scroll');
+                
+                // Update aria-expanded attribute
+                const isExpanded = mobileNavToggle.getAttribute('aria-expanded') === 'true';
+                mobileNavToggle.setAttribute('aria-expanded', !isExpanded);
+                
+                // Add focus trap for accessibility
+                if (nav.classList.contains('active')) {
+                    // Focus the first link in the menu
+                    setTimeout(() => {
+                        nav.querySelector('a').focus();
+                    }, 100);
+                }
+            }
+
+            mobileNavToggle.addEventListener('click', toggleMobileNav);
+            overlay.addEventListener('click', toggleMobileNav);
+
+            // Close menu when pressing Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && nav.classList.contains('active')) {
+                    toggleMobileNav();
+                }
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768 && nav.classList.contains('active')) {
+                    toggleMobileNav();
+                }
+            });
+
+            // Prevent body scrolling when menu is open
+            function preventScroll(e) {
+                if (body.classList.contains('no-scroll')) {
+                    e.preventDefault();
+                }
+            }
+
+            // Apply to touch devices
+            document.addEventListener('touchmove', preventScroll, { passive: false });
         });
+
+        // Add no-scroll class to body
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                .no-scroll {
+                    overflow: hidden;
+                    position: fixed;
+                    width: 100%;
+                    height: 100%;
+                }
+                
+                @media (prefers-reduced-motion: reduce) {
+                    * {
+                        transition: none !important;
+                        animation: none !important;
+                        scroll-behavior: auto !important;
+                    }
+                }
+            </style>
+        `);
     </script>
 </body>
 </html> 
