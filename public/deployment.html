@@ -557,6 +557,8 @@
             
             nav ul {
                 gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             .footer-bottom {
@@ -683,6 +685,26 @@
             nav {
                 width: 85%;
                 padding: 4.5rem 1.5rem 1.5rem;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) {
+            .feature-card:hover, .tool-card:hover, .setup-step:hover {
+                transform: none;
+            }
+
+            .btn:hover {
+                transform: none;
+            }
+
+            nav a {
+                padding: 0.7rem 0;  /* Larger touch target */
+            }
+
+            .footer-column a {
+                padding: 0.3rem 0;
+                display: inline-block;
             }
         }
     </style>
