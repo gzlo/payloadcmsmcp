@@ -1694,15 +1694,20 @@
                         <h3>Deploy on Railway (Recommended)</h3>
                         <p>The easiest way to deploy the MCP server is using Railway's one-click deployment:</p>
                         <div style="text-align:center; margin: 20px 0;">
-                            <a href="https://railway.app/new">
+                            <a href="https://railway.app/new" target="_blank" rel="noopener noreferrer">
                                 <img src="https://railway.app/button.svg" alt="Deploy on Railway">
                             </a>
                         </div>
-                        <p>After clicking the button:</p>
+                        
+                        <h4 style="margin-top: 20px;">Step-by-Step Railway Deployment</h4>
                         <ol>
-                            <li>Select "Deploy from GitHub repo"</li>
-                            <li>Search for "Matmax-Worldwide/payloadcmsmcp"</li>
-                            <li>Click "Deploy Now"</li>
+                            <li><strong>Create a Railway account</strong> if you don't have one already</li>
+                            <li>Click the "Deploy on Railway" button above</li>
+                            <li>In the Railway dashboard, select <strong>"Deploy from GitHub repo"</strong></li>
+                            <li>Search for <code>Matmax-Worldwide/payloadcmsmcp</code></li>
+                            <li>Click <strong>"Deploy Now"</strong> to start the deployment process</li>
+                            <li>Railway will automatically build and deploy the application</li>
+                            <li>Once deployed, you'll see a green "Deployed" status in your project dashboard</li>
                         </ol>
                         
                         <h4 style="margin-top: 20px;">Cursor IDE Setup Options</h4>
@@ -1711,19 +1716,40 @@
                         <h5 style="margin-top: 15px;">Option 1: Quick Setup (Recommended)</h5>
                         <ol>
                             <li>Install Railway CLI: <code>npm install -g @railway/cli</code></li>
-                            <li>Login to Railway: <code>railway login</code></li>
-                            <li>Link to your project: <code>railway link</code></li>
+                            <li>Login to Railway: <code>railway login</code> (this will open a browser window)</li>
+                            <li>Link to your project: <code>railway link</code> (select your MCP server project)</li>
                             <li>In Cursor Settings > MCP Servers, set the Command to: <code>railway run</code></li>
                         </ol>
                         
                         <h5 style="margin-top: 15px;">Option 2: Using API Token</h5>
                         <ol>
-                            <li>Generate a Railway API token at <a href="https://railway.app/account/tokens" target="_blank" rel="noopener noreferrer">railway.app/account/tokens</a></li>
-                            <li>Copy your service ID from the Railway dashboard (found in the URL when viewing your service)</li>
+                            <li>Go to <a href="https://railway.app/account/tokens" target="_blank" rel="noopener noreferrer">railway.app/account/tokens</a></li>
+                            <li>Click <strong>"+ New Token"</strong> and give it a name (e.g., "Cursor MCP")</li>
+                            <li>Copy the generated token (you won't be able to see it again)</li>
+                            <li>Find your service ID in the Railway dashboard:
+                                <ul>
+                                    <li>Navigate to your project</li>
+                                    <li>Click on the MCP server service</li>
+                                    <li>The service ID is in the URL: <code>https://railway.app/project/[project-id]/service/[service-id]</code></li>
+                                </ul>
+                            </li>
                             <li>In Cursor Settings > MCP Servers, set the Command to: <code>railway run --service=YOUR_SERVICE_ID</code></li>
                         </ol>
                         
                         <p style="margin-top: 15px;"><strong>Note:</strong> Option 1 is simpler as it handles authentication and service selection automatically after linking your project locally.</p>
+                        
+                        <h4 style="margin-top: 20px;">Verifying Your Deployment</h4>
+                        <p>To verify that your MCP server is running correctly:</p>
+                        <ol>
+                            <li>Open Cursor IDE</li>
+                            <li>Create or open a Payload CMS project</li>
+                            <li>Try a simple prompt like: "Validate this Payload CMS collection code"</li>
+                            <li>If configured correctly, the MCP server will respond with validation results</li>
+                        </ol>
+                        
+                        <div style="background-color: #f0f7ff; border-left: 4px solid #3b82f6; padding: 15px; margin: 20px 0; border-radius: 4px;">
+                            <p style="margin: 0;"><strong>💡 Tip:</strong> Railway automatically assigns a unique URL to your deployment. You can find this URL in the "Deployments" tab of your project dashboard. This URL can be used to verify your server is running by visiting it in a browser.</p>
+                        </div>
                     </div>
                     
                     <div class="setup-step">
