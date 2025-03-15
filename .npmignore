@@ -1,0 +1,49 @@
+# Development files
+.git
+.github
+.gitignore
+.DS_Store
+.env
+.env.*
+.vscode
+.idea
+*.log
+logs
+*.swp
+*.swo
+
+# Build artifacts
+node_modules
+coverage
+.nyc_output
+.cache
+.vercel
+.railway
+
+# Documentation and examples
+docs
+examples
+test
+tests
+__tests__
+*.test.js
+*.spec.js
+
+# Miscellaneous
+.editorconfig
+.eslintrc
+.eslintignore
+.prettierrc
+.prettierignore
+.travis.yml
+.gitlab-ci.yml
+.circleci
+.github
+CONTRIBUTING.md
+CHANGELOG.md
+LICENSE.md
+current_html.html
+public/index.html.bak
+public/logo-generator.html
+public/logo-server.js
+scripts/update-logo.js 

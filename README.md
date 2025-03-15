@@ -658,17 +658,16 @@ cd payloadcmsmcp
 npm install
 ```
 
-3. Set up environment variables:
-Create a `.env` file and add your Railway API token:
-```env
-RAILWAY_API_TOKEN=your_railway_api_token_here
-```
-
-4. Run the server:
+3. Run the server locally:
 ```bash
 npm run dev
 ```
 
-Your MCP server will now be running locally and accessible for development and testing.
+Or alternatively:
+```bash
+npm run local
+```
+
+Your MCP server will now be running locally and accessible for development and testing without requiring a Railway API token.
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/albertosaco/mcp-server&plugins=postgresql)
