@@ -798,6 +798,28 @@
                         <div class="code-block">
                             <code>npm install --save payload-cms-mcp</code>
                         </div>
+                        
+                        <h4>Configuring in Cursor IDE</h4>
+                        <p>After installing the npm package, follow these steps to configure it in Cursor IDE:</p>
+                        <ol>
+                            <li>Open Cursor IDE</li>
+                            <li>Go to Settings (gear icon in the bottom left)</li>
+                            <li>Navigate to "MCP Servers" section</li>
+                            <li>Click "Add MCP Server"</li>
+                            <li>Fill in the following details:
+                                <ul>
+                                    <li><strong>Name:</strong> "Payload CMS 3.0 MCP"</li>
+                                    <li><strong>Transport Type:</strong> "Command"</li>
+                                    <li><strong>Command:</strong> <code>payload-cms-mcp</code> (if installed globally) or <code>npx payload-cms-mcp</code> (if installed locally)</li>
+                                </ul>
+                            </li>
+                            <li>Click "Save"</li>
+                        </ol>
+                        <p>You can now use the MCP server in your Cursor IDE by referencing it in your prompts:</p>
+                        <div class="code-block">
+                            <code>// Example prompt</code>
+                            <code>"Generate a Payload CMS collection for a blog with title, content, and author fields."</code>
+                        </div>
                     </div>
                 </div>
             </div>
