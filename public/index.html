@@ -1606,6 +1606,7 @@
                         <p>Before you begin, make sure you have:</p>
                         <ul>
                             <li>Node.js 18+ (required for Payload CMS 3.0)</li>
+                            <li>npm or yarn package manager</li>
                             <li>Basic familiarity with Payload CMS 3.0 concepts</li>
                         </ul>
                     </div>
@@ -1615,7 +1616,10 @@
                         <h3>Installation Options</h3>
                         <p><strong>Option 1:</strong> Install from npm (Recommended)</p>
                         <div class="code-block">
-                            <code># Install globally</code>
+                            <code># Install specific version globally</code>
+                            <code>npm install -g payload-cms-mcp@1.0.2</code>
+                            <code></code>
+                            <code># Or install latest version</code>
                             <code>npm install -g payload-cms-mcp</code>
                             <code></code>
                             <code># Run the server</code>
@@ -1624,9 +1628,14 @@
                         
                         <p><strong>Option 2:</strong> Clone the repository</p>
                         <div class="code-block">
+                            <code># Clone the repository</code>
                             <code>git clone https://github.com/Matmax-Worldwide/payloadcmsmcp.git</code>
                             <code>cd payloadcmsmcp</code>
+                            <code></code>
+                            <code># Install dependencies</code>
                             <code>npm install</code>
+                            <code></code>
+                            <code># Run the development server</code>
                             <code>npm run dev</code>
                         </div>
                     </div>
@@ -1663,7 +1672,10 @@
 
         <section id="deployment-options" class="section">
             <div class="container">
-                <h2 class="section-title">Deployment Options</h2>
+                <div class="section-title">
+                    <h2>Deployment Options</h2>
+                    <p>Choose the deployment method that works best for your needs.</p>
+                </div>
                 <div class="setup-steps">
                     <div class="setup-step">
                         <div class="step-number">1</div>
@@ -1688,7 +1700,12 @@
                             <code># If using local repository</code>
                             <code>npm run dev</code>
                         </div>
-                        <p>Your server will be available at <code>http://localhost:3000</code></p>
+                        <p>Your server will be available at <code>http://localhost:8080</code> by default.</p>
+                        <p>You can customize the port by setting the <code>PORT</code> environment variable:</p>
+                        <div class="code-block">
+                            <code># Set custom port</code>
+                            <code>PORT=3000 npm run dev</code>
+                        </div>
                     </div>
                     
                     <div class="setup-step">
@@ -1701,7 +1718,13 @@
                                 <img src="https://img.shields.io/npm/dm/payload-cms-mcp.svg?style=for-the-badge" alt="npm downloads">
                             </a>
                         </div>
+                        <p>Current stable version: <code>1.0.2</code></p>
                         <p>This makes it easy to integrate into your existing projects or workflows.</p>
+                        <p>You can also use it as a dependency in your own projects:</p>
+                        <div class="code-block">
+                            <code># Add as a dependency</code>
+                            <code>npm install --save payload-cms-mcp</code>
+                        </div>
                     </div>
                 </div>
             </div>
