@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Options | Payload CMS MCP Server</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">Payload CMS MCP Server</a>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/deployment.html">Deployment Options</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="deployment-options" class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Deployment Options</h2>
+                    <p>Choose the deployment method that works best for your needs.</p>
+                </div>
+                <div class="setup-steps">
+                    <!-- Railway Deployment Section -->
+                    <div class="setup-step">
+                        <h3>Deploy on Railway (Recommended)</h3>
+                        <p>The easiest way to deploy the MCP server is using Railway's one-click deployment:</p>
+                        <div style="text-align:center; margin: 20px 0;">
+                            <a href="https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FMatmax-Worldwide%2Fpayloadcmsmcp" target="_blank">
+                                <img src="https://railway.app/button.svg" alt="Deploy on Railway">
+                            </a>
+                        </div>
+
+                        <h4>Detailed Railway Deployment Guide</h4>
+                        <ol>
+                            <li><strong>Create a Railway account</strong>
+                                <ul>
+                                    <li>Go to <a href="https://railway.app" target="_blank">railway.app</a> and sign up using GitHub, Google, or Discord</li>
+                                    <li>Verify your email if required</li>
+                                </ul>
+                            </li>
+                            <li><strong>Deploy the MCP server</strong>
+                                <ul>
+                                    <li>Click the "Deploy on Railway" button above</li>
+                                    <li>You'll be redirected to Railway's template deployment page</li>
+                                    <li>Click "Deploy Now" to start the deployment process</li>
+                                    <li>Railway will automatically fork the repository to your GitHub account (if you signed up with GitHub)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Wait for the deployment to complete</strong>
+                                <ul>
+                                    <li>Railway will automatically build and deploy the application</li>
+                                    <li>This process typically takes 2-3 minutes</li>
+                                    <li>You'll see a green "Deployed" status when it's complete</li>
+                                </ul>
+                            </li>
+                            <li><strong>Access your deployment</strong>
+                                <ul>
+                                    <li>Once deployed, click on the "Deployments" tab in your project</li>
+                                    <li>You'll see a unique URL for your deployment (e.g., <code>https://payloadcmsmcp-production.up.railway.app</code>)</li>
+                                    <li>Click on this URL to verify your server is running</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <!-- NPM Package Section -->
+                    <div class="setup-step">
+                        <h3>NPM Package</h3>
+                        <p>The MCP server is available as an npm package, making it easy to integrate into your existing projects or workflows.</p>
+                        <div style="text-align:center; margin: 20px 0;">
+                            <a href="https://www.npmjs.com/package/payload-cms-mcp" target="_blank" rel="noopener noreferrer">
+                                <img src="https://img.shields.io/npm/v/payload-cms-mcp.svg?style=for-the-badge" alt="npm version">
+                                <img src="https://img.shields.io/npm/dm/payload-cms-mcp.svg?style=for-the-badge" alt="npm downloads">
+                            </a>
+                        </div>
+                        <p>Current stable version: <code>1.0.2</code></p>
+                        <p>You can also use it as a dependency in your own projects:</p>
+                        <div class="code-block">
+                            <code>npm install --save payload-cms-mcp</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 MATMAX WORLDWIDE. Made with ❤️ for humanity.</p>
+        </div>
+    </footer>
+</body>
+</html> 
