@@ -1606,18 +1606,33 @@
                         <p>Before you begin, make sure you have:</p>
                         <ul>
                             <li>Node.js 18+ (required for Payload CMS 3.0)</li>
-                            <li>An active Railway account (optional for cloud deployment)</li>
-                            <li>A Railway API token (create one at <a href="https://railway.app/account/tokens" target="_blank">railway.app/account/tokens</a>)</li>
                             <li>Basic familiarity with Payload CMS 3.0 concepts</li>
                         </ul>
-                        <p>You can also run the MCP server locally by following these steps:</p>
-                        <pre><code>git clone https://github.com/Matmax-Worldwide/payloadcmsmcp.git
-npm install
-npm run dev</code></pre>
                     </div>
                     
                     <div class="setup-step">
                         <div class="step-number">2</div>
+                        <h3>Installation Options</h3>
+                        <p><strong>Option 1:</strong> Install from npm (Recommended)</p>
+                        <div class="code-block">
+                            <code># Install globally</code>
+                            <code>npm install -g payload-cms-mcp</code>
+                            <code></code>
+                            <code># Run the server</code>
+                            <code>payload-cms-mcp</code>
+                        </div>
+                        
+                        <p><strong>Option 2:</strong> Clone the repository</p>
+                        <div class="code-block">
+                            <code>git clone https://github.com/Matmax-Worldwide/payloadcmsmcp.git</code>
+                            <code>cd payloadcmsmcp</code>
+                            <code>npm install</code>
+                            <code>npm run dev</code>
+                        </div>
+                    </div>
+                    
+                    <div class="setup-step">
+                        <div class="step-number">3</div>
                         <h3>Configure Cursor</h3>
                         <p>To use with Cursor IDE:</p>
                         <ol>
@@ -1626,13 +1641,13 @@ npm run dev</code></pre>
                             <li>Add a new MCP server</li>
                             <li>Name it "Payload CMS 3.0 MCP"</li>
                             <li>Set Transport Type to "Command"</li>
-                            <li>Set Command to: <code>railway run --service=YOUR_SERVICE_ID</code></li>
+                            <li>Set Command to: <code>payload-cms-mcp</code> (if installed via npm) or <code>npm run dev</code> (if using local repository)</li>
                             <li>Save the configuration</li>
                         </ol>
                     </div>
                     
                     <div class="setup-step">
-                        <div class="step-number">3</div>
+                        <div class="step-number">4</div>
                         <h3>Using the MCP Server</h3>
                         <p>Once configured, you can use these tools in your AI prompts:</p>
                         <ul>
@@ -1642,30 +1657,53 @@ npm run dev</code></pre>
                             <li><strong>SQL-like Queries:</strong> "Execute a query to find field types for collections"</li>
                         </ul>
                     </div>
-                    
-                    <div class="setup-step">
-                        <div class="step-number">4</div>
-                        <h3>Example Workflow</h3>
-                        <p>A typical workflow with the Payload CMS MCP Server:</p>
-                        <ol>
-                            <li>Generate a collection template with specific fields</li>
-                            <li>Validate the generated code for best practices</li>
-                            <li>Query for specific validation rules to improve the code</li>
-                            <li>Generate additional components like hooks or endpoints</li>
-                            <li>Scaffold a complete project structure when ready</li>
-                        </ol>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="local-run" class="section">
+        <section id="deployment-options" class="section">
             <div class="container">
-                <h2 class="section-title">Run Locally</h2>
-                <p class="section-description">You can also run the Payload CMS MCP Server locally for development and testing. Follow the instructions provided in the README to set up your local environment quickly and easily.</p>
-                <pre><code>git clone https://github.com/Matmax-Worldwide/payloadcmsmcp.git
-npm install
-npm run dev</code></pre>
+                <h2 class="section-title">Deployment Options</h2>
+                <div class="setup-steps">
+                    <div class="setup-step">
+                        <div class="step-number">1</div>
+                        <h3>Deploy on Railway (Recommended)</h3>
+                        <p>The easiest way to deploy the MCP server is using Railway's one-click deployment:</p>
+                        <div style="text-align:center; margin: 20px 0;">
+                            <a href="https://railway.app/new/template?template=https://github.com/albertosaco/mcp-server&plugins=postgresql">
+                                <img src="https://railway.app/button.svg" alt="Deploy on Railway">
+                            </a>
+                        </div>
+                        <p>This will automatically set up your server with all necessary configurations.</p>
+                    </div>
+                    
+                    <div class="setup-step">
+                        <div class="step-number">2</div>
+                        <h3>Run Locally</h3>
+                        <p>For development or testing, run the server locally:</p>
+                        <div class="code-block">
+                            <code># If installed via npm</code>
+                            <code>payload-cms-mcp</code>
+                            <code></code>
+                            <code># If using local repository</code>
+                            <code>npm run dev</code>
+                        </div>
+                        <p>Your server will be available at <code>http://localhost:3000</code></p>
+                    </div>
+                    
+                    <div class="setup-step">
+                        <div class="step-number">3</div>
+                        <h3>NPM Package</h3>
+                        <p>The MCP server is available as an npm package:</p>
+                        <div style="text-align:center; margin: 20px 0;">
+                            <a href="https://www.npmjs.com/package/payload-cms-mcp" target="_blank" rel="noopener noreferrer">
+                                <img src="https://img.shields.io/npm/v/payload-cms-mcp.svg?style=for-the-badge" alt="npm version">
+                                <img src="https://img.shields.io/npm/dm/payload-cms-mcp.svg?style=for-the-badge" alt="npm downloads">
+                            </a>
+                        </div>
+                        <p>This makes it easy to integrate into your existing projects or workflows.</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>

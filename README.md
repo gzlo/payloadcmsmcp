@@ -645,7 +645,22 @@ Visit [matmax.world](https://matmax.world) to learn more about our vision for hu
 
 ## 🖥️ Running Locally
 
-You can also run the Payload CMS MCP Server locally by following these steps:
+You can run the Payload CMS MCP Server locally using npm:
+
+[![npm version](https://img.shields.io/npm/v/payload-cms-mcp.svg?style=flat-square)](https://www.npmjs.org/package/payload-cms-mcp)
+[![npm downloads](https://img.shields.io/npm/dm/payload-cms-mcp.svg?style=flat-square)](https://npmjs.org/package/payload-cms-mcp)
+
+### Option 1: Install from npm
+
+```bash
+# Install globally
+npm install -g payload-cms-mcp
+
+# Run the server
+payload-cms-mcp
+```
+
+### Option 2: Clone the repository
 
 1. Clone the repository:
 ```bash
@@ -669,5 +684,11 @@ npm run local
 ```
 
 Your MCP server will now be running locally and accessible for development and testing without requiring a Railway API token.
+
+## 🚀 Deployment Options
+
+### Deploy to Railway (Recommended)
+
+The easiest way to deploy the MCP server is using Railway's one-click deployment:
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/albertosaco/mcp-server&plugins=postgresql)
