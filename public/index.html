@@ -1694,26 +1694,65 @@
                         <h3>Deploy on Railway (Recommended)</h3>
                         <p>The easiest way to deploy the MCP server is using Railway's one-click deployment:</p>
                         <div style="text-align:center; margin: 20px 0;">
-                            <a href="https://railway.app/new" target="_blank" rel="noopener noreferrer">
+                            <a href="https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FMatmax-Worldwide%2Fpayloadcmsmcp&envs=PORT&PORTDesc=The+port+to+run+the+server+on&PORTDefault=8080&referralCode=matmax" target="_blank" rel="noopener noreferrer">
                                 <img src="https://railway.app/button.svg" alt="Deploy on Railway">
                             </a>
                         </div>
                         
-                        <h4 style="margin-top: 20px;">Step-by-Step Railway Deployment</h4>
+                        <h4 style="margin-top: 20px;">Detailed Railway Deployment Guide</h4>
+                        
+                        <div style="background-color: #f0f7ff; border-left: 4px solid #3b82f6; padding: 15px; margin: 20px 0; border-radius: 4px;">
+                            <p style="margin: 0;"><strong>💡 Note:</strong> Railway offers a generous free tier that includes 5 USD of free credits per month, which is more than enough to run the MCP server.</p>
+                        </div>
+                        
                         <ol>
-                            <li><strong>Create a Railway account</strong> if you don't have one already</li>
-                            <li>Click the "Deploy on Railway" button above</li>
-                            <li>In the Railway dashboard, select <strong>"Deploy from GitHub repo"</strong></li>
-                            <li>Search for <code>Matmax-Worldwide/payloadcmsmcp</code></li>
-                            <li>Click <strong>"Deploy Now"</strong> to start the deployment process</li>
-                            <li>Railway will automatically build and deploy the application</li>
-                            <li>Once deployed, you'll see a green "Deployed" status in your project dashboard</li>
+                            <li><strong>Create a Railway account</strong>
+                                <ul>
+                                    <li>Go to <a href="https://railway.app" target="_blank" rel="noopener noreferrer">railway.app</a> and sign up using GitHub, Google, or Discord</li>
+                                    <li>Verify your email if required</li>
+                                </ul>
+                            </li>
+                            <li><strong>Deploy the MCP server</strong>
+                                <ul>
+                                    <li>Click the "Deploy on Railway" button above</li>
+                                    <li>You'll be redirected to Railway's template deployment page</li>
+                                    <li>Click "Deploy Now" to start the deployment process</li>
+                                    <li>Railway will automatically fork the repository to your GitHub account (if you signed up with GitHub)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Wait for the deployment to complete</strong>
+                                <ul>
+                                    <li>Railway will automatically build and deploy the application</li>
+                                    <li>This process typically takes 2-3 minutes</li>
+                                    <li>You'll see a green "Deployed" status when it's complete</li>
+                                </ul>
+                            </li>
+                            <li><strong>Access your deployment</strong>
+                                <ul>
+                                    <li>Once deployed, click on the "Deployments" tab in your project</li>
+                                    <li>You'll see a unique URL for your deployment (e.g., <code>https://payloadcmsmcp-production.up.railway.app</code>)</li>
+                                    <li>Click on this URL to verify your server is running</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        
+                        <h4 style="margin-top: 20px;">Environment Variables (Optional)</h4>
+                        <p>You can customize your deployment by setting these environment variables in the Railway dashboard:</p>
+                        <ul>
+                            <li><strong>PORT</strong>: The port to run the server on (default: 8080)</li>
+                        </ul>
+                        <p>To set environment variables:</p>
+                        <ol>
+                            <li>Go to your project in the Railway dashboard</li>
+                            <li>Click on the "Variables" tab</li>
+                            <li>Click "New Variable" and add your key-value pairs</li>
+                            <li>Railway will automatically redeploy your application with the new variables</li>
                         </ol>
                         
                         <h4 style="margin-top: 20px;">Cursor IDE Setup Options</h4>
-                        <p>After deployment, you have two options to set up with Cursor IDE:</p>
+                        <p>After deployment, you have two options to connect Cursor IDE to your Railway deployment:</p>
                         
-                        <h5 style="margin-top: 15px;">Option 1: Quick Setup (Recommended)</h5>
+                        <h5 style="margin-top: 15px;">Option 1: Quick Setup with Railway CLI (Recommended)</h5>
                         <ol>
                             <li>Install Railway CLI: <code>npm install -g @railway/cli</code></li>
                             <li>Login to Railway: <code>railway login</code> (this will open a browser window)</li>
@@ -1721,7 +1760,7 @@
                             <li>In Cursor Settings > MCP Servers, set the Command to: <code>railway run</code></li>
                         </ol>
                         
-                        <h5 style="margin-top: 15px;">Option 2: Using API Token</h5>
+                        <h5 style="margin-top: 15px;">Option 2: Using API Token and Service ID</h5>
                         <ol>
                             <li>Go to <a href="https://railway.app/account/tokens" target="_blank" rel="noopener noreferrer">railway.app/account/tokens</a></li>
                             <li>Click <strong>"+ New Token"</strong> and give it a name (e.g., "Cursor MCP")</li>
@@ -1736,19 +1775,27 @@
                             <li>In Cursor Settings > MCP Servers, set the Command to: <code>railway run --service=YOUR_SERVICE_ID</code></li>
                         </ol>
                         
-                        <p style="margin-top: 15px;"><strong>Note:</strong> Option 1 is simpler as it handles authentication and service selection automatically after linking your project locally.</p>
+                        <h4 style="margin-top: 20px;">Troubleshooting Railway Deployment</h4>
+                        <p>If you encounter issues with your Railway deployment:</p>
+                        <ul>
+                            <li><strong>Check deployment logs</strong>: Go to your project in Railway, click on the "Deployments" tab, and then click on the latest deployment to view logs</li>
+                            <li><strong>Verify environment variables</strong>: Make sure any required environment variables are set correctly</li>
+                            <li><strong>Restart the service</strong>: Click the "Restart" button in the Railway dashboard to restart your service</li>
+                            <li><strong>Check Railway status</strong>: Visit <a href="https://status.railway.app" target="_blank" rel="noopener noreferrer">status.railway.app</a> to check if Railway is experiencing any issues</li>
+                        </ul>
                         
                         <h4 style="margin-top: 20px;">Verifying Your Deployment</h4>
                         <p>To verify that your MCP server is running correctly:</p>
                         <ol>
-                            <li>Open Cursor IDE</li>
-                            <li>Create or open a Payload CMS project</li>
+                            <li>Visit your deployment URL in a browser (e.g., <code>https://payloadcmsmcp-production.up.railway.app</code>)</li>
+                            <li>You should see a simple page indicating the server is running</li>
+                            <li>Open Cursor IDE and configure it as described above</li>
                             <li>Try a simple prompt like: "Validate this Payload CMS collection code"</li>
                             <li>If configured correctly, the MCP server will respond with validation results</li>
                         </ol>
                         
-                        <div style="background-color: #f0f7ff; border-left: 4px solid #3b82f6; padding: 15px; margin: 20px 0; border-radius: 4px;">
-                            <p style="margin: 0;"><strong>💡 Tip:</strong> Railway automatically assigns a unique URL to your deployment. You can find this URL in the "Deployments" tab of your project dashboard. This URL can be used to verify your server is running by visiting it in a browser.</p>
+                        <div style="background-color: #f0fff4; border-left: 4px solid #10b981; padding: 15px; margin: 20px 0; border-radius: 4px;">
+                            <p style="margin: 0;"><strong>✅ Success:</strong> Your Payload CMS MCP Server is now deployed on Railway and ready to use with Cursor IDE!</p>
                         </div>
                     </div>
                     
