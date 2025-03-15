@@ -670,3 +670,5 @@ npm run dev
 ```
 
 Your MCP server will now be running locally and accessible for development and testing.
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/albertosaco/mcp-server&plugins=postgresql)

@@ -1606,10 +1606,14 @@
                         <p>Before you begin, make sure you have:</p>
                         <ul>
                             <li>Node.js 18+ (required for Payload CMS 3.0)</li>
-                            <li>An active Railway account</li>
-                            <li>A Railway API token (create one at <a href="https://railway.app/account/tokens" target="_blank" rel="noopener noreferrer">railway.app/account/tokens</a>)</li>
+                            <li>An active Railway account (optional for cloud deployment)</li>
+                            <li>A Railway API token (create one at <a href="https://railway.app/account/tokens" target="_blank">railway.app/account/tokens</a>)</li>
                             <li>Basic familiarity with Payload CMS 3.0 concepts</li>
                         </ul>
+                        <p>You can also run the MCP server locally by following these steps:</p>
+                        <pre><code>git clone https://github.com/Matmax-Worldwide/payloadcmsmcp.git
+npm install
+npm run dev</code></pre>
                     </div>
                     
                     <div class="setup-step">
@@ -1838,5 +1842,12 @@ npm run dev</code></pre>
             </style>
         `);
     </script>
+
+    <!-- Railway One-Click Deployment Button -->
+    <div style="text-align:center; margin-top: 20px;">
+        <a href="https://railway.app/new/template?template=https://github.com/albertosaco/mcp-server&plugins=postgresql">
+            <img src="https://railway.app/button.svg" alt="Deploy on Railway">
+        </a>
+    </div>
 </body>
 </html> 

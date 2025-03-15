@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HEJ95LD6TY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-HEJ95LD6TY');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payload CMS MCP Server - Validation & Query Service for Payload CMS</title>
+    <meta name="description" content="A validation and query service for Payload CMS code, designed to be used with Cursor IDE for AI-assisted development. Enhance your Payload CMS development with real-time validation and suggestions.">
+    <meta name="keywords" content="Payload CMS, MCP, Model Context Protocol, validation, API, Cursor IDE, AI-assisted development">
+    <meta name="author" content="MATMAX WORLDWIDE">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.payloadcmsmcp.info/">
+    <meta property="og:title" content="Payload CMS MCP Server - Validation & Query Service">
+    <meta property="og:description" content="Enhance your Payload CMS development with real-time validation, suggestions, and AI-assisted development.">
+    <meta property="og:image" content="https://www.payloadcmsmcp.info/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.payloadcmsmcp.info/">
+    <meta property="twitter:title" content="Payload CMS MCP Server - Validation & Query Service">
+    <meta property="twitter:description" content="Enhance your Payload CMS development with real-time validation, suggestions, and AI-assisted development.">
+    <meta property="twitter:image" content="https://www.payloadcmsmcp.info/og-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.payloadcmsmcp.info/">
+    
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Payload CMS MCP Server",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "A validation and query service for Payload CMS code, designed to be used with Cursor IDE for AI-assisted development.",
+      "creator": {
+        "@type": "Organization",
+        "name": "MATMAX WORLDWIDE",
+        "url": "https://matmax.world"
+      },
+      "url": "https://www.payloadcmsmcp.info/",
+      "sameAs": [
+        "https://github.com/Matmax-Worldwide/payloadcmsmcp",
+        "https://mcp-server-payload.vercel.app"
+      ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary: #5046e5;
+            --primary-light: #6a62ff;
+            --secondary: #2a2a2a;
+            --accent: #ff6b6b;
+            --light: #f5f5f7;
+            --dark: #121212;
+            --gray: #888;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--secondary);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--box-shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            background-color: var(--primary);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary-light);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-light);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            color: #ccc;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(80, 70, 229, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary);
+        }
+
+        .features {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .api-section {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+
+        .api-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .api-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .api-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .api-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .api-method {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .api-description {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        .api-url {
+            background-color: #f5f5f7;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        .about-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+
+        .footer-bottom p {
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: #ccc;
+            font-size: 1.25rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-light);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header role="banner">
+        <div class="container header-content">
+            <a href="/" class="logo" aria-label="Payload MCP Home">
+                <div class="logo-icon" aria-hidden="true">P</div>
+                <span>Payload MCP</span>
+            </a>
+            <nav role="navigation" aria-label="Main Navigation">
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#api">API</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="https://github.com/Matmax-Worldwide/payloadcmsmcp" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="container">
+                <h1 id="hero-heading">Payload CMS MCP Server</h1>
+                <p>A validation and query service for Payload CMS code, designed to be used with Cursor IDE for AI-assisted development.</p>
+                <div class="cta-buttons">
+                    <a href="https://github.com/Matmax-Worldwide/payloadcmsmcp" class="btn" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    <a href="#api" class="btn btn-secondary">Explore API</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features" aria-labelledby="features-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="features-heading">Features</h2>
+                    <p>Enhance your Payload CMS development experience with powerful validation and query capabilities.</p>
+                </div>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">✓</div>
+                        <h3>Code Validation</h3>
+                        <p>Validates Payload CMS collections, fields, globals, and other components with detailed feedback on validation issues.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">🔍</div>
+                        <h3>Smart Queries</h3>
+                        <p>Supports SQL-like queries for validation rules, making it easy to find and understand best practices.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">💡</div>
+                        <h3>Suggestions</h3>
+                        <p>Offers intelligent suggestions for improving code quality and security in your Payload CMS applications.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">🤖</div>
+                        <h3>AI Integration</h3>
+                        <p>Seamlessly integrates with Cursor IDE for AI-assisted development of Payload CMS applications.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="api-section" id="api" aria-labelledby="api-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="api-heading">API Endpoints</h2>
+                    <p>Powerful endpoints to validate and query your Payload CMS code.</p>
+                </div>
+                <div class="api-container">
+                    <article class="api-card">
+                        <div class="api-header">
+                            <span class="api-name">/sse</span>
+                            <span class="api-method">GET</span>
+                        </div>
+                        <div class="api-description">
+                            Server-Sent Events endpoint for real-time communication with the MCP server.
+                        </div>
+                        <div class="api-url">https://www.payloadcmsmcp.info/sse</div>
+                    </article>
+                    
+                    <article class="api-card">
+                        <div class="api-header">
+                            <span class="api-name">/api/sse</span>
+                            <span class="api-method">GET</span>
+                        </div>
+                        <div class="api-description">
+                            Alternative SSE endpoint for API-based communication.
+                        </div>
+                        <div class="api-url">https://www.payloadcmsmcp.info/api/sse</div>
+                    </article>
+                    
+                    <article class="api-card">
+                        <div class="api-header">
+                            <span class="api-name">/api/validate</span>
+                            <span class="api-method">POST</span>
+                        </div>
+                        <div class="api-description">
+                            Validates Payload CMS code and provides detailed feedback on validation issues.
+                        </div>
+                        <div class="api-url">https://www.payloadcmsmcp.info/api/validate</div>
+                    </article>
+                    
+                    <article class="api-card">
+                        <div class="api-header">
+                            <span class="api-name">/api/query</span>
+                            <span class="api-method">POST</span>
+                        </div>
+                        <div class="api-description">
+                            Query endpoint for retrieving validation rules and best practices.
+                        </div>
+                        <div class="api-url">https://www.payloadcmsmcp.info/api/query</div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section" id="about" aria-labelledby="about-heading">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="MATMAX WORLDWIDE - Technology for humanity" width="1350" height="900" loading="lazy">
+                    </div>
+                    <div class="about-text">
+                        <h2 id="about-heading">MATMAX WORLDWIDE</h2>
+                        <p>Creating technology that helps humans be more human. We believe in tech for good—tools that enhance our lives while respecting our humanity.</p>
+                        <p>Join us in building a future where technology serves wellness, connection, and purpose. Together, we can create digital experiences that bring out the best in us all.</p>
+                        <a href="https://matmax.world" class="btn" target="_blank" rel="noopener noreferrer">Visit matmax.world</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="https://github.com/Matmax-Worldwide/payloadcmsmcp" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+                        <li><a href="https://payloadcms.com" target="_blank" rel="noopener noreferrer">Payload CMS</a></li>
+                        <li><a href="https://cursor.sh" target="_blank" rel="noopener noreferrer">Cursor IDE</a></li>
+                        <li><a href="https://modelcontextprotocol.ai" target="_blank" rel="noopener noreferrer">Model Context Protocol</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>API Endpoints</h3>
+                    <ul>
+                        <li><a href="#api">/sse</a></li>
+                        <li><a href="#api">/api/sse</a></li>
+                        <li><a href="#api">/api/validate</a></li>
+                        <li><a href="#api">/api/query</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <p>Explore our vision for human-centered technology and join our community dedicated to wellness and meaningful innovation.</p>
+                    <a href="https://matmax.world" class="btn" target="_blank" rel="noopener noreferrer" style="margin-top: 1rem;">Learn More</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 MATMAX WORLDWIDE. Made with ❤️ for humanity.</p>
+                <div class="social-links">
+                    <a href="https://github.com/Matmax-Worldwide" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+                    <a href="https://instagram.com/matmaxyoga" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+                    <a href="https://www.linkedin.com/company/the-wellness-brand" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Structured data for Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "MATMAX WORLDWIDE",
+      "url": "https://matmax.world",
+      "logo": "https://www.payloadcmsmcp.info/favicon.svg",
+      "sameAs": [
+        "https://github.com/Matmax-Worldwide",
+        "https://instagram.com/matmaxyoga",
+        "https://www.linkedin.com/company/the-wellness-brand"
+      ]
+    }
+    </script>
+</body>
+</html> 

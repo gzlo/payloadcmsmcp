@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matmax Logo Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .logo-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            margin-left: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text strong {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .server-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        canvas {
+            border: 1px dashed #ccc;
+            margin-top: 20px;
+            background-color: transparent;
+        }
+        
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        button {
+            padding: 10px;
+            background-color: #0070f3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="logo-container" id="logoContainer">
+            <img src="/00Matmax-world-logo-_1_-svg.png" alt="Matmax Logo" class="logo-image" id="logoImage">
+            <div class="logo-text">
+                <strong>PAYLOAD CMS</strong>
+                <span class="server-text">MCP SERVER</span>
+            </div>
+        </div>
+        
+        <canvas id="canvas" width="500" height="120"></canvas>
+        
+        <div class="controls">
+            <button id="generateBtn">Generate Logo</button>
+            <a id="downloadLink" download="matmax-payload-mcp-logo.png" style="display: none;">Download Logo</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoContainer = document.getElementById('logoContainer');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const generateBtn = document.getElementById('generateBtn');
+            const downloadLink = document.getElementById('downloadLink');
+            const logoImage = document.getElementById('logoImage');
+            
+            // Wait for the image to load
+            logoImage.onload = function() {
+                generateBtn.disabled = false;
+            };
+            
+            generateBtn.addEventListener('click', function() {
+                // Clear canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw the logo container to canvas
+                html2canvas(logoContainer, {
+                    backgroundColor: null,
+                    scale: 2
+                }).then(function(renderedCanvas) {
+                    // Draw the rendered canvas to our main canvas
+                    ctx.drawImage(renderedCanvas, 0, 0, canvas.width, canvas.height);
+                    
+                    // Create download link
+                    const dataURL = canvas.toDataURL('image/png');
+                    downloadLink.href = dataURL;
+                    downloadLink.style.display = 'block';
+                    downloadLink.textContent = 'Download Logo';
+                    downloadLink.className = 'button';
+                    downloadLink.style.marginTop = '10px';
+                    downloadLink.style.padding = '10px';
+                    downloadLink.style.backgroundColor = '#0070f3';
+                    downloadLink.style.color = 'white';
+                    downloadLink.style.borderRadius = '4px';
+                    downloadLink.style.textDecoration = 'none';
+                    downloadLink.style.textAlign = 'center';
+                });
+            });
+        });
+    </script>
+    
+    <!-- Include html2canvas library -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</body>
+</html> 
