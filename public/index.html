@@ -1555,6 +1555,11 @@
                             <code>// In Cursor Settings > MCP Servers</code>
                             <code>Name: "Payload CMS 3.0 MCP"</code>
                             <code>Transport Type: "Command"</code>
+                            <code></code>
+                            <code>// Option 1: After linking with Railway CLI</code>
+                            <code>Command: railway run</code>
+                            <code></code>
+                            <code>// Option 2: Using API token and service ID</code>
                             <code>Command: railway run --service=YOUR_SERVICE_ID</code>
                         </div>
                     </article>
@@ -1607,6 +1612,8 @@
                         <ul>
                             <li>Node.js 18+ (required for Payload CMS 3.0)</li>
                             <li>npm or yarn package manager</li>
+                            <li>An active Railway account (for Railway deployment)</li>
+                            <li>A Railway API token (create one at <a href="https://railway.app/account/tokens" target="_blank" rel="noopener noreferrer">railway.app/account/tokens</a>)</li>
                             <li>Basic familiarity with Payload CMS 3.0 concepts</li>
                         </ul>
                     </div>
@@ -1698,14 +1705,25 @@
                             <li>Click "Deploy Now"</li>
                         </ol>
                         
-                        <h4 style="margin-top: 20px;">Quick Cursor IDE Setup</h4>
-                        <p>After deployment, set up with Cursor IDE in just a few steps:</p>
+                        <h4 style="margin-top: 20px;">Cursor IDE Setup Options</h4>
+                        <p>After deployment, you have two options to set up with Cursor IDE:</p>
+                        
+                        <h5 style="margin-top: 15px;">Option 1: Quick Setup (Recommended)</h5>
                         <ol>
                             <li>Install Railway CLI: <code>npm install -g @railway/cli</code></li>
                             <li>Login to Railway: <code>railway login</code></li>
                             <li>Link to your project: <code>railway link</code></li>
                             <li>In Cursor Settings > MCP Servers, set the Command to: <code>railway run</code></li>
                         </ol>
+                        
+                        <h5 style="margin-top: 15px;">Option 2: Using API Token</h5>
+                        <ol>
+                            <li>Generate a Railway API token at <a href="https://railway.app/account/tokens" target="_blank" rel="noopener noreferrer">railway.app/account/tokens</a></li>
+                            <li>Copy your service ID from the Railway dashboard (found in the URL when viewing your service)</li>
+                            <li>In Cursor Settings > MCP Servers, set the Command to: <code>railway run --service=YOUR_SERVICE_ID</code></li>
+                        </ol>
+                        
+                        <p style="margin-top: 15px;"><strong>Note:</strong> Option 1 is simpler as it handles authentication and service selection automatically after linking your project locally.</p>
                     </div>
                     
                     <div class="setup-step">
